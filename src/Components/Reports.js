@@ -4,7 +4,7 @@ import { Form, Container, Row, Col, Button, Table } from 'react-bootstrap';
 function Reports() {
     return (
         <div>
-            <Container>
+            <Container fluid>
                 <Row>
                     
                     <Col sm={12}>

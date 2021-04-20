@@ -10,7 +10,8 @@ function Hr() {
                     <Col>
                     </Col>
                     <Col sm={12}>
-                        <Form>
+                        <Form id="form-prospectus">
+                            <h1>Human Resource</h1>
                             <Form.Row>
                                 <Col>
                                     <Form.Group controlId="formBasicEmail">
@@ -62,7 +63,7 @@ function Hr() {
                             <Form.Row>
                                 <Col>
                                     <Form.Group controlId="exampleForm.ControlSelect1">
-                                        <Form.Label>Category</Form.Label>
+                                        <Form.Label>Position</Form.Label>
                                         <Form.Control as="select" >
                                             <option value="" selected="selected">--Select One--</option>
                                             <option value="form_name1">Staff</option>
@@ -102,7 +103,7 @@ function Hr() {
                                     
                                 </Col>
                             </Form.Row> */}
-                            <Button variant="primary" type="submit">
+                            <Button id="add-button" type="submit">
                                 Submit
                             </Button><br></br>
                         </Form><br></br>

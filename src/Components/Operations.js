@@ -11,20 +11,24 @@ function Operations() {
                     <Col>
                     </Col>
                     <Col sm={12}>
-                        <Form id="form">
+                        <Form id="form-prospectus">
                         <h1>Operations</h1>
                             <Form.Row>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Client</Form.Label>
-                                        <Form.Control placeholder="Client" required />
-                                    </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                            <Form.Label>Client</Form.Label>
+                                            <Form.Control as="select"  >
+                                                <option value="" selected="selected">--Choose--</option>
+                                                <option value="form_name1">Kasirye Stephen</option>
+                                                <option value="form_name1">Tusime Godwin</option>
+                                            </Form.Control>
+                                        </Form.Group>
 
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Contract Ref </Form.Label>
-                                        <Form.Control placeholder="Contract Ref" />
+                                        <Form.Control placeholder="Depends on Client Selected" />
                                     </Form.Group>
                                 </Col>
                             </Form.Row><br></br>
@@ -47,7 +51,7 @@ function Operations() {
                                 <Col>
                                     <Form.Group controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>Contract Value</Form.Label>
-                                        <Form.Control placeholder="Contract Value" />
+                                        <Form.Control placeholder="Depends on Client Selected" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
@@ -61,7 +65,7 @@ function Operations() {
                                 <Col>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Amount Due</Form.Label>
-                                        <Form.Control placeholder="Amount Due" />
+                                        <Form.Control placeholder="10,000,0000" />
                                     </Form.Group>
                                 </Col>
                                 <Col>
@@ -82,7 +86,7 @@ function Operations() {
 
                                 </Col>
                             </Form.Row>
-                            <Button variant="primary" type="submit">
+                            <Button id="add-button" type="submit">
                                 Submit
                             </Button><br></br>
                         </Form><br></br>

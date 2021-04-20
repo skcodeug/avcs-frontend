@@ -13,34 +13,31 @@ function NavBar() {
 
 
                 <Nav.Item>
-                    <Nav.Link activeClassName="active" href="/home" activeStyle={{
-                        fontWeight: "bold",
-                        color: "red"
-                    }}>Client</Nav.Link>
+                    <Nav.Link activeClassName="active" href="/home" id="navlinks">Client</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="prospectus" href="/prospectus">Prospectus</Nav.Link>
+                    <Nav.Link eventKey="prospectus" href="/prospectus" id="navlinks">Prospectus</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/quotations" eventKey="link-2">Quotations</Nav.Link>
+                    <Nav.Link href="/quotations" eventKey="link-2" id="navlinks">Quotations</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/contracts" eventKey="link-3">Contracts</Nav.Link>
+                    <Nav.Link href="/contracts" eventKey="link-3" id="navlinks">Contracts</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/operations" eventKey="link-4">Operations</Nav.Link>
+                    <Nav.Link href="/operations" eventKey="link-4" id="navlinks">Operations</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/accounts" eventKey="link-11">Accounts</Nav.Link>
+                    <Nav.Link href="/accounts" eventKey="link-11" id="navlinks">Accounts</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/hr" eventKey="link-5">HR</Nav.Link>
+                    <Nav.Link href="/hr" eventKey="link-5"id="navlinks">HR</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-6">Settings</Nav.Link>
+                    <Nav.Link eventKey="link-6" id="navlinks">Settings</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/reports" eventKey="link-7">Reports</Nav.Link>
+                    <Nav.Link href="/reports" eventKey="link-7" id="navlinks">Reports</Nav.Link>
                 </Nav.Item>
                
             </Nav>

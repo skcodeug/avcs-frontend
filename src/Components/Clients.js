@@ -1,72 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, Container, Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
-// class Clients extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {value: 'coconut'};
 
-//         this.handleChange = this.handleChange.bind(this);
-//         this.handleSubmit = this.handleSubmit.bind(this);
-//       }
-
-//       handleChange(event) {
-//         this.setState({value: event.target.value});
-//       }
-
-//       handleSubmit(event) {
-//         alert('Your favorite flavor is: ' + this.state.value);
-//         event.preventDefault();
-//       }
-//     }
-//     render (){
-//         return(
-//         <div>
-//             <Container>
-//                 <Row>
-//                     <Col></Col>
-//                     <Col xs={6}>
-//                         <Card>
-//                             <Card.Body>
-//                                 <Form>
-//                                     <Form.Group controlId="formBasicEmail">
-//                                         <Form.Label>First Name</Form.Label>
-//                                         <Form.Control type="text" placeholder="Enter email" />
-//                                     </Form.Group>
-
-//                                     <Form.Group controlId="formBasicPassword">
-//                                         <Form.Label>Other Names</Form.Label>
-//                                         <Form.Control type="password" placeholder="Password" />
-//                                     </Form.Group>
-//                                     <Form.Group controlId="exampleForm.ControlSelect1">
-//                                         <Form.Label>Category</Form.Label>
-//                                         <Form.Control as="select" onChange={value => {
-//                                             if (value === 0)
-//                                                 <h1>welcome</h1>
-//                                                 else
-//                                                     <h1>Denied</h1>
-
-//                                         }}>
-//                                             <option >Choose a cetegory</option>
-//                                             <option value="0">Individual</option>
-//                                             <option value="1">Corprate</option>
-//                                         </Form.Control>
-//                                     </Form.Group>
-//                                     <Button variant="primary" type="submit">
-//                                         Submit
-//                                         </Button>
-//                                 </Form>
-//                             </Card.Body>
-//                         </Card>
-//                     </Col>
-//                     <Col></Col>
-//                 </Row>
-//             </Container>
-//         </div>
-
-//     )
-
-// }
 class Clients extends React.Component {
     constructor() {
         super();
@@ -182,9 +117,9 @@ class Clients extends React.Component {
                         <Row>
                             <Col></Col>
                             <Col xs={12}>
-                                <Card>
+                                {/* <Card> */}
                                     <Card.Body>
-                                        <Form>
+                                        <Form id="form-prospectus">
                                         <h1>Clients</h1>
                                             <Form.Row>
                                                 <Col xs={12}>
@@ -221,12 +156,12 @@ class Clients extends React.Component {
                                             </Form.Row>
 
 
-                                            <Button variant="primary" type="submit">
+                                            <Button id="add-button" type="submit">
                                                 Submit
                                         </Button>
                                         </Form>
                                     </Card.Body>
-                                </Card>
+                                {/* </Card> */}
                             </Col>
                             <Col></Col>
                         </Row>

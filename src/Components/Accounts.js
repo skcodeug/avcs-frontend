@@ -7,7 +7,7 @@ function Accounts() {
     return (
         <div id="form">
 
-            <Container>
+            <Container id="form-prospectus">
                 <Row>
                     <Col>
                     </Col>
@@ -15,12 +15,12 @@ function Accounts() {
 
                         <Accordion defaultActiveKey="0">
                             <Card>
-                                <Accordion.Toggle as={Button} eventKey="0">
+                                <Accordion.Toggle as={Button} eventKey="0" id="add-button">
                                     Reciepts
                                     </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <Form>
+                                        <Form id="form-prospectus">
                                             <h1>Reciepts</h1>
                                             <Form.Row>
                                                 <Col>
@@ -66,7 +66,7 @@ function Accounts() {
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row>
-                                            <Button variant="primary" type="submit">
+                                            <Button id="add-button" type="submit">
                                                 Submit
                                             </Button>
                                             <br></br>
@@ -77,12 +77,12 @@ function Accounts() {
                             </Card>
                             <br></br>
                             <Card>
-                                <Accordion.Toggle as={Button} eventKey="1">
+                                <Accordion.Toggle as={Button} eventKey="1" id="add-button">
                                     Invoices
                                     </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="1">
                                     <Card.Body>
-                                        <Form>
+                                        <Form id="form-prospectus">
                                             <h1>Invoices</h1>
                                             <Form.Row>
                                                 <Col>
@@ -136,11 +136,11 @@ function Accounts() {
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
-                                                   
+
                                                 </Col>
                                             </Form.Row>
-                                            
-                                            <Button variant="primary" type="submit">
+
+                                            <Button id="add-button" type="submit">
                                                 Submit
                                                 </Button>
                                             <br></br>
@@ -150,12 +150,12 @@ function Accounts() {
                             </Card>
                             <br></br>
                             <Card>
-                                <Accordion.Toggle as={Button} eventKey="2">
+                                <Accordion.Toggle as={Button} eventKey="2" id="add-button">
                                     Payments
                                     </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="2">
                                     <Card.Body>
-                                        <Form>
+                                        <Form id="form-prospectus">
                                             <h1>Payments</h1>
                                             <Form.Row>
                                                 <Col>
@@ -183,7 +183,7 @@ function Accounts() {
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
                                                         <Form.Label>Payment For </Form.Label>
-                                                        <Form.Control placeholder="Payment For"  />
+                                                        <Form.Control placeholder="Payment For" />
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row><br></br>
@@ -201,8 +201,8 @@ function Accounts() {
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row>
-                                            
-                                            <Button variant="primary" type="submit">
+
+                                            <Button id="add-button" type="submit">
                                                 Submit
                                             </Button><br></br>
                                         </Form><br></br>
@@ -212,86 +212,62 @@ function Accounts() {
                             <br></br>
 
 
+
                             <Card>
-                                <Accordion.Toggle as={Button} eventKey="3">
+                                <Accordion.Toggle as={Button} eventKey="3" id="add-button">
                                     Requisitions
                                     </Accordion.Toggle>
                                 <Accordion.Collapse eventKey="3">
                                     <Card.Body>
-                                        <Form>
+                                        <Form id="form-prospectus">
                                             <h1>Requisitions</h1>
                                             <Form.Row>
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Client</Form.Label>
-                                                        <Form.Control placeholder="Client" required />
+                                                        <Form.Label>Requisition Date</Form.Label>
+                                                        <Form.Control type="date" required />
                                                     </Form.Group>
 
                                                 </Col>
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Contract Ref </Form.Label>
-                                                        <Form.Control placeholder="Contract Ref" />
+                                                        <Form.Label>Requisition Ref </Form.Label>
+                                                        <Form.Control placeholder="Requisition Ref" />
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row>
                                             <Form.Row>
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Start Date</Form.Label>
-                                                        <Form.Control type="date" />
+                                                        <Form.Label>Item</Form.Label>
+                                                        <Form.Control placeholder="Item" />
                                                     </Form.Group>
 
                                                 </Col>
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>End Date </Form.Label>
-                                                        <Form.Control type="date" />
+                                                        <Form.Label>Amount</Form.Label>
+                                                        <Form.Control placeholder='Amount' />
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row>
                                             <Form.Row>
                                                 <Col>
                                                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                                                        <Form.Label>Contract Value</Form.Label>
-                                                        <Form.Control placeholder="Contract Value" />
+                                                        <Form.Label>Who is making the Requisition</Form.Label>
+                                                        <Form.Control placeholder="Who is making the Requisition" />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Consultant Assigned</Form.Label>
-                                                        <Form.Control placeholder="Consultant Assigned " />
+                                                        <Form.Label>Who is making approving</Form.Label>
+                                                        <Form.Control placeholder="Who is making approving " />
                                                     </Form.Group>
                                                 </Col>
                                             </Form.Row>
-                                            <Form.Row>
-                                                <Col>
-                                                    <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Amount Due</Form.Label>
-                                                        <Form.Control placeholder="Amount Due" />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col>
-                                                    <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>WHT</Form.Label>
-                                                        <Form.Control placeholder="WHT" />
-                                                    </Form.Group>
-                                                </Col>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Col>
-                                                    <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Project Status</Form.Label>
-                                                        <Form.Control placeholder="Project status" />
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col>
-
-                                                </Col>
-                                            </Form.Row>
-                                            <Button variant="primary" type="submit">
+                                            <Button id="add-button" type="submit">
                                                 Submit
-                            </Button><br></br>
+                                            </Button><br></br>
                                         </Form><br></br>
                                     </Card.Body>
                                 </Accordion.Collapse>

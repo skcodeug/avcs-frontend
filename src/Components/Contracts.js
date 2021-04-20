@@ -9,7 +9,7 @@ function Contracts() {
                     <Col>
                     </Col>
                     <Col sm={12}>
-                        <Form id="form">
+                        <Form id="form-prospectus">
                         <h1>Contracts</h1>
                             <Form.Row>
                                 <Col>
@@ -28,17 +28,25 @@ function Contracts() {
                             </Form.Row><br></br>
                             <Form.Row>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Quotation No</Form.Label>
-                                        <Form.Control placeholder="Quotation no" />
-                                    </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                            <Form.Label>Quotation No</Form.Label>
+                                            <Form.Control as="select"  >
+                                                <option value="" selected="selected">Can Depend on Client</option>
+                                                <option value="form_name1">23783783</option>
+                                                <option value="form_name1">4647448</option>
+                                            </Form.Control>
+                                        </Form.Group>
 
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Client </Form.Label>
-                                        <Form.Control placeholder="Client" />
-                                    </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                            <Form.Label>Client</Form.Label>
+                                            <Form.Control as="select"  >
+                                                <option value="" selected="selected">Can Depend on Quotation</option>
+                                                <option value="form_name1">Kasirye Stephen</option>
+                                                <option value="form_name1">Tusime Godwin</option>
+                                            </Form.Control>
+                                        </Form.Group>
                                 </Col>
                             </Form.Row><br></br>
                             <Form.Row>
@@ -66,7 +74,7 @@ function Contracts() {
 
                                 </Col>
                             </Form.Row>
-                            <Button variant="primary" type="submit">
+                            <Button id="add-button" type="submit">
                                 Submit
                             </Button><br></br>
                         </Form><br></br>
