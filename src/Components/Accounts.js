@@ -40,13 +40,73 @@ function Accounts() {
         // invoiceNo errors
         if ( !invoiceNo || invoiceNo === '' ) newErrors.invoiceNo = 'Enter invoice number!'
         
+        // invoiceDate errors
+        if ( !invoiceDate || invoiceDate === '' ) newErrors.invoiceDate = 'Choose invoice date!'
+        
+        // description errors
+        if ( !description || description === '' ) newErrors.description = 'Add a description!'
+        
         // rating errors
-        // if ( !rate || rate > 5 || rate < 1 ) newErrors.rate = 'must assign a rating between 1 and 5!'
+        if (!rate || rate > 5 || rate < 1) newErrors.rate = 'must assign a rating between 1 and 5!'
+        
+        // quantity errors
+        if ( !quantity || quantity === '' ) newErrors.quantity = 'Add quatity!'
+        
+        // total errors
+        if ( !total || total === '' ) newErrors.total = 'Total missing!'
+        
+        // paymentDate errors
+        if ( !paymentDate || paymentDate === '' ) newErrors.paymentDate = 'Payment Date is missing!'
+        
+        // paymentRef errors
+        if ( !paymentRef || paymentRef === '' ) newErrors.paymentRef = 'Payment Reference missing!'
+        
+        // paymentTo errors
+        if ( !paymentTo || paymentTo === '' ) newErrors.paymentTo = 'Payment To!'
+        
+        // paymentTo errors
+        if ( !paymentTo || paymentTo === '' ) newErrors.paymentTo = 'Payment To!'
+        
+        // paymentFor errors
+        if ( !paymentFor || paymentFor === '' ) newErrors.paymentFor = 'Payment for!'
+        
+        // requisitionDate errors
+        if ( !requisitionDate || requisitionDate === '' ) newErrors.requisitionDate = 'select requisition date!'
+        
+        // requisitionRef errors
+        if ( !requisitionRef || requisitionRef === '' ) newErrors.requisitionRef = 'Requisition Reference missing!'
+        
+        // item errors
+        if ( !item || item === '' ) newErrors.item = 'Enter item name!'
+        
+        // amount errors
+        if ( !amount || amount === '' ) newErrors.amount = 'Enter amount!'
+        
+        // requisitionOwner errors
+        if ( !requisitionOwner || requisitionOwner === '' ) newErrors.requisitionOwner = 'Requisition Owner missing!'
+        
+        // approval errors
+        if ( !approval || approval === '' ) newErrors.approval = 'Enter you name to approve!'
+        
         // // comment errors
         // if ( !comment || comment === '' ) newErrors.comment = 'cannot be blank!'
         // else if ( comment.length > 100 ) newErrors.comment = 'comment is too long!'
 
         return newErrors
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        // get our new errors
+        const newErrors = findFormErrors()
+        // Conditional logic:
+        if ( Object.keys(newErrors).length > 0 ) {
+        // We got errors!
+        setErrors(newErrors)
+        } else {
+        // No errors! Put any logic here for the form submission!
+        alert('Thank you for your submission!')
+        }
     }
 
     return (
