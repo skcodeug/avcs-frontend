@@ -131,7 +131,13 @@ function Accounts() {
                                                 <Col>
                                                     <Form.Group controlId="formBasicEmail">
                                                         <Form.Label>Reciept No</Form.Label>
-                                                        <Form.Control type="text" placeholder="Reciept No" onChange={ e => setField('recieptNo', e.target.value) } required />
+                                                        <Form.Control 
+                                                            type="text" 
+                                                            placeholder="Reciept No" o
+                                                            nChange={e => setField('recieptNo', e.target.value)}
+                                                            isInvalid={ !!errors.recieptNo }
+                                                            required
+                                                        />
                                                     </Form.Group>
 
                                                 </Col>
