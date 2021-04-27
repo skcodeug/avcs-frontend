@@ -1,5 +1,6 @@
 // import { Accordion, Card, useAccordionToggle, Row, Col, Container, Button, ButtonGroup } from 'react-bootstrap';
 //import { Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './Components/NavBar';
