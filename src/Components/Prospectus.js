@@ -11,6 +11,25 @@ class Prospectus extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
     }
+
+     state = {
+        prospectDate:'',
+        prospectRef:'',
+        client:'',
+        unitRate:'',
+        quantity:'',
+        total:''
+    }
+
+    submitHandler = event => {
+        event.preventDefault();
+        event.target.className += " was-validated";
+    };
+
+  changeHandler = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
     addInput = ev => {
         this.setState(prev => ({ inputs: [...prev.inputs, 'Hi'] }))
     }
@@ -75,26 +94,63 @@ class Prospectus extends Component {
                     <Row>
 
                         <Col>
-                            <Form id="form-prospectus">
+                            <Form 
+                                className="needs-validation"
+                                onSubmit={this.submitHandler}
+                                noValidate
+                            >
                                 <h1>Prospectus</h1>
                                 <Form.Row>
                                     <Col >
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Prospect Date </Form.Label>
-                                            <Form.Control type="date" required />
+                                            <Form.Control 
+                                                type="date" 
+                                                value={this.state.prospectDate}
+                                                onChange={this.changeHandler}
+                                                name="prospectDate"
+                                                id="defaultFormRegisterPasswordEx4"
+                                                placeholder="Prospect Date" 
+                                                required 
+                                            />
+                                            <div className="invalid-feedback">
+                                                Enter Prospect Date!
+                                            </div>
                                         </Form.Group>
 
                                     </Col>
                                     <Col >
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Prospect Ref </Form.Label>
-                                            <Form.Control placeholder="Prospect Ref" />
+                                            <Form.Control 
+                                                type="date" 
+                                                value={this.state.prospectRef}
+                                                onChange={this.changeHandler}
+                                                name="prospectRef"
+                                                id="defaultFormRegisterPasswordEx4"
+                                                required 
+                                                placeholder="Prospect Ref" 
+                                            />
+                                            <div className="invalid-feedback">
+                                                Prospect Ref!
+                                            </div>
                                         </Form.Group>
                                     </Col>
                                     <Col >
                                         <Form.Group controlId="exampleForm.ControlSelect1">
                                             <Form.Label>Client</Form.Label>
-                                            <Form.Control as="select" value={this.state.selectedValue} onChange={this.handleChange}>
+                                            <Form.Control 
+                                                as="select"  
+                                                value={this.state.client}
+                                                onChange={this.changeHandler}
+                                                name="client"
+                                                id="defaultFormRegisterPasswordEx4"
+                                                placeholder="Client" 
+                                                required 
+                                            >
+                                            <div className="invalid-feedback">
+                                                Choose a Client!
+                                            </div>
                                                 <option value="" selected="selected">--Select One--</option>
                                                 <option value="form_name1">Tusime Godwin</option>
                                                 <option value="form_name1">Muhamadi Joseph</option>
@@ -110,7 +166,20 @@ class Prospectus extends Component {
                                         <Col>
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Unit Rate </Form.Label>
-                                                <Form.Control placeholder="Unit Rate" />
+                                                <Form.Control 
+                                                    type="text" 
+                                                    value={this.state.unitRate}
+                                                    onChange={this.changeHandler}
+                                                    name="unitRate"
+                                                    id="defaultFormRegisterPasswordEx4"
+                                                    className="form-control"
+                                                    placeholder="Total" 
+                                                    required 
+                                                    placeholder="Unit Rate" 
+                                                />
+                                                <div className="invalid-feedback">
+                                                    Quantity is Required!
+                                                </div>
                                             </Form.Group>
                                         </Col>
 
@@ -118,13 +187,40 @@ class Prospectus extends Component {
                                         <Col >
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Quantity </Form.Label>
-                                                <Form.Control placeholder="Quantity" />
+                                                <Form.Control 
+                                                    type="text" 
+                                                    value={this.state.quantity}
+                                                    onChange={this.changeHandler}
+                                                    name="quantity"
+                                                    id="defaultFormRegisterPasswordEx4"
+                                                    className="form-control"
+                                                    placeholder="Total" 
+                                                    required 
+                                                    placeholder="Quantity" 
+                                                />
+                                                <div className="invalid-feedback">
+                                                    Quantity is Required!
+                                                </div>
                                             </Form.Group>
                                         </Col>
                                         <Col >
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Total</Form.Label>
-                                                <Form.Control placeholder="Total" required />
+                                                <Form.Control 
+                                                type="text" 
+                                                value={this.state.total}
+                                                onChange={this.changeHandler}
+                                                name="total"
+                                                id="defaultFormRegisterPasswordEx4"
+                                                className="form-control"
+                                                placeholder="Total" 
+                                                required 
+                                                placeholder="Total" 
+                                                required 
+                                                />
+                                                <div className="invalid-feedback">
+                                                    Total must be filled!
+                                                </div>
                                             </Form.Group>
                                         </Col>
                                     </Form.Row>
