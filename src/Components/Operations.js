@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../App.css';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import axios from 'axios'
 
 
 function Operations() {
@@ -64,6 +65,11 @@ function Operations() {
         setErrors(newErrors)
         } else {
         // No errors! Put any logic here for the form submission!
+        console.log(form)
+        axios.post("https://avcs-platform.herokuapp.com/invoices", form)
+        .then((res) => console.log("Success" + res))
+        .catch((err) => console.log(err))
+
         alert('Thank you for your submission!')
         }
     }
