@@ -12,6 +12,10 @@ import Operations from './Components/Operations';
 import Accounts from './Components/Accounts';
 import Hr from './Components/HR';
 import Reports from './Components/Reports';
+import Users from './Components/Users';
+import Login from './Components/Login';
+import Groups from './Components/Groups';
+import MaritalStatus from './Components/MaritalStatus';
 
 
 // function CustomToggle({ children, eventKey }) {
@@ -37,7 +41,7 @@ function App() {
       <br></br>
       <div>  
           <Switch>
-            <Route path="/home" component={clients} axact></Route>
+            <Route path="/home" component={clients} exact></Route>
             <Route path="/prospectus" component={prospectus}></Route>
             <Route path="/quotations" component={Quotations}></Route>
             <Route path="/contracts" component={Contracts}></Route>
@@ -45,6 +49,10 @@ function App() {
             <Route path="/accounts" component={Accounts}></Route>
             <Route path="/hr" component={Hr}></Route>
             <Route path="/reports" component={Reports}></Route>
+            <Route path="/users" component={Users} exact></Route>
+            <Route path="/groups" component={Groups} exact></Route>
+            <Route path="/login" component={Login} exact></Route>
+            <Route path="/maritalstatus" component={MaritalStatus} exact></Route>
             
           </Switch>
       </div>

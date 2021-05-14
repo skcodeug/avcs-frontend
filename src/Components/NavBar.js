@@ -9,9 +9,7 @@ function NavBar() {
                     
                     
             <Nav fill >
-        
-
-
+    
                 <Nav.Item>
                     <Nav.Link activeClassName="active" href="/home" id="navlinks">Client</Nav.Link>
                 </Nav.Item>
@@ -39,6 +37,16 @@ function NavBar() {
                 <Nav.Item>
                     <Nav.Link href="/reports" eventKey="link-7" id="navlinks">Reports</Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/users" eventKey="link-8" id="navlinks">Users</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/groups" eventKey="link-9" id="navlinks">Groups</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/maritalstatus" eventKey="link-10" id="navlinks">Marital Status</Nav.Link>
+                </Nav.Item>
+                
                
             </Nav>
         </div>
