@@ -135,9 +135,7 @@ class Users extends React.Component {
                                             required
                                             placeholder="Other Names"
                                         />
-                                        <div className="invalid-feedback">
-                                            Required!
-                                        </div>
+                                        
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
