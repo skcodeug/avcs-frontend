@@ -28,9 +28,8 @@ class Users extends React.Component {
         groupId: "",
         password: "",
         roles: [""],
-        users: [],
-        maritals: [],
-        groups:[],
+        users: []
+       
        
     }
 
@@ -259,7 +258,7 @@ class Users extends React.Component {
                                 </Col>
                                 <Col>
 
-                                    <Form.Group controlId="formBasicPassword">
+                                    {/* <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Marital Status</Form.Label>
                                         <Form.Control
                                             as="select"
@@ -277,7 +276,7 @@ class Users extends React.Component {
 
                                                 ))}
                                         </Form.Control>
-                                    </Form.Group>
+                                    </Form.Group> */}
 
 
                                 </Col>
@@ -373,7 +372,7 @@ class Users extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
+                                    {/* <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Group ID</Form.Label>
                                         <Form.Control
                                            as="select" 
@@ -389,7 +388,7 @@ class Users extends React.Component {
 
                                                 ))}
                                                 </Form.Control>
-                                    </Form.Group>
+                                    </Form.Group> */}
                                 </Col>
                             </Form.Row>
 
