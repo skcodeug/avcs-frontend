@@ -16,8 +16,12 @@ class Groups extends React.Component {
         event.preventDefault();
         event.target.className += " was-validated";
         axios
-            .post("https://avcs-platform.herokuapp.com/users", this.state)
-            .then(() => this.setState(() => ({ name: "" })))
+            .post("https://avcs-platform.herokuapp.com/groups", this.state)
+            .then(() => this.setState(() => ({ name: "" })
+            
+            ),
+            alert("submitted successfully"))
+           
             .catch((error) => console.log(error));
     };
 
