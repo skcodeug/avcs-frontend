@@ -350,7 +350,7 @@ class Users extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    {/* <Form.Group controlId="formBasicEmail">
+                                    <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Group ID</Form.Label>
                                         <Form.Control
                                             as="select"
