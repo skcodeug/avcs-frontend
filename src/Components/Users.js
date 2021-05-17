@@ -28,10 +28,15 @@ class Users extends React.Component {
         groupId: "",
         password: "",
         roles: [""],
-        users: []
+        users: [],
+        maritals: [],
+        groups:[],
+       
     }
 
-    handleChange() {}
+
+
+    handleChange() { }
 
     changeHandler = (event) => {
         this.setState({ [event.target.name]: event.target.value });
@@ -41,6 +46,7 @@ class Users extends React.Component {
         event.preventDefault();
         event.target.className += " was-validated";
         let temp = this.state;
+
         delete temp.selectedValue;
         delete temp.users;
         axios
@@ -71,7 +77,7 @@ class Users extends React.Component {
         axios
             .get("https://avcs-platform.herokuapp.com/users")
             .then((res) => {
-                this.setState({...this.state, users: res.data})
+                this.setState({ ...this.state, users: res.data })
             })
             .catch((error) => console.log(error));
     };
@@ -80,7 +86,54 @@ class Users extends React.Component {
         this.fetchUsers()
     }
 
+    fetchgroups = () => {
+        axios
+            .get("https://avcs-platform.herokuapp.com/groups")
+            .then((res) => {
+                this.setState({ ...this.state, groups: res.data })
+            })
+            .catch((error) => console.log(error));
+    };
+
+    componentDidMount() {
+        this.fetchgroups()
+    }
+
+
+    fetchMaritalStatus = () => {
+        axios
+            .get("https://avcs-platform.herokuapp.com/maritalStatus")
+            .then((res) => {
+                this.setState({ ...this.state, maritals: res.data })
+            })
+            .catch((error) => console.log(error));
+    };
+
+    componentDidMount() {
+        this.fetchMaritalStatus()
+    }
+
+//    getAll =()=>{ Promise.all([
+//         fetch('https://avcs-platform.herokuapp.com/groups'),
+//         fetch('https://avcs-platform.herokuapp.com/maritalStatus')
+//     ]).then(function (responses) {
+//         // Get a JSON object from each of the responses
+//         return Promise.all(responses.map(function (response) {
+//             return response.json();
+//         }));
+//     }).then(function (data) {
+//         // Log the data to the console
+//         // You would do something with both sets of data here
+//         console.log(data);
+//     }).catch(function (error) {
+//         // if there's an error, log it
+//         console.log(error);
+//     })};
+    
+
+
     render() {
+        
         return (
             <>
                 <Container>
@@ -135,7 +188,7 @@ class Users extends React.Component {
                                             required
                                             placeholder="Other Names"
                                         />
-                                        
+
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
@@ -205,20 +258,28 @@ class Users extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
+
+                                    <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Marital Status</Form.Label>
                                         <Form.Control
-                                            type="text"
-                                            value={this.state.maritalStatusId}
+                                            as="select"
+                                            // value={this.state.maritalStatusId}
                                             onChange={this.changeHandler}
-                                            name="maritalStatusId"
+                                            // name="maritalStatusId"
+                                            // placeholder="Gender"
                                             required
-                                            placeholder="Marital Status"
-                                        />
-                                        <div className="invalid-feedback">
-                                            Required!
-                                        </div>
+                                        >
+                                            <div className="invalid-feedback">
+                                                Enter Prospect Date!
+                                            </div>
+                                            {this.state.maritals && this.state.maritals.map((marital) => (
+                                                <option value={this.state.groupId} name="groupId">{marital.name}</option>
+
+                                                ))}
+                                        </Form.Control>
                                     </Form.Group>
+
+
                                 </Col>
                             </Form.Row>
 
@@ -315,16 +376,19 @@ class Users extends React.Component {
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Group ID</Form.Label>
                                         <Form.Control
-                                            type="text"
-                                            value={this.state.groupId}
+                                           as="select" 
                                             onChange={this.changeHandler}
-                                            name="groupId"
-                                            required
-                                            placeholder="Enter group ID"
-                                        />
+                                            // name="groupId"
+                                            required 
+                                        >
                                         <div className="invalid-feedback">
                                             Enter your group ID!
                                         </div>
+                                        {this.state.groups && this.state.groups.map((group) => (
+                                                <option value={this.state.groupId} name="groupId">{group.name}</option>
+
+                                                ))}
+                                                </Form.Control>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
