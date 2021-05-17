@@ -14,7 +14,7 @@ function NavBar() {
                     <Nav.Link activeClassName="active" href="/home" id="navlinks">Client</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="prospectus" href="/prospectus" id="navlinks">Prospectus</Nav.Link>
+                    <Nav.Link eventKey="prospectus" href="/prospectus" id="navlinks">Prospects</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link href="/quotations" eventKey="link-2" id="navlinks">Quotations</Nav.Link>
@@ -34,9 +34,9 @@ function NavBar() {
                 <Nav.Item>
                     <Nav.Link eventKey="link-6" id="navlinks">Settings</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                {/* <Nav.Item>
                     <Nav.Link href="/reports" eventKey="link-7" id="navlinks">Reports</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Item>
                     <Nav.Link href="/users" eventKey="link-8" id="navlinks">Users</Nav.Link>
                 </Nav.Item>

@@ -16,7 +16,7 @@ class MaritalStatus extends React.Component {
         event.preventDefault();
         event.target.className += " was-validated";
         axios
-            .post("https://avcs-platform.herokuapp.com/users", this.state)
+            .post("https://avcs-platform.herokuapp.com/maritalStatus", this.state)
             .then(() => this.setState(() => ({ name: "" })))
             .catch((error) => console.log(error));
     };

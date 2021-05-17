@@ -27,9 +27,11 @@ class Users extends React.Component {
         staffId: "",
         groupId: "",
         password: "",
-        roles: [""],
-        users: []
-    }
+        ballz: "",
+        users: [],
+        maritals: [],
+        groups: [],
+    };
 
     handleChange() {}
 
@@ -40,9 +42,16 @@ class Users extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
-        let temp = this.state;
+        let temp = {roles: [], ...this.state}
+
+        temp.roles.push(this.state.ballz)
+        delete temp.ballz
+        delete temp.role
         delete temp.selectedValue;
         delete temp.users;
+        delete temp.maritals;
+        delete temp.groups;
+        console.log(temp)
         axios
             .post("https://avcs-platform.herokuapp.com/users", temp)
             .then(() =>
@@ -61,23 +70,39 @@ class Users extends React.Component {
                     staffId: "",
                     groupId: "",
                     password: "",
-                    roles: [""],
+                    ballz: "",
+                    
                 }))
+            )
+            .catch((error) => console.log(error));
+
+            // this.fetchUsers()
+    };
+
+    fetchUsers = () => {
+        let users = axios.get("https://avcs-platform.herokuapp.com/users");
+        let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+        let maritalstatus = axios.get(
+            "https://avcs-platform.herokuapp.com/maritalStatus"
+        );
+
+        axios
+            .all([users, groups, maritalstatus])
+            .then(
+                axios.spread((...res) => {
+                    this.setState({
+                        ...this.state,
+                        users: res[0].data,
+                        groups: res[1].data,
+                        maritals: res[2].data,
+                    });
+                })
             )
             .catch((error) => console.log(error));
     };
 
-    fetchUsers = () => {
-        axios
-            .get("https://avcs-platform.herokuapp.com/users")
-            .then((res) => {
-                this.setState({...this.state, users: res.data})
-            })
-            .catch((error) => console.log(error));
-    };
-
     componentDidMount() {
-        this.fetchUsers()
+        this.fetchUsers();
     }
 
     render() {
@@ -135,9 +160,6 @@ class Users extends React.Component {
                                             required
                                             placeholder="Other Names"
                                         />
-                                        <div className="invalid-feedback">
-                                            Required!
-                                        </div>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
@@ -169,7 +191,7 @@ class Users extends React.Component {
                                             type="date"
                                             value={this.state.dob}
                                             onChange={this.changeHandler}
-                                            name="dateOfBirth"
+                                            name="dob"
                                             id="defaultFormRegisterPasswordEx4"
                                             placeholder="Date Of Birth"
                                             required
@@ -207,19 +229,33 @@ class Users extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicEmail">
+                                    <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Marital Status</Form.Label>
                                         <Form.Control
-                                            type="text"
-                                            value={this.state.maritalStatusId}
+                                            as="select"
+                                            // value={this.state.maritalStatusId}
                                             onChange={this.changeHandler}
                                             name="maritalStatusId"
+                                            // placeholder="Gender"
                                             required
-                                            placeholder="Marital Status"
-                                        />
-                                        <div className="invalid-feedback">
-                                            Required!
-                                        </div>
+                                        >
+                                            <div className="invalid-feedback">
+                                                Enter Prospect Date!
+                                            </div>
+                                            {this.state.maritals &&
+                                                this.state.maritals.map(
+                                                    (marital) => (
+                                                        <option
+                                                            value={
+                                                                this.state
+                                                                    .maritalStatusId
+                                                            }
+                                                        >
+                                                            {marital.name}
+                                                        </option>
+                                                    )
+                                                )}
+                                        </Form.Control>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
@@ -317,16 +353,28 @@ class Users extends React.Component {
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Group ID</Form.Label>
                                         <Form.Control
-                                            type="text"
-                                            value={this.state.groupId}
+                                            as="select"
                                             onChange={this.changeHandler}
                                             name="groupId"
                                             required
-                                            placeholder="Enter group ID"
-                                        />
-                                        <div className="invalid-feedback">
-                                            Enter your group ID!
-                                        </div>
+                                        >
+                                            <div className="invalid-feedback">
+                                                Enter your group ID!
+                                            </div>
+                                            {this.state.groups &&
+                                                this.state.groups.map(
+                                                    (group) => (
+                                                        <option
+                                                            value={
+                                                                this.state
+                                                                    .groupId
+                                                            }
+                                                        >
+                                                            {group.name}
+                                                        </option>
+                                                    )
+                                                )}
+                                        </Form.Control>
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
@@ -353,9 +401,9 @@ class Users extends React.Component {
                                         <Form.Label>Roles</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            value={this.state.roles}
+                                            value={this.state.ballz}
                                             onChange={this.changeHandler}
-                                            name="roles"
+                                            name="ballz"
                                             required
                                             placeholder="Enter your roles"
                                         />
@@ -386,13 +434,14 @@ class Users extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.users && this.state.users.map((user) => (
-                                    <tr>
-                                        <td>{user.fullName}</td>
-                                        <td>{user.staffId}</td>
-                                        <td>{user.workEmail}</td>
-                                    </tr>
-                                ))}
+                                {this.state.users &&
+                                    this.state.users.map((user) => (
+                                        <tr>
+                                            <td>{user.fullName}</td>
+                                            <td>{user.staffId}</td>
+                                            <td>{user.workEmail}</td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </Table>
                     </Card.Body>
