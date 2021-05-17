@@ -86,32 +86,32 @@ class Users extends React.Component {
         this.fetchUsers()
     }
 
-    fetchgroups = () => {
-        axios
-            .get("https://avcs-platform.herokuapp.com/groups")
-            .then((res) => {
-                this.setState({ ...this.state, groups: res.data })
-            })
-            .catch((error) => console.log(error));
-    };
+    // fetchgroups = () => {
+    //     axios
+    //         .get("https://avcs-platform.herokuapp.com/groups")
+    //         .then((res) => {
+    //             this.setState({ ...this.state, groups: res.data })
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
-    componentDidMount() {
-        this.fetchgroups()
-    }
+    // componentDidMount() {
+    //     this.fetchgroups()
+    // }
 
 
-    fetchMaritalStatus = () => {
-        axios
-            .get("https://avcs-platform.herokuapp.com/maritalStatus")
-            .then((res) => {
-                this.setState({ ...this.state, maritals: res.data })
-            })
-            .catch((error) => console.log(error));
-    };
+    // fetchMaritalStatus = () => {
+    //     axios
+    //         .get("https://avcs-platform.herokuapp.com/maritalStatus")
+    //         .then((res) => {
+    //             this.setState({ ...this.state, maritals: res.data })
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
-    componentDidMount() {
-        this.fetchMaritalStatus()
-    }
+    // componentDidMount() {
+    //     this.fetchMaritalStatus()
+    // }
 
 //    getAll =()=>{ Promise.all([
 //         fetch('https://avcs-platform.herokuapp.com/groups'),
