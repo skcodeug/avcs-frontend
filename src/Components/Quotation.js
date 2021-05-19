@@ -18,6 +18,7 @@ class Quotations extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        console.log(this.state)
         axios
             .post("https://avcs-platform.herokuapp.com/quotations", this.state)
             .then(() =>

@@ -21,6 +21,7 @@ class Contracts extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        console.log(this.state)
         axios
             .post("https://avcs-platform.herokuapp.com/contracts", this.state)
             .then(() =>
@@ -91,7 +92,7 @@ class Contracts extends React.Component {
                                                 this.state.quotationReferenceId
                                             }
                                             onChange={this.changeHandler}
-                                            name="quotationsReferenceId"
+                                            name="quotationReferenceId"
                                             required
                                             placeholder="Reference"
                                         />
@@ -143,7 +144,7 @@ class Contracts extends React.Component {
                                             type="date"
                                             value={this.state.endDate}
                                             onChange={this.changeHandler}
-                                            name="date"
+                                            name="endDate"
                                             id="defaultFormRegisterPasswordEx5"
                                             placeholder="Date"
                                             required

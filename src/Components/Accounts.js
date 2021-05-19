@@ -27,26 +27,48 @@ function Accounts() {
                 [field]: null,
             });
     };
-
+    
     const findFormErrors = () => {
-        const { recieptNo, receiptDate, client, amountPaid, amountInWords, amountOutstanding, paymentDate, paymentRef, paymentTo, paymentFor, requisitionDate, requisitionRef, item, amount, requisitionOwner, approval } = form
-        const newErrors = {}
+        const {
+            recieptNo,
+            receiptDate,
+            client,
+            amountPaid,
+            amountInWords,
+            amountOutstanding,
+            paymentDate,
+            paymentRef,
+            paymentTo,
+            paymentFor,
+            requisitionDate,
+            requisitionRef,
+            item,
+            amount,
+            requisitionOwner,
+            approval,
+        } = form;
+        const newErrors = {};
 
         // recieptNo errors
-        if (!recieptNo || recieptNo === '') newErrors.recieptNo = 'cannot be blank!'
-        else if (recieptNo.length > 30) newErrors.recieptNo = 'Reciept Number is too long!'
+        if (!recieptNo || recieptNo === "")
+            newErrors.recieptNo = "cannot be blank!";
+        else if (recieptNo.length > 30)
+            newErrors.recieptNo = "Reciept Number is too long!";
 
         // receiptDate errors
-        if (!receiptDate || receiptDate === '') newErrors.receiptDate = 'select a date!'
+        if (!receiptDate || receiptDate === "")
+            newErrors.receiptDate = "select a date!";
 
         // cleint errors
         if (!client || client === "") newErrors.client = "Enter Client Name!";
 
         // amountPaid errors
-        if (!amountPaid || amountPaid === '') newErrors.amountPaid = 'Enter amount paid!'
+        if (!amountPaid || amountPaid === "")
+            newErrors.amountPaid = "Enter amount paid!";
 
         // amountInWords errors
-        if (!amountInWords || amountInWords === '') newErrors.amountInWords = 'Enter amount paid in words!'
+        if (!amountInWords || amountInWords === "")
+            newErrors.amountInWords = "Enter amount paid in words!";
 
         // amountOutstanding errors
         if (!amountOutstanding || amountOutstanding === "")

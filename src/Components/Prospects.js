@@ -18,8 +18,9 @@ class Prospectus extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        console.log(this.state)
         axios
-            .post("https://avcs-platform.herokuapp.com/prospectus", this.state)
+            .post("https://avcs-platform.herokuapp.com/prospects", this.state)
             .then(() =>
                 this.setState(() => ({
                     date: "",

@@ -7,9 +7,9 @@ class Clients extends React.Component {
     state = {
         firstName: "",
         surname: "",
-        otherNames: "",
+        otherName: "",
         fullName: "",
-        clientcategoryId: "",
+        clientCategoryId: "",
         clientId: ""
     };
 
@@ -20,15 +20,16 @@ class Clients extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        console.log(this.state)
         axios
             .post("https://avcs-platform.herokuapp.com/clients", this.state)
             .then(() =>
                 this.setState(() => ({
                     firstName: "",
                     surname: "",
-                    otherNames: "",
+                    otherName: "",
                     fullName: "",
-                    clientcategoryId: "",
+                    clientCategoryId: "",
                     clientId: ""
                 }))
             )
@@ -122,7 +123,7 @@ class Clients extends React.Component {
                                         <Form.Label>Category ID</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            value={this.state.clientcategoryId}
+                                            value={this.state.clientCategoryId}
                                             onChange={this.changeHandler}
                                             name="clientCategoryId"
                                             required

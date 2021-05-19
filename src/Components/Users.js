@@ -103,6 +103,7 @@ class Users extends React.Component {
 
     componentDidMount() {
         this.fetchUsers();
+        console.log(this.state.users)
     }
 
     render() {

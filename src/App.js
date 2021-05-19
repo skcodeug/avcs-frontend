@@ -5,7 +5,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './Components/NavBar';
 import clients from './Components/Clients';
-import prospectus from './Components/Prospectus';
+import prospects from './Components/Prospects';
 import Quotations from './Components/Quotation';
 import Contracts from './Components/Contracts';
 import Operations from './Components/Operations';
@@ -42,7 +42,7 @@ function App() {
       <div>  
           <Switch>
             <Route path="/home" component={clients} exact></Route>
-            <Route path="/prospectus" component={prospectus}></Route>
+            <Route path="/prospectus" component={prospects}></Route>
             <Route path="/quotations" component={Quotations}></Route>
             <Route path="/contracts" component={Contracts}></Route>
             <Route path="/operations" component={Operations}></Route>
