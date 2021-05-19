@@ -28,9 +28,9 @@ class Users extends React.Component {
         groupId: "",
         password: "",
         roles: [""],
-        // users: [],
-        // maritals: [],
-        // groups: [],
+         users: [],
+         maritals: [],
+         groups: [],
 
     };
 
@@ -43,18 +43,18 @@ class Users extends React.Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
-        // let temp = { roles: [], ...this.state }
+         let temp = { roles: [], ...this.state }
 
-        // temp.roles.push(this.state.ballz)
-        // delete temp.ballz
-        // delete temp.role
-        // delete temp.selectedValue;
-        // delete temp.users;
-        // delete temp.maritals;
-        // delete temp.groups;
-        // console.log(temp)
+        temp.roles.push(this.state.ballz)
+        delete temp.ballz
+        delete temp.role
+        delete temp.selectedValue;
+        delete temp.users;
+        delete temp.maritals;
+        delete temp.groups;
+         console.log(temp)
         axios
-            .post("https://avcs-platform.herokuapp.com/users", this.state)
+            .post("https://avcs-platform.herokuapp.com/users", temp)
             .then(() =>
                 this.setState(() => ({
                     firstName: "",
@@ -71,41 +71,40 @@ class Users extends React.Component {
                     staffId: "",
                     groupId: "",
                     password: "",
-                   // ballz: "",
+                    ballz: "",
 
-                }),
-                alert("submitted successfully"))
+                }))
             )
             .catch((error) => console.log(error));
 
         // this.fetchUsers()
     };
 
-    // fetchUsers = () => {
-    //     let users = axios.get("https://avcs-platform.herokuapp.com/users");
-    //     let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
-    //     let maritalstatus = axios.get(
-    //         "https://avcs-platform.herokuapp.com/maritalStatus"
-    //     );
+    fetchUsers = () => {
+        let users = axios.get("https://avcs-platform.herokuapp.com/users");
+        let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+        let maritalstatus = axios.get(
+            "https://avcs-platform.herokuapp.com/maritalStatus"
+        );
 
-    //     axios
-    //         .all([users, groups, maritalstatus])
-    //         .then(
-    //             axios.spread((...res) => {
-    //                 this.setState({
-    //                     ...this.state,
-    //                     users: res[0].data,
-    //                     groups: res[1].data,
-    //                     maritals: res[2].data,
-    //                 });
-    //             })
-    //         )
-    //         .catch((error) => console.log(error));
-    // };
+        axios
+            .all([users, groups, maritalstatus])
+            .then(
+                axios.spread((...res) => {
+                    this.setState({
+                        ...this.state,
+                        users: res[0].data,
+                        groups: res[1].data,
+                        maritals: res[2].data,
+                    });
+                })
+            )
+            .catch((error) => console.log(error));
+    };
 
-    // componentDidMount() {
-    //     this.fetchUsers();
-    // }
+    componentDidMount() {
+        this.fetchUsers();
+    }
 
     render() {
 
@@ -245,11 +244,17 @@ class Users extends React.Component {
                                             <div className="invalid-feedback">
                                                 Enter Prospect Date!
                                             </div>
-                                            {/* {this.state.maritals && this.state.maritals.map((marital) => (
-                                                <option value="1" >{marital.name}</option>
-                                            ))} */}
-
                                             <option
+                                                value=""
+                                                selected="selected"
+                                            >
+                                                --
+                                            </option>
+                                            {this.state.maritals && this.state.maritals.map((marital) => (
+                                                <option value={marital.id} >{marital.name}</option>
+                                            ))}
+
+                                            {/* <option
                                                 value=""
                                                 selected="selected"
                                             >
@@ -258,7 +263,7 @@ class Users extends React.Component {
                                             <option value="513cd3ec-e0bf-4e18-b813-2d231cf571d8">Single</option>
                                             <option value="married">
                                                 Married
-                                            </option>
+                                            </option> */}
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -366,11 +371,17 @@ class Users extends React.Component {
                                             <div className="invalid-feedback">
                                                 Enter your group ID!
                                         </div>
-                                            {/* {this.state.groups && this.state.groups.map((group) => (
-                                                <option value='1'>{group.name}</option>
-                                            ))} */}
+                                        <option
+                                                value=""
+                                                selected="selected"
+                                            >
+                                                --Choose--
+                                            </option>
+                                            {this.state.groups && this.state.groups.map((group) => (
+                                                <option value={group.id}>{group.name}</option>
+                                            ))}
 
-                                            <option
+                                            {/* <option
                                                 value=""
                                                 selected="selected"
                                             >
@@ -379,7 +390,7 @@ class Users extends React.Component {
                                             <option value="93d79131-884d-49b2-94b4-c4bf4fa0752d">Admin</option>
                                             <option value="hr">
                                                 Hr
-                                            </option>
+                                            </option> */}
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
@@ -407,9 +418,9 @@ class Users extends React.Component {
                                         <Form.Label>Roles</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            value={this.state.roles}
+                                            value={this.state.ballz}
                                             onChange={this.changeHandler}
-                                            name="roles"
+                                            name="ballz"
                                             required
                                             placeholder="Enter your roles"
                                         />
@@ -457,6 +468,14 @@ class Users extends React.Component {
     }
 }
 export default Users;
+
+
+
+
+
+
+
+
 
 
 
@@ -542,31 +561,31 @@ export default Users;
 //         // this.fetchUsers()
 //     };
 
-//     fetchUsers = () => {
-//         let users = axios.get("https://avcs-platform.herokuapp.com/users");
-//         let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
-//         let maritalstatus = axios.get(
-//             "https://avcs-platform.herokuapp.com/maritalStatus"
-//         );
+//     // fetchUsers = () => {
+//     //     let users = axios.get("https://avcs-platform.herokuapp.com/users");
+//     //     let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+//     //     let maritalstatus = axios.get(
+//     //         "https://avcs-platform.herokuapp.com/maritalStatus"
+//     //     );
 
-//         axios
-//             .all([users, groups, maritalstatus])
-//             .then(
-//                 axios.spread((...res) => {
-//                     this.setState({
-//                         ...this.state,
-//                         users: res[0].data,
-//                         groups: res[1].data,
-//                         maritals: res[2].data,
-//                     });
-//                 })
-//             )
-//             .catch((error) => console.log(error));
-//     };
+//     //     axios
+//     //         .all([users, groups, maritalstatus])
+//     //         .then(
+//     //             axios.spread((...res) => {
+//     //                 this.setState({
+//     //                     ...this.state,
+//     //                     users: res[0].data,
+//     //                     groups: res[1].data,
+//     //                     maritals: res[2].data,
+//     //                 });
+//     //             })
+//     //         )
+//     //         .catch((error) => console.log(error));
+//     // };
 
-//     componentDidMount() {
-//         this.fetchUsers();
-//     }
+//     // componentDidMount() {
+//     //     this.fetchUsers();
+//     // }
 
 //     render() {
 
@@ -706,11 +725,11 @@ export default Users;
 //                                             <div className="invalid-feedback">
 //                                                 Enter Prospect Date!
 //                                             </div>
-//                                             {this.state.maritals && this.state.maritals.map((marital) => (
-//                                                 <option value={marital.id} >{marital.name}</option>
-//                                             ))}
+//                                             {/* {this.state.maritals && this.state.maritals.map((marital) => (
+//                                                 <option value="1" >{marital.name}</option>
+//                                             ))} */}
 
-//                                             {/* <option
+//                                             <option
 //                                                 value=""
 //                                                 selected="selected"
 //                                             >
@@ -719,7 +738,7 @@ export default Users;
 //                                             <option value="513cd3ec-e0bf-4e18-b813-2d231cf571d8">Single</option>
 //                                             <option value="married">
 //                                                 Married
-//                                             </option> */}
+//                                             </option>
 //                                         </Form.Control>
 //                                     </Form.Group>
 //                                 </Col>
@@ -827,11 +846,11 @@ export default Users;
 //                                             <div className="invalid-feedback">
 //                                                 Enter your group ID!
 //                                         </div>
-//                                             {this.state.groups && this.state.groups.map((group) => (
-//                                                 <option value={group.id}>{group.name}</option>
-//                                             ))}
+//                                             {/* {this.state.groups && this.state.groups.map((group) => (
+//                                                 <option value='1'>{group.name}</option>
+//                                             ))} */}
 
-//                                             {/* <option
+//                                             <option
 //                                                 value=""
 //                                                 selected="selected"
 //                                             >
@@ -840,7 +859,7 @@ export default Users;
 //                                             <option value="93d79131-884d-49b2-94b4-c4bf4fa0752d">Admin</option>
 //                                             <option value="hr">
 //                                                 Hr
-//                                             </option> */}
+//                                             </option>
 //                                         </Form.Control>
 //                                     </Form.Group>
 //                                 </Col>
@@ -918,18 +937,6 @@ export default Users;
 //     }
 // }
 // export default Users;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
