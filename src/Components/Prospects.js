@@ -42,7 +42,7 @@ class Prospectus extends React.Component {
                             onSubmit={this.submitHandler}
                             noValidate
                         >
-                            <h1>Prospectus</h1>
+                            <h1>Prospects</h1>
                             <Form.Row>
                                 <Col>
                                     <Form.Group controlId="formBasicEmail">
