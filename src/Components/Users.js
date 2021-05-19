@@ -73,7 +73,8 @@ class Users extends React.Component {
                     password: "",
                    // ballz: "",
 
-                }))
+                }),
+                alert("submitted successfully"))
             )
             .catch((error) => console.log(error));
 
