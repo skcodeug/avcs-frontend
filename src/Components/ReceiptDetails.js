@@ -3,13 +3,12 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form, Table } from "react-bootstrap";
 import axios from "axios";
 
-class Prospect extends React.Component {
+class ReceiptDetails extends React.Component {
   constructor() {
     super();
     this.state = {
-      date: "",
-      client_id: "",
-      details: "",
+      receipt_reference_id: "",
+      invoice_reference_id: "",
       errors: {},
     };
   }
@@ -32,77 +31,9 @@ class Prospect extends React.Component {
         errors.surname = "Please provide a surname";
       }
     };
-    let validateOthernames = () => {
-      if (this.state.otherNames === "") {
-        errors.otherNames = "Please provide any other name";
-      }
-    };
-    let validateFullName = () => {
-      if (this.state.fullName === "") {
-        errors.fullName = "Please provide any fullname";
-      }
-    };
-    let validateDob = () => {
-      if (this.state.dob === "") {
-        errors.dob = "Please provide a date of birth";
-      }
-    };
-    let validateGender = () => {
-      if (this.state.gender === "") {
-        errors.gender = "Please provide a gender";
-      }
-    };
-    let validateMaritalStatusId = () => {
-      if (this.state.maritalStatusId === "") {
-        errors.maritalStatusId = "Please provide a marital status";
-      }
-    };
-    let validateNationalIdNumber = () => {
-      if (this.state.nationalIdNumber === "") {
-        errors.nationalIdNumber = "Please provide a NIN";
-      }
-    };
-    let validateWorkEmail = () => {
-      if (this.state.workEmail === "") {
-        errors.workEmail = "Please provide a work email";
-      }
-    };
-    let validatePersonalEmail = () => {
-      if (this.state.personalEmail === "") {
-        errors.personalEmail = "Please provide a personal email";
-      }
-    };
-    let validatePhoneNumbers = () => {
-      if (this.state.phoneNumbers === "") {
-        errors.phoneNumbers = "Please provide your phone numbers";
-      }
-    };
-    let validateStaffId = () => {
-      if (this.state.staffId === "") {
-        errors.staffId = "Please provide staff ID";
-      }
-    };
-    let validateGroupId = () => {
-      if (this.state.groupId === "") {
-        errors.groupId = "Please provide group ID";
-      }
-    };
-    let validatePassword = () => {
-      if (this.state.password === "") {
-        errors.password = "Please provide a password";
-      }
-    };
-    let validateRoles = () => {
-      if (this.state.ballz === "") {
-        errors.roles = "Please provide a role";
-      }
-    };
 
     validateFirstname();
     validateSurname();
-    validateOthernames();
-    validatePassword();
-    validateRoles();
 
     return errors;
   };
@@ -500,4 +431,4 @@ class Prospect extends React.Component {
     );
   }
 }
-export default Prospects;
+export default ReceiptDetails;

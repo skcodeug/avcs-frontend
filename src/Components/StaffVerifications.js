@@ -3,13 +3,23 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form, Table } from "react-bootstrap";
 import axios from "axios";
 
-class Prospect extends React.Component {
+class StaffVerifications extends React.Component {
   constructor() {
     super();
     this.state = {
-      date: "",
-      client_id: "",
-      details: "",
+      staff_id: "",
+      staff_ref: "",
+      application_letter: "",
+      cv: "",
+      academic_paper: "",
+      referee_letter: "",
+      interview_evaluation_reference_id: "",
+      management_recommendation: "",
+      appointment_approval: "",
+      appointment_letter: "",
+      bio_data: "",
+      confirmation_letter: "",
+      exit_interview: "",
       errors: {},
     };
   }
@@ -500,4 +510,4 @@ class Prospect extends React.Component {
     );
   }
 }
-export default Prospects;
+export default UserDetails1;
