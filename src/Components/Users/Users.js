@@ -23,7 +23,12 @@ class Users extends React.Component {
 
   fetchDropDownData = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/departments")
+      .get("https://avcs-platform.herokuapp.com/departments", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+        }
+      })
       .then((res) => {
         this.setState((prevState) => {
           return {
