@@ -3,8 +3,6 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Operations from "./Components/Operations";
-import Accounts from "./Components/Accounts";
-import Reports from "./Components/Reports";
 import Login from "./Components/Login";
 import MaritalStatus from "./Components/MaritalStatus";
 import Users from "./Components/Users/Users";
@@ -38,7 +36,6 @@ import Quotation from "./Components/Quotation";
 import QuotationDetails from "./Components/QuotationDetails";
 import ReceiptDetails from "./Components/ReceiptDetails";
 import Receipts from "./Components/Receipts";
-import Reports from "./Components/Reports";
 import Requisitions from "./Components/Requisitions";
 import StaffVerifications from "./Components/StaffVerifications";
 import UserDetails1 from "./Components/UserDetails1";
@@ -54,8 +51,6 @@ function App() {
           <Switch>
             <Route path="/home" component={Clients} exact></Route>
             <Route path="/operations" component={Operations}></Route>
-            <Route path="/accounts" component={Accounts}></Route>
-            <Route path="/reports" component={Reports}></Route>
             <Route path="/users" component={Users} exact></Route>
             <Route path="/login" component={Login} exact></Route>
             <Route

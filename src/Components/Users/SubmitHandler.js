@@ -32,10 +32,6 @@ export default submitHandler = (event) => {
           roles: "",
           password: "",
           departments: [],
-          // ballz: "",
-          // users: [],
-          // maritals: [],
-          // groups: [],
           errors: {},
         }));
         event.target.className = "needs-validation";
