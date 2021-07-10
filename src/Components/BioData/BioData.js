@@ -1,12 +1,12 @@
-import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form, Table } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
+import React from "react";
+import { Card, Col, Container, Button } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
 
 class BioData extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       staffId: "",
       residence: "",
@@ -16,30 +16,31 @@ class BioData extends React.Component {
       personalSkills: "",
       periodOfAvailability: "",
       expectedDate: "",
-      errors: {}
-    }
+      errors: {},
+    };
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      console.log(temp)
+      let temp = { ...this.state };
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/biodata", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
           this.setState(() => ({
@@ -51,21 +52,21 @@ class BioData extends React.Component {
             personalSkills: "",
             periodOfAvailability: "",
             expectedDate: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -194,7 +195,7 @@ class BioData extends React.Component {
               </Form.Group>
 
               <Form.Group as={Col} controlId="expectedDate">
-                <Form.Label>expectedDate</Form.Label>
+                <Form.Label>Expected date</Form.Label>
                 <Form.Control
                   type="text"
                   value={this.state.expectedDate}
@@ -216,7 +217,7 @@ class BioData extends React.Component {
           </Form>
         </Card.Body>
       </Container>
-    )
+    );
   }
 }
-export default BioData
+export default BioData;

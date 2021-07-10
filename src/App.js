@@ -1,45 +1,44 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./App.css"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import Operations from "./Components/Operations"
-import Login from "./Components/Login"
-import MaritalStatus from "./Components/MaritalStatus"
-import Users from "./Components/Users/Users"
-import AnnualLeave from "./Components/AnnualLeave/AnnualLeave"
-import AnnualLeaveDepartments from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments"
-import AnnualLeaveMds from "./Components/AnnualLeaveMds/AnnualLeaveMds"
-import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders/AnnualLeaveRecommenders"
-import Approvals from "./Components/Approvals/Approvals"
-import BioData from "./Components/BioData"
-import ClientCategories from "./Components/ClientCategories"
-import Clients from "./Components/Clients"
-import Collection from "./Components/Collection"
-import ConsultantFirmConsultants from "./Components/ConsultanFirmConsultants"
-import ConsultantCategories from "./Components/ConsultantCategories"
-import ConsultantFirms from "./Components/ConsultantFirms"
-import Consultants from "./Components/Consultants"
-import Contracts from "./Components/Contracts"
-import CorporateClients from "./Components/CorporateClients"
-import Departments from "./Components/Departments"
-import IndividualClients from "./Components/IndividualClients"
-import IndividualConsultants from "./Components/IndividualConsultants"
-import InterviewEvaluation from "./Components/InterviewEvaluations"
-import InvoiceDetails from "./Components/InvoiceDetails"
-import Invoices from "./Components/Invoices"
-import NextOfKin from "./Components/NextOfKin"
-import Payments from "./Components/Payments"
-import ProjectStatus from "./Components/ProjectStatus"
-import Prospects from "./Components/Prospects"
-import Qualifications from "./Components/Qualifications"
-import Quotation from "./Components/Quotation"
-import QuotationDetails from "./Components/QuotationDetails"
-import ReceiptDetails from "./Components/ReceiptDetails"
-import Receipts from "./Components/Receipts"
-import Requisitions from "./Components/Requisitions"
-import StaffVerifications from "./Components/StaffVerifications"
-import UserDetails1 from "./Components/UserDetails1"
-import UserDetails2 from "./Components/UserDetails2"
-import UserRelations from "./Components/UserRelations"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Operations from "./Components/Operations";
+import Login from "./Components/Login";
+import MaritalStatus from "./Components/MaritalStatus";
+import Users from "./Components/Users/Users";
+import AnnualLeave from "./Components/AnnualLeave/AnnualLeave";
+import AnnualLeaveDepartments from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments";
+import AnnualLeaveMds from "./Components/AnnualLeaveMds/AnnualLeaveMds";
+import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders/AnnualLeaveRecommenders";
+import Approvals from "./Components/Approvals/Approvals";
+import BioData from "./Components/BioData/BioData";
+import ClientCategories from "./Components/ClientCategories/ClientCategories";
+import Clients from "./Components/Clients-Beta/Clients";
+import ConsultantFirmConsultants from "./Components/ConsultantFirmConsultants/ConsultanFirmConsultants";
+import ConsultantCategories from "./Components/ConsultantCategories/ConsultantCategories";
+import ConsultantFirms from "./Components/ConsultantFirms/ConsultantFirms";
+import Consultants from "./Components/Consultants";
+import Contracts from "./Components/Contracts";
+import CorporateClients from "./Components/CorporateClients";
+import Departments from "./Components/Departments";
+import IndividualClients from "./Components/IndividualClients";
+import IndividualConsultants from "./Components/IndividualConsultants";
+import InterviewEvaluation from "./Components/InterviewEvaluations";
+import InvoiceDetails from "./Components/InvoiceDetails";
+import Invoices from "./Components/Invoices";
+import NextOfKin from "./Components/NextOfKin";
+import Payments from "./Components/Payments";
+import ProjectStatus from "./Components/ProjectStatus";
+import Prospects from "./Components/Prospects";
+import Qualifications from "./Components/Qualifications";
+import Quotation from "./Components/Quotation";
+import QuotationDetails from "./Components/QuotationDetails";
+import ReceiptDetails from "./Components/ReceiptDetails";
+import Receipts from "./Components/Receipts";
+import Requisitions from "./Components/Requisitions";
+import StaffVerifications from "./Components/StaffVerifications";
+import UserDetails1 from "./Components/UserDetails1";
+import UserDetails2 from "./Components/UserDetails2";
+import UserRelations from "./Components/UserRelations";
 // import { Redirect } from "react-router-dom"
 
 function App() {
@@ -191,10 +190,10 @@ function App() {
         </div>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 
 {
   /* 
