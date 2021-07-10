@@ -23,12 +23,7 @@ class Users extends React.Component {
 
   fetchDropDownData = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
+      .get("https://avcs-platform.herokuapp.com/departments")
       .then((res) => {
         this.setState((prevState) => {
           return {
@@ -102,7 +97,7 @@ class Users extends React.Component {
             noValidate
           >
             <NavBar /> <br />
-            <h1>Clients</h1>
+            <h1>Users</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="prefix">
                 <Form.Label>Prefix</Form.Label>

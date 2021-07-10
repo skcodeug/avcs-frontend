@@ -41,8 +41,20 @@ import StaffVerifications from "./Components/StaffVerifications"
 import UserDetails1 from "./Components/UserDetails1"
 import UserDetails2 from "./Components/UserDetails2"
 import UserRelations from "./Components/UserRelations"
+import { Redirect } from "react-router-dom"
 
 function App() {
+  // const checkIfUserIsAuthorized = () => {
+  //   if (
+  //     localStorage.getItem("access-token") !== null &&
+  //     localStorage.getItem("access-token") !== undefined
+  //   ) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   return (
     <div id="body">
       <Router>
@@ -52,6 +64,18 @@ function App() {
             <Route path="/clients" component={Clients} exact></Route>
             <Route path="/operations" component={Operations}></Route>
             <Route path="/users" component={Users} exact></Route>
+            {/* <Route
+              path="/users"
+              render={() => {
+                console.log(checkIfUserIsAuthorized())
+                return checkIfUserIsAuthorized() ? (
+                  <Users />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }}
+              exact
+            ></Route> */}
             <Route
               path="/maritalstatus"
               component={MaritalStatus}
