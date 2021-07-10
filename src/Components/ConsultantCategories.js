@@ -1,78 +1,78 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form, Table } from "react-bootstrap";
-import axios from "axios";
+import React from "react"
+import { Card, Col, Container, Button } from "react-bootstrap"
+import { Form, Table } from "react-bootstrap"
+import axios from "axios"
 
 class ConsultantCategories extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       name: "",
-      errors: {},
-    };
+      errors: {}
+    }
   }
 
   handleChange() {}
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   findFormErrors = () => {
-    const errors = {};
+    const errors = {}
     let validateName = () => {
       if (this.state.firstName === "") {
-        errors.firstName = "Please provide a first name";
+        errors.firstName = "Please provide a first name"
       }
-    };
+    }
 
-    validateNmae();
+    validateName()
 
-    return errors;
-  };
+    return errors
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(this.findFormErrors()).length === 0) {
-      event.target.className += " was-validated";
+      event.target.className += " was-validated"
 
-      let temp = { ...this.state, roles: [] };
-      temp.roles[0] = this.state.ballz;
-      delete temp.ballz;
-      delete temp.users;
-      delete temp.maritals;
-      delete temp.groups;
-      delete temp.errors;
-      console.log(temp);
+      let temp = { ...this.state, roles: [] }
+      temp.roles[0] = this.state.ballz
+      delete temp.ballz
+      delete temp.users
+      delete temp.maritals
+      delete temp.groups
+      delete temp.errors
+      console.log(temp)
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp)
         .then(() => {
           this.setState(() => ({
             name: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
+            errors: {}
+          }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = this.findFormErrors();
+      let errors = this.findFormErrors()
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors: errors
+        }
+      })
     }
-  };
+  }
 
   fetchUsers = () => {
-    let users = axios.get("https://avcs-platform.herokuapp.com/users");
-    let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+    let users = axios.get("https://avcs-platform.herokuapp.com/users")
+    let groups = axios.get("https://avcs-platform.herokuapp.com/groups")
     let maritalstatus = axios.get(
       "https://avcs-platform.herokuapp.com/maritalStatus"
-    );
+    )
 
     axios
       .all([users, groups, maritalstatus])
@@ -83,16 +83,16 @@ class ConsultantCategories extends React.Component {
               ...prevState,
               users: res[0].data,
               groups: res[1].data,
-              maritals: res[2].data,
-            };
-          });
+              maritals: res[2].data
+            }
+          })
         })
       )
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchUsers()
   }
 
   render() {
@@ -407,7 +407,7 @@ class ConsultantCategories extends React.Component {
           </Card.Body>
         </Container>
       </>
-    );
+    )
   }
 }
-export default ConsultantCategories;
+export default ConsultantCategories

@@ -1,34 +1,35 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import axios from "axios";
+import React from "react"
+import { Card, Col, Container, Button } from "react-bootstrap"
+import { Form } from "react-bootstrap"
+import axios from "axios"
 
 class Login extends React.Component {
   state = {
     email: "",
-    password: "",
-  };
+    password: ""
+  }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
-    event.target.className += " was-validated";
-    const token = Buffer.from(`${email}:${password}`, "utf8").toString(
-      "base64"
-    );
+    event.preventDefault()
+    event.target.className += " was-validated"
+    const token = Buffer.from(
+      `${this.state.email}:${this.state.password}`,
+      "utf8"
+    ).toString("base64")
     axios
       .post("https://avcs-platform.herokuapp.com/login", this.state, {
-        headers: { Authorization: `Basic ${token}` },
+        headers: { Authorization: `Basic ${token}` }
       })
       .then((res) => {
-        localStorage.setItem("access-token", res.data.access_token);
-        this.props.history.push("/users");
+        localStorage.setItem("access-token", res.data.access_token)
+        this.props.history.push("/users")
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
   render() {
     return (
@@ -79,7 +80,7 @@ class Login extends React.Component {
           </Card.Body>
         </Container>
       </>
-    );
+    )
   }
 }
-export default Login;
+export default Login

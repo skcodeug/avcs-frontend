@@ -1,26 +1,26 @@
-import axios from "axios";
-import findFormErrors from "./ValidateUsers";
+import axios from "axios"
+import findFormErrors from "./ValidateUsers"
 
-export default submitHandler = (event) => {
-  event.preventDefault();
+const submitHandler = (event) => {
+  event.preventDefault()
 
   if (Object.keys(findFormErrors()).length === 0) {
-    event.target.className += " was-validated";
+    event.target.className += " was-validated"
 
-    let temp = { ...this.state, roles: [] };
-    temp.roles[0] = this.state.ballz;
-    delete temp.ballz;
-    delete temp.users;
-    delete temp.maritals;
-    delete temp.groups;
-    delete temp.errors;
-    console.log(temp);
+    let temp = { ...this.state, roles: [] }
+    temp.roles[0] = this.state.ballz
+    delete temp.ballz
+    delete temp.users
+    delete temp.maritals
+    delete temp.groups
+    delete temp.errors
+    console.log(temp)
 
     axios
       .post("https://avcs-platform.herokuapp.com/users", temp, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }
       })
       .then(() => {
         this.setState(() => ({
@@ -32,18 +32,20 @@ export default submitHandler = (event) => {
           roles: "",
           password: "",
           departments: [],
-          errors: {},
-        }));
-        event.target.className = "needs-validation";
+          errors: {}
+        }))
+        event.target.className = "needs-validation"
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
   } else {
-    let errors = findFormErrors();
+    let errors = findFormErrors()
     this.setState((prevState) => {
       return {
         ...prevState,
-        errors: errors,
-      };
-    });
+        errors: errors
+      }
+    })
   }
-};
+}
+
+export default submitHandler

@@ -1,11 +1,11 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form, Table } from "react-bootstrap";
-import axios from "axios";
+import React from "react"
+import { Card, Col, Container, Button } from "react-bootstrap"
+import { Form, Table } from "react-bootstrap"
+import axios from "axios"
 
 class AnnualLeave extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       date: "",
       staff_id: "",
@@ -15,117 +15,117 @@ class AnnualLeave extends React.Component {
       last_date: "",
       return_date: "",
       contact_address: "",
-      errors: {},
-    };
+      errors: {}
+    }
   }
 
   handleChange() {}
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   findFormErrors = () => {
-    const errors = {};
+    const errors = {}
     let validateFirstname = () => {
       if (this.state.firstName === "") {
-        errors.firstName = "Please provide a first name";
+        errors.firstName = "Please provide a first name"
       }
-    };
+    }
     let validateSurname = () => {
       if (this.state.surname === "") {
-        errors.surname = "Please provide a surname";
+        errors.surname = "Please provide a surname"
       }
-    };
+    }
     let validateOthernames = () => {
       if (this.state.otherNames === "") {
-        errors.otherNames = "Please provide any other name";
+        errors.otherNames = "Please provide any other name"
       }
-    };
+    }
     let validateFullName = () => {
       if (this.state.fullName === "") {
-        errors.fullName = "Please provide any fullname";
+        errors.fullName = "Please provide any fullname"
       }
-    };
+    }
     let validateDob = () => {
       if (this.state.dob === "") {
-        errors.dob = "Please provide a date of birth";
+        errors.dob = "Please provide a date of birth"
       }
-    };
+    }
     let validateGender = () => {
       if (this.state.gender === "") {
-        errors.gender = "Please provide a gender";
+        errors.gender = "Please provide a gender"
       }
-    };
+    }
     let validateMaritalStatusId = () => {
       if (this.state.maritalStatusId === "") {
-        errors.maritalStatusId = "Please provide a marital status";
+        errors.maritalStatusId = "Please provide a marital status"
       }
-    };
+    }
     let validateNationalIdNumber = () => {
       if (this.state.nationalIdNumber === "") {
-        errors.nationalIdNumber = "Please provide a NIN";
+        errors.nationalIdNumber = "Please provide a NIN"
       }
-    };
+    }
     let validateWorkEmail = () => {
       if (this.state.workEmail === "") {
-        errors.workEmail = "Please provide a work email";
+        errors.workEmail = "Please provide a work email"
       }
-    };
+    }
     let validatePersonalEmail = () => {
       if (this.state.personalEmail === "") {
-        errors.personalEmail = "Please provide a personal email";
+        errors.personalEmail = "Please provide a personal email"
       }
-    };
+    }
     let validatePhoneNumbers = () => {
       if (this.state.phoneNumbers === "") {
-        errors.phoneNumbers = "Please provide your phone numbers";
+        errors.phoneNumbers = "Please provide your phone numbers"
       }
-    };
+    }
     let validateStaffId = () => {
       if (this.state.staffId === "") {
-        errors.staffId = "Please provide staff ID";
+        errors.staffId = "Please provide staff ID"
       }
-    };
+    }
     let validateGroupId = () => {
       if (this.state.groupId === "") {
-        errors.groupId = "Please provide group ID";
+        errors.groupId = "Please provide group ID"
       }
-    };
+    }
     let validatePassword = () => {
       if (this.state.password === "") {
-        errors.password = "Please provide a password";
+        errors.password = "Please provide a password"
       }
-    };
+    }
     let validateRoles = () => {
       if (this.state.ballz === "") {
-        errors.roles = "Please provide a role";
+        errors.roles = "Please provide a role"
       }
-    };
+    }
 
-    validateFirstname();
-    validateSurname();
-    validateOthernames();
-    validatePassword();
-    validateRoles();
+    validateFirstname()
+    validateSurname()
+    validateOthernames()
+    validatePassword()
+    validateRoles()
 
-    return errors;
-  };
+    return errors
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(this.findFormErrors()).length === 0) {
-      event.target.className += " was-validated";
+      event.target.className += " was-validated"
 
-      let temp = { ...this.state, roles: [] };
-      temp.roles[0] = this.state.ballz;
-      delete temp.ballz;
-      delete temp.users;
-      delete temp.maritals;
-      delete temp.groups;
-      delete temp.errors;
-      console.log(temp);
+      let temp = { ...this.state, roles: [] }
+      temp.roles[0] = this.state.ballz
+      delete temp.ballz
+      delete temp.users
+      delete temp.maritals
+      delete temp.groups
+      delete temp.errors
+      console.log(temp)
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp)
@@ -146,28 +146,28 @@ class AnnualLeave extends React.Component {
             groupId: "",
             password: "",
             ballz: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
+            errors: {}
+          }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = this.findFormErrors();
+      let errors = this.findFormErrors()
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors: errors
+        }
+      })
     }
-  };
+  }
 
   fetchUsers = () => {
-    let users = axios.get("https://avcs-platform.herokuapp.com/users");
-    let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+    let users = axios.get("https://avcs-platform.herokuapp.com/users")
+    let groups = axios.get("https://avcs-platform.herokuapp.com/groups")
     let maritalstatus = axios.get(
       "https://avcs-platform.herokuapp.com/maritalStatus"
-    );
+    )
 
     axios
       .all([users, groups, maritalstatus])
@@ -178,16 +178,16 @@ class AnnualLeave extends React.Component {
               ...prevState,
               users: res[0].data,
               groups: res[1].data,
-              maritals: res[2].data,
-            };
-          });
+              maritals: res[2].data
+            }
+          })
         })
       )
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchUsers()
   }
 
   render() {
@@ -502,7 +502,7 @@ class AnnualLeave extends React.Component {
           </Card.Body>
         </Container>
       </>
-    );
+    )
   }
 }
-export default UserDetails1;
+export default AnnualLeave

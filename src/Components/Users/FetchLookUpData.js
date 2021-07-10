@@ -1,20 +1,24 @@
-export default fetchUsers = () => {
+import axios from "axios"
+
+const fetchUsers = () => {
   axios
     .get("https://avcs-platform.herokuapp.com/departments", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
     })
     .then((res) => {
       this.setState((prevState) => {
         return {
           ...prevState,
-          departments: res.data,
-        };
-      });
+          departments: res.data
+        }
+      })
     })
-    .catch((error) => console.log(error));
-};
+    .catch((error) => console.log(error))
+}
+
+export default fetchUsers
 
 // export default fetchUsers = () => {
 //   const users = axios.get("https://avcs-platform.herokuapp.com/users", {

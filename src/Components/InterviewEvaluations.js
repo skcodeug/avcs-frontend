@@ -1,7 +1,7 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import axios from "axios";
+import React from "react"
+import { Card, Col, Container, Button } from "react-bootstrap"
+import { Form } from "react-bootstrap"
+import axios from "axios"
 
 class InterviewEvaluations extends React.Component {
   state = {
@@ -14,32 +14,32 @@ class InterviewEvaluations extends React.Component {
     professional_impression: "",
     interpersonal_skill: "",
     organizational_fit: "",
-    errors: {},
-  };
+    errors: {}
+  }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   findFormErrors = () => {
-    const errors = {};
+    const errors = {}
     let validateName = () => {
       if (this.state.name === "") {
-        errors.name = "Please provide a marital status";
+        errors.name = "Please provide a marital status"
       }
-    };
-    validateName();
+    }
+    validateName()
 
-    return errors;
-  };
+    return errors
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(this.findFormErrors()).length === 0) {
-      event.target.className += " was-validated";
-      let temp = { ...this.state };
-      delete temp.errors;
+      event.target.className += " was-validated"
+      let temp = { ...this.state }
+      delete temp.errors
 
       axios
         .post(
@@ -47,25 +47,25 @@ class InterviewEvaluations extends React.Component {
           temp,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            }
           }
         )
         .then(() => {
-          this.setState(() => ({ name: "" }));
-          event.target.className = "needs-validation";
+          this.setState(() => ({ name: "" }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = this.findFormErrors();
+      let errors = this.findFormErrors()
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors: errors
+        }
+      })
     }
-  };
+  }
 
   render() {
     return (
@@ -103,7 +103,7 @@ class InterviewEvaluations extends React.Component {
           </Card.Body>
         </Container>
       </>
-    );
+    )
   }
 }
-export default MaritalStatus;
+export default InterviewEvaluations

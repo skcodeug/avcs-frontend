@@ -1,71 +1,70 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form, Table } from "react-bootstrap";
-import axios from "axios";
+import React from "react"
+import { Card, Col, Container, Button } from "react-bootstrap"
+import { Form, Table } from "react-bootstrap"
+import axios from "axios"
 
 class Payments extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       date: "",
       consultant_id: "",
       contract_reference_id: "",
       paid: "",
-      errors: {},
-    };
+      errors: {}
+    }
   }
 
   handleChange() {}
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   findFormErrors = () => {
-    const errors = {};
+    const errors = {}
     let validateFirstname = () => {
       if (this.state.firstName === "") {
-        errors.firstName = "Please provide a first name";
+        errors.firstName = "Please provide a first name"
       }
-    };
+    }
     let validateSurname = () => {
       if (this.state.surname === "") {
-        errors.surname = "Please provide a surname";
+        errors.surname = "Please provide a surname"
       }
-    };
+    }
     let validateOthernames = () => {
       if (this.state.otherNames === "") {
-        errors.otherNames = "Please provide any other name";
+        errors.otherNames = "Please provide any other name"
       }
-    };
+    }
     let validateFullName = () => {
       if (this.state.fullName === "") {
-        errors.fullName = "Please provide any fullname";
+        errors.fullName = "Please provide any fullname"
       }
-    };
+    }
 
-    validateFirstname();
-    validateSurname();
-    validateOthernames();
-    validatePassword();
+    validateFirstname()
+    validateSurname()
+    validateOthernames()
 
-    return errors;
-  };
+    return errors
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(this.findFormErrors()).length === 0) {
-      event.target.className += " was-validated";
+      event.target.className += " was-validated"
 
-      let temp = { ...this.state, roles: [] };
-      temp.roles[0] = this.state.ballz;
-      delete temp.ballz;
-      delete temp.users;
-      delete temp.maritals;
-      delete temp.groups;
-      delete temp.errors;
-      console.log(temp);
+      let temp = { ...this.state, roles: [] }
+      temp.roles[0] = this.state.ballz
+      delete temp.ballz
+      delete temp.users
+      delete temp.maritals
+      delete temp.groups
+      delete temp.errors
+      console.log(temp)
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp)
@@ -86,28 +85,28 @@ class Payments extends React.Component {
             groupId: "",
             password: "",
             ballz: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
+            errors: {}
+          }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = this.findFormErrors();
+      let errors = this.findFormErrors()
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors: errors
+        }
+      })
     }
-  };
+  }
 
   fetchUsers = () => {
-    let users = axios.get("https://avcs-platform.herokuapp.com/users");
-    let groups = axios.get("https://avcs-platform.herokuapp.com/groups");
+    let users = axios.get("https://avcs-platform.herokuapp.com/users")
+    let groups = axios.get("https://avcs-platform.herokuapp.com/groups")
     let maritalstatus = axios.get(
       "https://avcs-platform.herokuapp.com/maritalStatus"
-    );
+    )
 
     axios
       .all([users, groups, maritalstatus])
@@ -118,16 +117,16 @@ class Payments extends React.Component {
               ...prevState,
               users: res[0].data,
               groups: res[1].data,
-              maritals: res[2].data,
-            };
-          });
+              maritals: res[2].data
+            }
+          })
         })
       )
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchUsers()
   }
 
   render() {
@@ -442,7 +441,7 @@ class Payments extends React.Component {
           </Card.Body>
         </Container>
       </>
-    );
+    )
   }
 }
-export default Payments;
+export default Payments
