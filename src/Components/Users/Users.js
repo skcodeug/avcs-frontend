@@ -100,7 +100,7 @@ class Users extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <h1>Users</h1>
+            <h1>Clients</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="prefix">
                 <Form.Label>Prefix</Form.Label>
