@@ -42,7 +42,15 @@ class InterviewEvaluations extends React.Component {
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/interviewEvaluations", temp, {headers: {'Authorization': `Bearer ${localStorage.getItem('access_token')}}`})
+        .post(
+          "https://avcs-platform.herokuapp.com/interviewEvaluations",
+          temp,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        )
         .then(() => {
           this.setState(() => ({ name: "" }));
           event.target.className = "needs-validation";

@@ -1,70 +1,208 @@
-// import { Accordion, Card, useAccordionToggle, Row, Col, Container, Button, ButtonGroup } from 'react-bootstrap';
-//import { Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from './Components/NavBar';
-import clients from './Components/Clients';
-import prospects from './Components/Prospects';
-import Quotations from './Components/Quotation';
-import Contracts from './Components/Contracts';
-import Operations from './Components/Operations';
-import Accounts from './Components/Accounts';
-import Hr from './Components/HR';
-import Reports from './Components/Reports';
-import Users from './Components/Users';
-import Login from './Components/Login';
-import Groups from './Components/Groups';
-import MaritalStatus from './Components/MaritalStatus';
+import NavBar from "./Components/NavBar";
+import Operations from "./Components/Operations";
+import Accounts from "./Components/Accounts";
+import Reports from "./Components/Reports";
+import Login from "./Components/Login";
+import MaritalStatus from "./Components/MaritalStatus";
+import Users from "./Components/Users/Users";
+import AnnualLeave from "./Components/AnnualLeave";
+import AnnualLeaveDepartments from "./Components/AnnualLeaveDepartments";
+import AnnualLeaveMds from "./Components/AnnualLeaveMds";
+import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders";
+import Approvals from "./Components/Approvals";
+import BioData from "./Components/BioData";
+import ClientCategories from "./Components/ClientCategories";
+import Clients from "./Components/Clients";
+import Collection from "./Components/Collection";
+import ConsultantFirmConsultants from "./Components/ConsultanFirmConsultants";
+import ConsultantCategories from "./Components/ConsultantCategories";
+import ConsultantFirms from "./Components/ConsultantFirms";
+import Consultants from "./Components/Consultants";
+import Contracts from "./Components/Contracts";
+import CorporateClients from "./Components/CorporateClients";
+import Departments from "./Components/Departments";
+import IndividualClients from "./Components/IndividualClients";
+import IndividualConsultants from "./Components/IndividualConsultants";
+import InterviewEvaluation from "./Components/InterviewEvaluations";
+import InvoiceDetails from "./Components/InvoiceDetails";
+import Invoices from "./Components/Invoices";
+import NextOfKin from "./Components/NextOfKin";
+import Payments from "./Components/Payments";
+import ProjectStatus from "./Components/ProjectStatus";
+import Prospects from "./Components/Prospects";
+import Qualifications from "./Components/Qualifications";
+import Quotation from "./Components/Quotation";
+import QuotationDetails from "./Components/QuotationDetails";
+import ReceiptDetails from "./Components/ReceiptDetails";
+import Receipts from "./Components/Receipts";
+import Reports from "./Components/Reports";
+import Requisitions from "./Components/Requisitions";
+import StaffVerifications from "./Components/StaffVerifications";
+import UserDetails1 from "./Components/UserDetails1";
+import UserDetails2 from "./Components/UserDetails2";
+import UserRelations from "./Components/UserRelations";
 
-
-// function CustomToggle({ children, eventKey }) {
-//   const decoratedOnClick = useAccordionToggle(eventKey, () =>
-//     console.log('totally custom!'),
-//   );
-
-//   return (
-//     <Button
-//       variant="primary"
-      
-//       onClick={decoratedOnClick}
-//     >
-//       {children}
-//     </Button>
-//   );
-// }
 function App() {
   return (
     <div id="body">
-<Router>
-      <NavBar />
-      <br></br>
-      <div>  
+      <Router>
+        <NavBar /> <br />
+        <div>
           <Switch>
-            <Route path="/home" component={clients} exact></Route>
-            <Route path="/prospectus" component={prospects}></Route>
-            <Route path="/quotations" component={Quotations}></Route>
-            <Route path="/contracts" component={Contracts}></Route>
+            <Route path="/home" component={Clients} exact></Route>
             <Route path="/operations" component={Operations}></Route>
             <Route path="/accounts" component={Accounts}></Route>
-            <Route path="/hr" component={Hr}></Route>
             <Route path="/reports" component={Reports}></Route>
             <Route path="/users" component={Users} exact></Route>
-            <Route path="/groups" component={Groups} exact></Route>
             <Route path="/login" component={Login} exact></Route>
-            <Route path="/maritalstatus" component={MaritalStatus} exact></Route>
-            
+            <Route
+              path="/maritalstatus"
+              component={MaritalStatus}
+              exact
+            ></Route>
+            <Route path="/annualleave" component={AnnualLeave} exact></Route>
+            <Route
+              path="/annualleavedepartments"
+              component={AnnualLeaveDepartments}
+              exact
+            ></Route>
+            <Route
+              path="/annualleavemds"
+              component={AnnualLeaveMds}
+              exact
+            ></Route>
+            <Route
+              path="/annualleaverecommenders"
+              component={AnnualLeaveRecommenders}
+              exact
+            ></Route>
+            <Route path="/approvals" component={Approvals} exact></Route>
+            <Route path="/biodata" component={BioData} exact></Route>
+            <Route
+              path="/clientcategories"
+              component={ClientCategories}
+              exact
+            ></Route>
+            <Route path="/clients" component={Clients} exact></Route>
+            <Route path="/collection" component={Collection} exact></Route>
+            <Route
+              path="/consultantfirmconsultants"
+              component={ConsultantFirmConsultants}
+              exact
+            ></Route>
+            <Route
+              path="/consultantcategories"
+              component={ConsultantCategories}
+              exact
+            ></Route>
+            <Route
+              path="/consultantfirms"
+              component={ConsultantFirms}
+              exact
+            ></Route>
+            <Route path="/consultants" component={Consultants} exact></Route>
+            <Route path="/contracts" component={Contracts} exact></Route>
+            <Route
+              path="/corporateclients"
+              component={CorporateClients}
+              exact
+            ></Route>
+            <Route path="/departments" component={Departments} exact></Route>
+            <Route
+              path="/individualclients"
+              component={IndividualClients}
+              exact
+            ></Route>
+            <Route
+              path="/individualconsultants"
+              component={IndividualConsultants}
+              exact
+            ></Route>
+            <Route
+              path="/interviewevaluation"
+              component={InterviewEvaluation}
+              exact
+            ></Route>
+            <Route
+              path="/invoicedetails"
+              component={InvoiceDetails}
+              exact
+            ></Route>
+            <Route path="/invoices" component={Invoices} exact></Route>
+            <Route path="/nextofkin" component={NextOfKin} exact></Route>
+            <Route path="/payments" component={Payments} exact></Route>
+            <Route
+              path="/projectstatus"
+              component={ProjectStatus}
+              exact
+            ></Route>
+            <Route path="/prospects" component={Prospects} exact></Route>
+            <Route
+              path="/qualifications"
+              component={Qualifications}
+              exact
+            ></Route>
+            <Route path="/quotation" component={Quotation} exact></Route>
+            <Route
+              path="/quotationdetails"
+              component={QuotationDetails}
+              exact
+            ></Route>
+            <Route
+              path="/receiptdetails"
+              component={ReceiptDetails}
+              exact
+            ></Route>
+            <Route path="/receipts" component={Receipts} exact></Route>
+            <Route path="/requisitions" component={Requisitions} exact></Route>
+            <Route
+              path="/staffverifications"
+              component={StaffVerifications}
+              exact
+            ></Route>
+            <Route path="/userdetails1" component={UserDetails1} exact></Route>
+            <Route path="/userdetails2" component={UserDetails2} exact></Route>
+            <Route
+              path="/userrelations"
+              component={UserRelations}
+              exact
+            ></Route>
           </Switch>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </div>
+  );
+}
 
-      
+export default App;
+
+{
+  /* 
+import { Accordion, Card, useAccordionToggle, Row, Col, Container, Button, ButtonGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+
+  function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionToggle(eventKey, () =>
+      console.log('totally custom!'),
+    );
+    return (
+      <Button
+        variant="primary"
+        onClick={decoratedOnClick}
+      >
+        {children}
+      </Button>
+    );
+  }
 
 
+  function App (){}
 
 
-
-    {/* <Container>
+   <Container>
         <Row>
           <Col sm={4}>
             <Accordion defaultActiveKey="0">
@@ -194,13 +332,12 @@ function App() {
           </Col>
            <Col sm={4}>sm=4</Col> 
          </Row> 
-</Container> */}
-      
-    </div>
-
-
-  );
+</Container> */
 }
 
+//     </div>
 
-export default App;
+//   );
+// }
+
+// export default App;

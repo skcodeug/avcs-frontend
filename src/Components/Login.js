@@ -9,8 +9,6 @@ class Login extends React.Component {
     password: "",
   };
 
-  handleChange() {}
-
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -18,16 +16,16 @@ class Login extends React.Component {
   submitHandler = (event) => {
     event.preventDefault();
     event.target.className += " was-validated";
-    let token = Buffer.from(`${email}:${password}`, "utf8").toString("base64");
+    const token = Buffer.from(`${email}:${password}`, "utf8").toString(
+      "base64"
+    );
     axios
       .post("https://avcs-platform.herokuapp.com/login", this.state, {
         headers: { Authorization: `Basic ${token}` },
       })
       .then((res) => {
-        if (res.status === 200) {
-          localStorage.setItem("access-token", res.data.access_token);
-          this.props.history.push("/users");
-        }
+        localStorage.setItem("access-token", res.data.access_token);
+        this.props.history.push("/users");
       })
       .catch((error) => console.log(error));
   };
