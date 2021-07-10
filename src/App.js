@@ -49,10 +49,10 @@ function App() {
         <NavBar /> <br />
         <div>
           <Switch>
+            <Route path="/login" component={Login} exact></Route>
             <Route path="/" component={Clients} exact></Route>
             <Route path="/operations" component={Operations}></Route>
             <Route path="/users" component={Users} exact></Route>
-            <Route path="/login" component={Login} exact></Route>
             <Route
               path="/maritalstatus"
               component={MaritalStatus}

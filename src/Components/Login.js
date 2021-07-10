@@ -25,7 +25,10 @@ class Login extends React.Component {
         headers: { Authorization: `Basic ${token}` }
       })
       .then((res) => {
-        localStorage.setItem("access-token", res.data.access_token)
+        localStorage.setItem(
+          "access-token",
+          JSON.stringify(res.data.access_token)
+        )
         this.props.history.push("/users")
       })
       .catch((error) => console.log(error))

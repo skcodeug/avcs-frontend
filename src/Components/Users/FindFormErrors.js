@@ -1,38 +1,38 @@
-const findFormErrors = () => {
+const findFormErrors = (state) => {
   const errors = {}
   const alphaRegex = /^[a-zA-Z\s]+$/
   let validatePrefix = () => {
-    if (alphaRegex.test(this.state.prefix) === false) {
+    if (alphaRegex.test(state.prefix) === false) {
       errors.prefix = "Please provide a prefix"
     }
   }
   let validateFirstname = () => {
-    if (alphaRegex.test(this.state.first_name) === false) {
+    if (alphaRegex.test(state.firstName) === false) {
       errors.firstName = "Please provide a firstname"
     }
   }
   let validateSurname = () => {
-    if (alphaRegex.test(this.state.surname) === false) {
+    if (alphaRegex.test(state.surname) === false) {
       errors.surname = "Please provide a surname"
     }
   }
   let validateOthernames = () => {
-    if (alphaRegex.test(this.state.other_names) === false) {
+    if (alphaRegex.test(state.otherNames) === false) {
       errors.otherNames = "Please provide any other name"
     }
   }
   let validateDepartmentId = () => {
-    if (alphaRegex.test(this.state.department_id) === false) {
-      errors.groupId = "Please provide department ID"
+    if (state.departmentId === "") {
+      errors.departmentId = "Please provide department ID"
     }
   }
   let validateRoles = () => {
-    if (alphaRegex.test(this.state.ballz) === false) {
+    if (alphaRegex.test(state.roles) === false) {
       errors.roles = "Please provide a role"
     }
   }
   let validatePassword = () => {
-    if (this.state.password === "") {
+    if (state.password === "") {
       errors.password = "Please provide a password"
     }
   }
