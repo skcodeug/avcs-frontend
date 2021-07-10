@@ -36,53 +36,48 @@ class Login extends React.Component {
 
   render() {
     return (
-      <>
-        <Container>
-          <Card.Body>
-            <Form
-              className="needs-validation"
-              onSubmit={this.submitHandler}
-              noValidate
-            >
-              <h1>Login</h1>
-              <Form.Row>
-                <Col>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={this.state.email}
-                      onChange={this.changeHandler}
-                      name="email"
-                      required
-                      placeholder="email"
-                    />
-                    <div className="invalid-feedback">Required!</div>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={this.state.password}
-                      onChange={this.changeHandler}
-                      name="password"
-                      required
-                      placeholder="password"
-                    />
-                    <div className="invalid-feedback">Required!</div>
-                  </Form.Group>
-                </Col>
-              </Form.Row>
+      <Container>
+        <Card.Body>
+          <Form
+            className="needs-validation"
+            onSubmit={this.submitHandler}
+            noValidate
+          >
+            <h1>Login</h1>
+            <Form.Row>
+              <Form.Group as={Col} controlId="formBasicEmail">
+                <Form.Label>email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.changeHandler}
+                  name="email"
+                  required
+                  placeholder="email"
+                />
+                <div className="invalid-feedback">Required!</div>
+              </Form.Group>
 
-              <Button id="add-button" type="submit">
-                Submit
-              </Button>
-            </Form>
-          </Card.Body>
-        </Container>
-      </>
+              <Form.Group as={Col} controlId="formBasicEmail">
+                <Form.Label>password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.changeHandler}
+                  name="password"
+                  required
+                  placeholder="password"
+                />
+                <div className="invalid-feedback">Required!</div>
+              </Form.Group>
+            </Form.Row>
+
+            <Button id="add-button" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Card.Body>
+      </Container>
     )
   }
 }

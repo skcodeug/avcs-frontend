@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <Nav fill>
       <Nav.Item>
-        <Nav.Link activeClassName="active" href="/" id="navlinks">
+        <Nav.Link activeClassName="active" href="/clients" id="navlinks">
           Clients
         </Nav.Link>
       </Nav.Item>

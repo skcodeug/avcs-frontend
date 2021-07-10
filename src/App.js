@@ -46,11 +46,10 @@ function App() {
   return (
     <div id="body">
       <Router>
-        <NavBar /> <br />
         <div>
           <Switch>
-            <Route path="/login" component={Login} exact></Route>
-            <Route path="/" component={Clients} exact></Route>
+            <Route path="/" component={Login} exact></Route>
+            <Route path="/clients" component={Clients} exact></Route>
             <Route path="/operations" component={Operations}></Route>
             <Route path="/users" component={Users} exact></Route>
             <Route
