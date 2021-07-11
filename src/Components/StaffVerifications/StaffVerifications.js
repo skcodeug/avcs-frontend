@@ -86,7 +86,7 @@ class StaffVerifications extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <NavNar /> <br />
+            <NavBar /> <br />
             <h1>Staff verifications</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="staffId">
@@ -184,18 +184,112 @@ class StaffVerifications extends React.Component {
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="refereeLetter">
-                <Form.Label>Referee letter</Form.Label>
+              <Form.Group as={Col} controlId="interviewEvaluationReferenceId">
+                <Form.Label>Interview evaluation reference ID</Form.Label>
                 <Form.Control
-                  type="file"
-                  value={this.state.refereeLetter}
+                  type="text"
+                  value={this.state.interviewEvaluationReferenceId}
                   onChange={this.changeHandler}
-                  name="refereeLetter"
+                  name="interviewEvaluationReferenceId"
                   required
-                  isInvalid={this.state.errors.refereeLetter}
+                  isInvalid={this.state.errors.interviewEvaluationReferenceId}
+                  placeholder="Enter ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.refereeLetter}
+                  {this.state.errors.interviewEvaluationReferenceId}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="managementRecommendation">
+                <Form.Label>Management recommendation</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.managementRecommendation}
+                  onChange={this.changeHandler}
+                  name="managementRecommendation"
+                  required
+                  isInvalid={this.state.errors.managementRecommendation}
+                  placeholder="E.g This is a strong fit for this role."
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.managementRecommendation}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="appointmentApproval">
+                <Form.Label>Appointment approval</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.appointmentApproval}
+                  onChange={this.changeHandler}
+                  name="appointmentApproval"
+                  required
+                  isInvalid={this.state.errors.appointmentApproval}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.appointmentApproval}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="appointmentLetter">
+                <Form.Label>Appointment letter</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.appointmentLetter}
+                  onChange={this.changeHandler}
+                  name="appointmentLetter"
+                  required
+                  isInvalid={this.state.errors.appointmentLetter}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.appointmentLetter}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="bioData">
+                <Form.Label>Bio Data</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.bioData}
+                  onChange={this.changeHandler}
+                  name="bioData"
+                  required
+                  isInvalid={this.state.errors.bioData}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.bioData}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="confirmationLetter">
+                <Form.Label>Confirmation letter</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.confirmationLetter}
+                  onChange={this.changeHandler}
+                  name="confirmationLetter"
+                  required
+                  isInvalid={this.state.errors.confirmationLetter}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.confirmationLetter}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="exitInterview">
+                <Form.Label>Exit interview</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.exitInterview}
+                  onChange={this.changeHandler}
+                  name="exitInterview"
+                  required
+                  isInvalid={this.state.errors.exitInterview}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.exitInterview}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
