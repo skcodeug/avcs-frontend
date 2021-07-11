@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
+import 
 
 class ProjectStatus extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class ProjectStatus extends React.Component {
     const errors = {};
     let validateName = () => {
       if (this.state.name === "") {
-        errors.name = "Please provide department name";
+        errors.name = "Please provide a valid name";
       }
     };
     validateName();
@@ -34,7 +35,11 @@ class ProjectStatus extends React.Component {
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/departments", temp)
+        .post("https://avcs-platform.herokuapp.com/ProjectStatus", temp, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        })
         .then(() => {
           this.setState(() => ({ name: "" }));
           event.target.className = "needs-validation";
@@ -53,7 +58,6 @@ class ProjectStatus extends React.Component {
 
   render() {
     return (
-      <>
         <Container>
           <Card.Body>
             <Form
@@ -61,10 +65,10 @@ class ProjectStatus extends React.Component {
               onSubmit={this.submitHandler}
               noValidate
             >
-              <h1>Departments</h1>
+              <h1>Project status</h1>
               <Form.Row>
-                <Form.Group as={Col} lg="3" controlId="departments">
-                  <Form.Label>Departments</Form.Label>
+                <Form.Group as={Col} lg="3" controlId="projectStatus">
+                  <Form.Label>Project status</Form.Label>
                   <Form.Control
                     type="text"
                     value={this.state.name}
@@ -72,7 +76,7 @@ class ProjectStatus extends React.Component {
                     isInvalid={this.state.errors.name}
                     name="name"
                     required
-                    placeholder="Departments"
+                    placeholder="projectStatus"
                   />
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.name}
@@ -86,7 +90,6 @@ class ProjectStatus extends React.Component {
             </Form>
           </Card.Body>
         </Container>
-      </>
     );
   }
 }
