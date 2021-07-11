@@ -3,6 +3,7 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
+import NavBar from "../NavBar";
 
 class ConsultantCategories extends React.Component {
   state = {
@@ -59,6 +60,7 @@ class ConsultantCategories extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
+            <NavBar /> <br />
             <h1>Consultant categories</h1>
             <Form.Row>
               <Form.Group as={Col} lg="3" controlId="clientcategories">
@@ -77,7 +79,6 @@ class ConsultantCategories extends React.Component {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
-
             <Button id="add-button" type="submit">
               Submit
             </Button>

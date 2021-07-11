@@ -5,18 +5,18 @@ import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import NavBar from "../NavBar";
 
-class BioData extends React.Component {
+class CorporateClients extends React.Component {
   constructor() {
     super();
     this.state = {
-      staffId: "",
-      residence: "",
-      nextOfKinId: "",
-      employmentExperiences: "",
-      responsibilitiesBefore: "",
-      personalSkills: "",
-      periodOfAvailability: "",
-      expectedDate: "",
+      clientId: "",
+      tinNo: "",
+      contactsNames: "",
+      emails: "",
+      phoneNumbers: "",
+      address: "",
+      city: "",
+      avcsDiscovery: "",
       errors: {},
     };
   }
@@ -36,7 +36,7 @@ class BioData extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/biodata", temp, {
+        .post("https://avcs-platform.herokuapp.com/corporateClients", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -45,14 +45,14 @@ class BioData extends React.Component {
         })
         .then(() => {
           this.setState(() => ({
-            staffId: "",
-            residence: "",
-            nextOfKinId: "",
-            employmentExperiences: "",
-            responsibilitiesBefore: "",
-            personalSkills: "",
-            periodOfAvailability: "",
-            expectedDate: "",
+            clientId: "",
+            tinNo: "",
+            contactsNames: "",
+            emails: "",
+            phoneNumbers: "",
+            address: "",
+            city: "",
+            avcsDiscovery: "",
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -78,138 +78,141 @@ class BioData extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <NavBar /> <br />
-            <h1>BioData</h1>
+            <h1>Corporate clients</h1>
             <Form.Row>
-              <Form.Group as={Col} controlId="staffId">
-                <Form.Label>Staff ID</Form.Label>
+              <Form.Group as={Col} controlId="clientId">
+                <Form.Label>Client ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.staffId}
+                  value={this.state.clientId}
                   onChange={this.changeHandler}
-                  name="staffId"
+                  name="clientId"
                   required
-                  isInvalid={this.state.errors.staffId}
-                  placeholder="Enter ID"
+                  isInvalid={this.state.errors.clientId}
+                  placeholder="First Name"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.staffId}
+                  {this.state.errors.clientId}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="residence">
-                <Form.Label>Residence</Form.Label>
+              <Form.Group as={Col} controlId="tinNo">
+                <Form.Label>TIN No</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.residence}
+                  value={this.state.tinNo}
                   onChange={this.changeHandler}
-                  name="residence"
+                  name="tinNo"
                   required
-                  isInvalid={this.state.errors.residence}
-                  placeholder="Enter residence"
+                  isInvalid={this.state.errors.tinNo}
+                  placeholder="Enter tin number"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.residence}
+                  {this.state.errors.tinNo}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="nextOfKinId">
-                <Form.Label>Next of kin ID</Form.Label>
+              <Form.Group as={Col} controlId="contactsNames">
+                <Form.Label>Contacts names</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.nextOfKinId}
+                  value={this.state.contactsNames}
                   onChange={this.changeHandler}
-                  name="nextOfKinId"
+                  name="contactsNames"
                   required
-                  isInvalid={this.state.errors.nextOfKinId}
-                  placeholder="Enter ID"
+                  isInvalid={this.state.errors.contactsNames}
+                  placeholder="Enter contacts names"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.nextOfKinId}
+                  {this.state.errors.contactsNames}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Form.Row>
-              <Form.Group as={Col} controlId="employmentExperiences">
-                <Form.Label>Employment experiences</Form.Label>
+              <Form.Group as={Col} controlId="emails">
+                <Form.Label>Emails</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.employmentExperiences}
+                  value={this.state.emails}
                   onChange={this.changeHandler}
-                  name="employmentExperiences"
+                  name="emails"
                   required
-                  isInvalid={this.state.errors.employmentExperiences}
-                  placeholder="Enter text here"
+                  isInvalid={this.state.errors.emails}
+                  placeholder="emails"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.employmentExperiences}
+                  {this.state.errors.emails}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="responsibilitiesBefore">
-                <Form.Label>Responsibilities before</Form.Label>
+              <Form.Group as={Col} controlId="phoneNumbers">
+                <Form.Label>Phone numbers</Form.Label>
                 <Form.Control
                   type="date"
-                  value={this.state.responsibilitiesBefore}
+                  value={this.state.phoneNumbers}
                   onChange={this.changeHandler}
-                  name="responsibilitiesBefore"
+                  name="phoneNumbers"
                   id="defaultFormRegisterPasswordEx4"
-                  placeholder="Enter your esponsibilities before"
+                  placeholder="Enter phone numbers"
                   required
-                  isInvalid={this.state.errors.responsibilitiesBefore}
+                  isInvalid={this.state.errors.phoneNumbers}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.responsibilitiesBefore}
+                  {this.state.errors.phoneNumbers}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="personalSkills">
-                <Form.Label>Personal skills</Form.Label>
+              <Form.Group as={Col} controlId="address">
+                <Form.Label>Address</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.personalSkills}
+                  value={this.state.address}
                   onChange={this.changeHandler}
-                  name="personalSkills"
-                  placeholder="Enter personal skills"
+                  name="address"
                   required
-                  isInvalid={this.state.errors.personalSkills}
+                  isInvalid={this.state.errors.address}
+                  placeholder="Enter address"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.personalSkills}
+                  {this.state.errors.address}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Form.Row>
-              <Form.Group as={Col} controlId="periodOfAvailability">
-                <Form.Label>Period of availability</Form.Label>
+              <Form.Group as={Col} controlId="city">
+                <Form.Label>City</Form.Label>
                 <Form.Control
                   type="text"
+                  placeholder="Enter city"
+                  value={this.state.city}
                   onChange={this.changeHandler}
-                  name="periodOfAvailability"
+                  name="city"
                   required
-                  isInvalid={this.state.errors.periodOfAvailability}
+                  isInvalid={this.state.errors.city}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.periodOfAvailability}
+                  {this.state.errors.city}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="expectedDate">
-                <Form.Label>Expected date</Form.Label>
+              <Form.Group as={Col} controlId="avcsDiscovery">
+                <Form.Label>AVCS discovery</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.expectedDate}
+                  value={this.state.avcsDiscovery}
                   onChange={this.changeHandler}
-                  name="expectedDate"
+                  name="avcsDiscovery"
                   required
-                  isInvalid={this.state.errors.expectedDate}
-                  placeholder="National Id Numner"
+                  isInvalid={this.state.errors.avcsDiscovery}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.expectedDate}
+                  {this.state.errors.avcsDiscovery}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Button id="add-button" type="submit">
               Submit
             </Button>
@@ -219,4 +222,4 @@ class BioData extends React.Component {
     );
   }
 }
-export default BioData;
+export default CorporateClients;

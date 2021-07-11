@@ -5,21 +5,22 @@ import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import NavBar from "../NavBar";
 
-class ConsultantFirmConsultants extends React.Component {
+class IndividualConsultants extends React.Component {
   constructor() {
     super();
     this.state = {
       consultantId: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
       dob: "",
       gender: "",
-      maritalStatuId: "",
+      maritalStatusId: "",
       nationalIdNumber: "",
       email: "",
       phoneNumber: "",
+      address: "",
       consultancyRate: "",
+      photo: "",
+      cv: "",
+      academicDocuments: "",
       maritalStatusGroup: [],
       errors: {},
     };
@@ -37,12 +38,11 @@ class ConsultantFirmConsultants extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
-      delete temp.maritalStatusGroup;
       console.log(temp);
 
       axios
         .post(
-          "https://avcs-platform.herokuapp.com/consultantFirmConsultants",
+          "https://avcs-platform.herokuapp.com/individualConsultants",
           temp,
           {
             headers: {
@@ -55,16 +55,17 @@ class ConsultantFirmConsultants extends React.Component {
         .then(() => {
           this.setState(() => ({
             consultantId: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
             dob: "",
             gender: "",
-            maritalStatuId: "",
+            maritalStatusId: "",
             nationalIdNumber: "",
             email: "",
             phoneNumber: "",
+            address: "",
             consultancyRate: "",
+            photo: "",
+            cv: "",
+            academicDocuments: "",
             maritalStatusGroup: [],
             errors: {},
           }));
@@ -84,8 +85,13 @@ class ConsultantFirmConsultants extends React.Component {
 
   fetchUsers = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/maritalStatus")
-      .then((...res) => {
+      .get("https://avcs-platform.herokuapp.com/maritalStatus", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
         this.setState((prevState) => {
           return {
             ...prevState,
@@ -110,7 +116,7 @@ class ConsultantFirmConsultants extends React.Component {
             noValidate
           >
             <NavBar /> <br />
-            <h1>Consultant Firm Consultants</h1>
+            <h1>Individual consultants</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="consultantId">
                 <Form.Label>Consultant ID</Form.Label>
@@ -121,73 +127,23 @@ class ConsultantFirmConsultants extends React.Component {
                   name="consultantId"
                   required
                   isInvalid={this.state.errors.consultantId}
-                  placeholder="Consultant ID"
+                  placeholder="Enter consultant ID"
                 />
                 <Form.Control.Feedback type="invalid">
                   {this.state.errors.consultantId}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="firstname">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.firstName}
-                  onChange={this.changeHandler}
-                  name="firstName"
-                  required
-                  isInvalid={this.state.errors.firstName}
-                  placeholder="First Name"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.firstName}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="surname">
-                <Form.Label>Surname</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.surname}
-                  onChange={this.changeHandler}
-                  name="surname"
-                  required
-                  isInvalid={this.state.errors.surname}
-                  placeholder="Surname"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.surname}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="othernames">
-                <Form.Label>Other Names</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.otherNames}
-                  onChange={this.changeHandler}
-                  name="otherNames"
-                  required
-                  isInvalid={this.state.errors.otherNames}
-                  placeholder="Other Names"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.otherNames}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
               <Form.Group as={Col} controlId="dob">
-                <Form.Label>Date Of Birth</Form.Label>
+                <Form.Label>dob</Form.Label>
                 <Form.Control
                   type="date"
                   value={this.state.dob}
                   onChange={this.changeHandler}
                   name="dob"
-                  id="defaultFormRegisterPasswordEx4"
-                  placeholder="Date Of Birth"
                   required
                   isInvalid={this.state.errors.dob}
+                  placeholder="Enter date"
                 />
                 <Form.Control.Feedback type="invalid">
                   {this.state.errors.dob}
@@ -205,7 +161,6 @@ class ConsultantFirmConsultants extends React.Component {
                   required
                   isInvalid={this.state.errors.gender}
                 >
-                  <div className="invalid-feedback">Enter Prospect Date!</div>
                   <option value="" selected="selected">
                     --
                   </option>
@@ -216,8 +171,9 @@ class ConsultantFirmConsultants extends React.Component {
                   {this.state.errors.gender}
                 </Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="maritalstatus">
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="maritalStatusId">
                 <Form.Label>Marital Status</Form.Label>
                 <Form.Control
                   as="select"
@@ -226,13 +182,14 @@ class ConsultantFirmConsultants extends React.Component {
                   required
                   isInvalid={this.state.errors.maritalStatusId}
                 >
-                  <option value="" defaultValue>
+                  <div className="invalid-feedback">Enter Prospect Date!</div>
+                  <option value="" selected="selected">
                     --
                   </option>
                   {this.state.maritalStatusGroup &&
-                    this.state.maritalStatusGroup.map((maritalstatus) => (
-                      <option value={maritalstatus.id}>
-                        {maritalstatus.name}
+                    this.state.maritalStatusGroup.map((maritalStatus) => (
+                      <option value={maritalStatus.id}>
+                        {maritalStatus.name}
                       </option>
                     ))}
                 </Form.Control>
@@ -240,9 +197,8 @@ class ConsultantFirmConsultants extends React.Component {
                   {this.state.errors.maritalStatusId}
                 </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="nin">
+
+              <Form.Group as={Col} controlId="nationalIdNumber">
                 <Form.Label>NIN</Form.Label>
                 <Form.Control
                   type="text"
@@ -262,7 +218,7 @@ class ConsultantFirmConsultants extends React.Component {
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter  email"
+                  placeholder="Enter email"
                   value={this.state.email}
                   onChange={this.changeHandler}
                   name="email"
@@ -273,20 +229,37 @@ class ConsultantFirmConsultants extends React.Component {
                   {this.state.errors.email}
                 </Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="phonenumber">
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="phoneNumber">
                 <Form.Label>Phone number</Form.Label>
                 <Form.Control
                   type="text"
                   value={this.state.phoneNumber}
                   onChange={this.changeHandler}
-                  name="phoneNumbers"
+                  name="phoneNumber"
                   required
                   isInvalid={this.state.errors.phoneNumber}
                   placeholder="Enter phone numbers e.g. 0700237434, 0779883527"
                 />
                 <Form.Control.Feedback type="invalid">
                   {this.state.errors.phoneNumber}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.address}
+                  onChange={this.changeHandler}
+                  name="address"
+                  required
+                  isInvalid={this.state.errors.address}
+                  placeholder="Enter address"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.address}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -299,10 +272,59 @@ class ConsultantFirmConsultants extends React.Component {
                   name="consultancyRate"
                   required
                   isInvalid={this.state.errors.consultancyRate}
-                  placeholder="Enter phone numbers e.g. 0700237434, 0779883527"
+                  placeholder="Enter consultancyRate"
                 />
                 <Form.Control.Feedback type="invalid">
                   {this.state.errors.consultancyRate}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="photo">
+                <Form.Label>Photo</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.photo}
+                  onChange={this.changeHandler}
+                  name="photo"
+                  required
+                  isInvalid={this.state.errors.photo}
+                  placeholder="Enter photo"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.photo}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="cv">
+                <Form.Label>CV</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.cv}
+                  onChange={this.changeHandler}
+                  name="cv"
+                  required
+                  isInvalid={this.state.errors.cv}
+                  placeholder="Enter avcs discovery"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.cv}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="academicDocuments">
+                <Form.Label>Academic documents</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={this.state.academicDocuments}
+                  onChange={this.changeHandler}
+                  name="academicDocuments"
+                  required
+                  isInvalid={this.state.errors.academicDocuments}
+                  placeholder="Enter avcs discovery"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.academicDocuments}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
@@ -315,4 +337,4 @@ class ConsultantFirmConsultants extends React.Component {
     );
   }
 }
-export default ConsultantFirmConsultants;
+export default IndividualConsultants;

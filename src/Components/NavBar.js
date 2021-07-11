@@ -1,7 +1,7 @@
-import React from "react"
-import "../App.css"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
-import { Nav } from "react-bootstrap"
+import React from "react";
+import "../App.css";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 function NavBar() {
   return (
@@ -95,15 +95,9 @@ function NavBar() {
       </Nav.Item>
 
       <Nav.Item>
-        <Nav.Link eventKey="collection" href="/collection" id="navlinks">
-          Collection
-        </Nav.Link>
-      </Nav.Item>
-
-      <Nav.Item>
         <Nav.Link
-          eventKey="consultantfirmconsultant"
-          href="/consultantfirmconsultant"
+          eventKey="consultantfirmconsultants"
+          href="/consultantfirmconsultants"
           id="navlinks"
         >
           Consultant Firm Consultants
@@ -179,16 +173,6 @@ function NavBar() {
           id="navlinks"
         >
           Interview Evaluation
-        </Nav.Link>
-      </Nav.Item>
-
-      <Nav.Item>
-        <Nav.Link
-          eventKey="invoicedetails"
-          href="/invoicedetails"
-          id="navlinks"
-        >
-          Invoice Details
         </Nav.Link>
       </Nav.Item>
 
@@ -298,6 +282,6 @@ function NavBar() {
         </Nav.Link>
       </Nav.Item>
     </Nav>
-  )
+  );
 }
-export default NavBar
+export default NavBar;

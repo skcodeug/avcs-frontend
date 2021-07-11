@@ -2,17 +2,17 @@ import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import findFormErrors from "./FindFormErrors";
 import NavBar from "../NavBar";
+import findFormErrors from "./FindFormErrors";
 
-class Clients extends React.Component {
+class Payments extends React.Component {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      clientCategoryId: "",
+      date: "",
+      consultantId: "",
+      contractReferenceId: "",
+      paid: 0,
       errors: {},
     };
   }
@@ -32,19 +32,17 @@ class Clients extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/clients", temp, {
+        .post("https://avcs-platform.herokuapp.com/payments", temp, {
           headers: {
-            Authorization:
-              "Bearer " +
-              localStorage.getItem("access-token").replace(/"/g, ""),
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         })
         .then(() => {
           this.setState(() => ({
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            clientCategoryId: "",
+            date: "",
+            consultantId: "",
+            contractReferenceId: "",
+            paid: 0,
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -71,65 +69,68 @@ class Clients extends React.Component {
             noValidate
           >
             <NavBar /> <br />
-            <h1>Clients</h1>
+            <h1>Payments</h1>
             <Form.Row>
-              <Form.Group as={Col} controlId="firstname">
-                <Form.Label>First Name</Form.Label>
+              <Form.Group as={Col} controlId="date">
+                <Form.Label>Date</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.firstName}
+                  type="date"
+                  value={this.state.date}
                   onChange={this.changeHandler}
-                  name="firstName"
+                  name="date"
                   required
-                  placeholder="First Name"
+                  isInvalid={this.state.errors.date}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.firstName}
+                  {this.state.errors.date}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="surname">
-                <Form.Label>Surname</Form.Label>
+              <Form.Group as={Col} controlId="consultantId">
+                <Form.Label>Consultant ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.surname}
+                  value={this.state.consultantId}
                   onChange={this.changeHandler}
-                  name="surname"
+                  name="consultantId"
                   required
-                  placeholder="Surname"
+                  isInvalid={this.state.errors.consultantId}
+                  placeholder="Consultant ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.surname}
+                  {this.state.errors.consultantId}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="othernames">
-                <Form.Label>Other Names</Form.Label>
+              <Form.Group as={Col} controlId="contractReferenceId">
+                <Form.Label>Contract reference ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.otherNames}
+                  value={this.state.contractReferenceId}
                   onChange={this.changeHandler}
-                  name="otherNames"
+                  name="contractReferenceId"
                   required
-                  placeholder="Other Names"
+                  isInvalid={this.state.errors.contractReferenceId}
+                  placeholder="Contract reference ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.otherNames}
+                  {this.state.errors.contractReferenceId}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="clientcategoryid">
-                <Form.Label>Client category ID</Form.Label>
+              <Form.Group as={Col} controlId="paid">
+                <Form.Label>Paid</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.clientCategoryId}
+                  type="number"
+                  value={this.state.paid}
                   onChange={this.changeHandler}
-                  name="clientCategoryId"
+                  name="paid"
                   required
-                  placeholder="Enter ID"
+                  isInvalid={this.state.errors.paid}
+                  placeholder="E.g 50000"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.clientCategoryId}
+                  {this.state.errors.paid}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
@@ -142,4 +143,4 @@ class Clients extends React.Component {
     );
   }
 }
-export default Clients;
+export default Payments;

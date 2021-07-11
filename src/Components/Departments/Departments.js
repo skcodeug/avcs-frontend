@@ -5,7 +5,7 @@ import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import NavBar from "../NavBar";
 
-class ClientCategories extends React.Component {
+class Departments extends React.Component {
   state = {
     name: "",
     errors: {},
@@ -24,7 +24,7 @@ class ClientCategories extends React.Component {
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/clientCategories", temp, {
+        .post("https://avcs-platform.herokuapp.com/departments", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -57,10 +57,10 @@ class ClientCategories extends React.Component {
             noValidate
           >
             <NavBar /> <br />
-            <h1>Client categories</h1>
+            <h1>Departments</h1>
             <Form.Row>
-              <Form.Group as={Col} lg="3" controlId="clientcategories">
-                <Form.Label>Category</Form.Label>
+              <Form.Group as={Col} lg="3" controlId="departments">
+                <Form.Label>Departments</Form.Label>
                 <Form.Control
                   type="text"
                   value={this.state.name}
@@ -68,7 +68,7 @@ class ClientCategories extends React.Component {
                   isInvalid={this.state.errors.name}
                   name="name"
                   required
-                  placeholder="Enter category"
+                  placeholder="Departments"
                 />
                 <Form.Control.Feedback type="invalid">
                   {this.state.errors.name}
@@ -84,4 +84,4 @@ class ClientCategories extends React.Component {
     );
   }
 }
-export default ClientCategories;
+export default Departments;

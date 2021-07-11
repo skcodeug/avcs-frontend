@@ -2,8 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Operations from "./Components/Operations";
-import Login from "./Components/Login";
-import MaritalStatus from "./Components/MaritalStatus";
+import Login from "./Components/Login/Login";
+import MaritalStatus from "./Components/MaritalStatus/MaritalStatus";
 import Users from "./Components/Users/Users";
 import AnnualLeave from "./Components/AnnualLeave/AnnualLeave";
 import AnnualLeaveDepartments from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments";
@@ -12,33 +12,31 @@ import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders/Annual
 import Approvals from "./Components/Approvals/Approvals";
 import BioData from "./Components/BioData/BioData";
 import ClientCategories from "./Components/ClientCategories/ClientCategories";
-import Clients from "./Components/Clients-Beta/Clients";
+import Clients from "./Components/Clients/Clients";
 import ConsultantFirmConsultants from "./Components/ConsultantFirmConsultants/ConsultanFirmConsultants";
 import ConsultantCategories from "./Components/ConsultantCategories/ConsultantCategories";
 import ConsultantFirms from "./Components/ConsultantFirms/ConsultantFirms";
-import Consultants from "./Components/Consultants";
-import Contracts from "./Components/Contracts";
-import CorporateClients from "./Components/CorporateClients";
-import Departments from "./Components/Departments";
-import IndividualClients from "./Components/IndividualClients";
-import IndividualConsultants from "./Components/IndividualConsultants";
-import InterviewEvaluation from "./Components/InterviewEvaluations";
-import InvoiceDetails from "./Components/InvoiceDetails";
-import Invoices from "./Components/Invoices";
-import NextOfKin from "./Components/NextOfKin";
-import Payments from "./Components/Payments";
+import Consultants from "./Components/Consultants/Consultants";
+import Contracts from "./Components/Contracts/Contracts";
+import CorporateClients from "./Components/CorporateClients/CorporateClients";
+import Departments from "./Components/Departments/Departments";
+import IndividualClients from "./Components/IndividualClients/IndividualClients";
+import IndividualConsultants from "./Components/IndividualConsultants/IndividualConsultants";
+import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEvaluations";
+import Invoices from "./Components/Invoices/Invoices";
+import NextOfKin from "./Components/NextOfKin/NextOfKin";
+import Payments from "./Components/Payments/Payments";
 import ProjectStatus from "./Components/ProjectStatus";
 import Prospects from "./Components/Prospects";
-import Qualifications from "./Components/Qualifications";
+import Qualifications from "./Components/Qualifications/Qualifications";
 import Quotation from "./Components/Quotation";
 import QuotationDetails from "./Components/QuotationDetails";
-import ReceiptDetails from "./Components/ReceiptDetails";
-import Receipts from "./Components/Receipts";
+import Receipts from "./Components/Receipts/Receipts";
 import Requisitions from "./Components/Requisitions";
-import StaffVerifications from "./Components/StaffVerifications";
-import UserDetails1 from "./Components/UserDetails1";
-import UserDetails2 from "./Components/UserDetails2";
-import UserRelations from "./Components/UserRelations";
+import StaffVerifications from "./Components/StaffVerifications/StaffVerifications";
+import UserDetails1 from "./Components/UserDetails1/UserDetails1";
+import UserDetails2 from "./Components/UserDetails2/UserDetails2";
+import UserRelations from "./Components/UserRelations/UserRelations";
 // import { Redirect } from "react-router-dom"
 
 function App() {
@@ -103,7 +101,6 @@ function App() {
               exact
             ></Route>
             <Route path="/clients" component={Clients} exact></Route>
-            <Route path="/collection" component={Collection} exact></Route>
             <Route
               path="/consultantfirmconsultants"
               component={ConsultantFirmConsultants}
@@ -142,11 +139,6 @@ function App() {
               component={InterviewEvaluation}
               exact
             ></Route>
-            <Route
-              path="/invoicedetails"
-              component={InvoiceDetails}
-              exact
-            ></Route>
             <Route path="/invoices" component={Invoices} exact></Route>
             <Route path="/nextofkin" component={NextOfKin} exact></Route>
             <Route path="/payments" component={Payments} exact></Route>
@@ -165,11 +157,6 @@ function App() {
             <Route
               path="/quotationdetails"
               component={QuotationDetails}
-              exact
-            ></Route>
-            <Route
-              path="/receiptdetails"
-              component={ReceiptDetails}
               exact
             ></Route>
             <Route path="/receipts" component={Receipts} exact></Route>

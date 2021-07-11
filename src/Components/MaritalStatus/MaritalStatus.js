@@ -1,55 +1,49 @@
-import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form } from "react-bootstrap"
-import axios from "axios"
+import React from "react";
+import { Card, Col, Container, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import axios from "axios";
+import NavBar from "../NavBar";
+import findFormErrors from "./FindFormErrors";
 
 class MaritalStatus extends React.Component {
   state = {
     name: "",
     errors: {},
-  }
+  };
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  findFormErrors = () => {
-    const errors = {}
-    let validateName = () => {
-      if (this.state.name === "") {
-        errors.name = "Please provide a marital status"
-      }
-    }
-    validateName()
-
-    return errors
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    if (Object.keys(this.findFormErrors()).length === 0) {
-      event.target.className += " was-validated"
-      let temp = { ...this.state }
-      delete temp.errors
+    if (Object.keys(findFormErrors(this.state)).length === 0) {
+      event.target.className += " was-validated";
+      let temp = { ...this.state };
+      delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/maritalStatus", temp)
-        .then(() => {
-          this.setState(() => ({ name: "" }))
-          event.target.className = "needs-validation"
+        .post("https://avcs-platform.herokuapp.com/maritalStatus", temp, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
         })
-        .catch((error) => console.log(error))
+        .then(() => {
+          this.setState(() => ({ name: "" }));
+          event.target.className = "needs-validation";
+        })
+        .catch((error) => console.log(error));
     } else {
-      let errors = this.findFormErrors()
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
           errors: errors,
-        }
-      })
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -61,6 +55,7 @@ class MaritalStatus extends React.Component {
               onSubmit={this.submitHandler}
               noValidate
             >
+              <NavBar /> <br />
               <h1>Marital Status</h1>
               <Form.Row>
                 <Form.Group as={Col} lg="3" controlId="maritalstatus">
@@ -79,7 +74,6 @@ class MaritalStatus extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
-
               <Button id="add-button" type="submit">
                 Submit
               </Button>
@@ -87,7 +81,7 @@ class MaritalStatus extends React.Component {
           </Card.Body>
         </Container>
       </>
-    )
+    );
   }
 }
-export default MaritalStatus
+export default MaritalStatus;

@@ -3,12 +3,12 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
-import NavBar from "../NavBar";
 
-class ClientCategories extends React.Component {
+class Login extends React.Component {
   state = {
-    name: "",
-    errors: {},
+    email: "",
+    password: "",
+    errors: "",
   };
 
   changeHandler = (event) => {
@@ -20,20 +20,26 @@ class ClientCategories extends React.Component {
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
       event.target.className += " was-validated";
+
+      const token = Buffer.from(
+        `${this.state.email}:${this.state.password}`,
+        "utf8"
+      ).toString("base64");
+
       let temp = { ...this.state };
       delete temp.errors;
+      console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/clientCategories", temp, {
-          headers: {
-            Authorization:
-              "Bearer " +
-              localStorage.getItem("access-token").replace(/"/g, ""),
-          },
+        .post("https://avcs-platform.herokuapp.com/login", temp, {
+          headers: { Authorization: `Basic ${token}` },
         })
-        .then(() => {
-          this.setState(() => ({ name: "" }));
-          event.target.className = "needs-validation";
+        .then((res) => {
+          localStorage.setItem(
+            "access-token",
+            JSON.stringify(res.data.access_token)
+          );
+          this.props.history.push("/users");
         })
         .catch((error) => console.log(error));
     } else {
@@ -56,25 +62,38 @@ class ClientCategories extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <NavBar /> <br />
-            <h1>Client categories</h1>
+            <h1>Login</h1>
             <Form.Row>
-              <Form.Group as={Col} lg="3" controlId="clientcategories">
-                <Form.Label>Category</Form.Label>
+              <Form.Group as={Col} controlId="email">
+                <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.name}
+                  type="email"
+                  value={this.state.email}
                   onChange={this.changeHandler}
-                  isInvalid={this.state.errors.name}
-                  name="name"
+                  name="email"
                   required
-                  placeholder="Enter category"
+                  placeholder="E.g abc@avcs.co.ug"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.name}
+                  {this.state.errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.changeHandler}
+                  name="password"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.password}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Button id="add-button" type="submit">
               Submit
             </Button>
@@ -84,4 +103,4 @@ class ClientCategories extends React.Component {
     );
   }
 }
-export default ClientCategories;
+export default Login;

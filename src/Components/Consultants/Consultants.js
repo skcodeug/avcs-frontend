@@ -1,18 +1,18 @@
 import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import NavBar from "../NavBar";
 
-class Clients extends React.Component {
+class Consultants extends React.Component {
   constructor() {
     super();
     this.state = {
       firstName: "",
       surname: "",
       otherNames: "",
-      clientCategoryId: "",
+      consultantCategoryId: "",
       errors: {},
     };
   }
@@ -32,7 +32,7 @@ class Clients extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/clients", temp, {
+        .post("https://avcs-platform.herokuapp.com/consultants", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -44,7 +44,7 @@ class Clients extends React.Component {
             firstName: "",
             surname: "",
             otherNames: "",
-            clientCategoryId: "",
+            consultantCategoryId: "",
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -71,7 +71,7 @@ class Clients extends React.Component {
             noValidate
           >
             <NavBar /> <br />
-            <h1>Clients</h1>
+            <h1>Consultants</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="firstname">
                 <Form.Label>First Name</Form.Label>
@@ -81,10 +81,11 @@ class Clients extends React.Component {
                   onChange={this.changeHandler}
                   name="firstName"
                   required
+                  isInvalid={this.state.errors.firstName}
                   placeholder="First Name"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.firstName}
+                  {this.state.errors.firstName}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -96,10 +97,11 @@ class Clients extends React.Component {
                   onChange={this.changeHandler}
                   name="surname"
                   required
+                  isInvalid={this.state.errors.surname}
                   placeholder="Surname"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.surname}
+                  {this.state.errors.surname}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -111,25 +113,27 @@ class Clients extends React.Component {
                   onChange={this.changeHandler}
                   name="otherNames"
                   required
+                  isInvalid={this.state.errors.otherNames}
                   placeholder="Other Names"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.otherNames}
+                  {this.state.errors.otherNames}
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="clientcategoryid">
-                <Form.Label>Client category ID</Form.Label>
+              <Form.Group as={Col} controlId="consultantCategoryId">
+                <Form.Label>Consultant Category ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.clientCategoryId}
+                  value={this.state.consultantCategoryId}
                   onChange={this.changeHandler}
-                  name="clientCategoryId"
+                  name="consultantCategoryId"
                   required
-                  placeholder="Enter ID"
+                  isInvalid={this.state.errors.consultantCategoryId}
+                  placeholder="consultantCategoryId"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.clientCategoryId}
+                  {this.state.errors.consultantCategoryId}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
@@ -142,4 +146,4 @@ class Clients extends React.Component {
     );
   }
 }
-export default Clients;
+export default Consultants;
