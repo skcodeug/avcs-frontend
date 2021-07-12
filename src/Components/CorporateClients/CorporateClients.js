@@ -78,6 +78,8 @@ class CorporateClients extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
+            <NavBar />
+            <br />
             <h1>Corporate clients</h1>
             <Form.Row>
               <Form.Group as={Col} controlId="clientId">

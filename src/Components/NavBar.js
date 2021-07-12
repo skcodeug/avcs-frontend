@@ -233,16 +233,6 @@ function NavBar() {
       </Nav.Item>
 
       <Nav.Item>
-        <Nav.Link
-          eventKey="receiptdetails"
-          href="/receiptdetails"
-          id="navlinks"
-        >
-          Receipt Details
-        </Nav.Link>
-      </Nav.Item>
-
-      <Nav.Item>
         <Nav.Link eventKey="receipts" href="/receipts" id="navlinks">
           Receipts
         </Nav.Link>
