@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form, Table } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import Navbar from "../NavBar";

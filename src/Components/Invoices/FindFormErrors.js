@@ -1,6 +1,6 @@
 const findFormErrors = (state) => {
   const errors = {};
-  const alphaRegex = /^[a-zA-Z\s]+$/;
+  // const alphaRegex = /^[a-zA-Z\s]+$/;
 
   if (state.date === "") {
     errors.date = "Enter a valid date";

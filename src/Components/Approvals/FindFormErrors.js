@@ -1,21 +1,21 @@
 const findFormErrors = (state) => {
-  const errors = {}
-  const alphaRegex = /^[a-zA-Z\s]+$/
+  const errors = {};
+  // const alphaRegex = /^[a-zA-Z\s]+$/
 
   if (state.date === "") {
-    errors.date = "Please provide a date"
+    errors.date = "Please provide a date";
   }
 
   if (state.requisitionReferenceId === "") {
     errors.requisitionReferenceId =
-      "Please provide a valid requisition reference ID"
+      "Please provide a valid requisition reference ID";
   }
 
   if (state.approverId === "") {
-    errors.approverId = "Please provide an approver ID"
+    errors.approverId = "Please provide an approver ID";
   }
 
-  return errors
-}
+  return errors;
+};
 
-export default findFormErrors
+export default findFormErrors;

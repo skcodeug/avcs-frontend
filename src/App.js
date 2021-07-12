@@ -182,8 +182,7 @@ function App() {
 
 export default App;
 
-{
-  /* 
+/* 
 import { Accordion, Card, useAccordionToggle, Row, Col, Container, Button, ButtonGroup } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 
@@ -336,7 +335,6 @@ import { Form } from 'react-bootstrap';
            <Col sm={4}>sm=4</Col> 
          </Row> 
 </Container> */
-}
 
 //     </div>
 

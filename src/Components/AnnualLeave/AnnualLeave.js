@@ -1,13 +1,13 @@
-import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form, Table } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "../AnnualLeave/FindFormErrors"
-import NavBar from "../NavBar"
+import React from "react";
+import { Card, Col, Container, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "../AnnualLeave/FindFormErrors";
+import NavBar from "../NavBar";
 
 class AnnualLeave extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       date: "",
       staffId: "",
@@ -16,30 +16,31 @@ class AnnualLeave extends React.Component {
       lastDate: "",
       returnDate: "",
       contactAddress: "",
-      errors: {}
-    }
+      errors: {},
+    };
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      console.log(temp)
+      let temp = { ...this.state };
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/annualLeave", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
           this.setState(() => ({
@@ -51,21 +52,21 @@ class AnnualLeave extends React.Component {
             lastDate: "",
             returnDate: "",
             contactAddress: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -198,7 +199,7 @@ class AnnualLeave extends React.Component {
           </Form>
         </Card.Body>
       </Container>
-    )
+    );
   }
 }
-export default AnnualLeave
+export default AnnualLeave;

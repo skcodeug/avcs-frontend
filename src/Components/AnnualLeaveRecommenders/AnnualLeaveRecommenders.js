@@ -1,35 +1,35 @@
-import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import NavBar from "../NavBar"
+import React from "react";
+import { Card, Col, Container, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import NavBar from "../NavBar";
 
 class AnnualLeaveRecommenders extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       date: "",
       annualLeaveReferenceId: "",
       recommenderId: "",
       acknowledgement: "",
-      errors: {}
-    }
+      errors: {},
+    };
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      console.log(temp)
+      let temp = { ...this.state };
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post(
@@ -39,8 +39,8 @@ class AnnualLeaveRecommenders extends React.Component {
             headers: {
               Authorization:
                 "Bearer " +
-                localStorage.getItem("access-token").replace(/"/g, "")
-            }
+                localStorage.getItem("access-token").replace(/"/g, ""),
+            },
           }
         )
         .then(() => {
@@ -49,21 +49,21 @@ class AnnualLeaveRecommenders extends React.Component {
             annualLeaveReferenceId: "",
             recommenderId: "",
             acknowledgement: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -141,10 +141,13 @@ class AnnualLeaveRecommenders extends React.Component {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+            <Button id="add-button" type="submit">
+              Submit
+            </Button>
           </Form>
         </Card.Body>
       </Container>
-    )
+    );
   }
 }
-export default AnnualLeaveRecommenders
+export default AnnualLeaveRecommenders;

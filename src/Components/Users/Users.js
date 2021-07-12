@@ -1,13 +1,13 @@
-import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form, Table } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import NavBar from "../NavBar"
+import React from "react";
+import { Card, Col, Container, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import NavBar from "../NavBar";
 
 class Users extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       prefix: "",
       firstName: "",
@@ -17,8 +17,8 @@ class Users extends React.Component {
       roles: "",
       password: "",
       departments: [],
-      errors: {}
-    }
+      errors: {},
+    };
   }
 
   fetchDropDownData = () => {
@@ -26,45 +26,46 @@ class Users extends React.Component {
       .get("https://avcs-platform.herokuapp.com/departments", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data
-          }
-        })
+            departments: res.data,
+          };
+        });
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   componentDidMount() {
-    this.fetchDropDownData()
+    this.fetchDropDownData();
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.departments
-      delete temp.errors
-      console.log(temp)
+      let temp = { ...this.state };
+      delete temp.departments;
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
           this.setState(() => ({
@@ -76,21 +77,21 @@ class Users extends React.Component {
             roles: "",
             password: "",
             departments: [],
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -236,7 +237,7 @@ class Users extends React.Component {
           </Form>
         </Card.Body>
       </Container>
-    )
+    );
   }
 }
-export default Users
+export default Users;

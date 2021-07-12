@@ -1,6 +1,5 @@
 const findFormErrors = (state) => {
   const errors = {};
-  const alphaRegex = /^[a-zA-Z\s]+$/;
 
   if (state.clientId === "") {
     errors.clientId = "Enter a valid ID";
