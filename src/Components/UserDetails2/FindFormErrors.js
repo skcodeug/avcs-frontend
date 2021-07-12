@@ -15,7 +15,10 @@ const findFormErrors = (state) => {
     errors.accountNumber = "Enter a valid account number";
   }
   if (state.village === "") {
-    errors.village = "Enter a valid village name";
+    errors.village = "Enter a valid village name e.g Mulago";
+  }
+  if (state.district === "") {
+    errors.district = "Enter a valid district name e.g Kampala";
   }
   if (state.currentAddress === "") {
     errors.currentAddress = "Enter a valid address";

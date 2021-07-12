@@ -14,6 +14,7 @@ class UserDetails2 extends React.Component {
       branch: "",
       accountNumber: "",
       village: "",
+      district: "",
       currentAddress: "",
       permanentAddress: "",
       fatherNames: "",
@@ -49,6 +50,7 @@ class UserDetails2 extends React.Component {
             branch: "",
             accountNumber: "",
             village: "",
+            district: "",
             currentAddress: "",
             permanentAddress: "",
             fatherNames: "",
@@ -96,66 +98,143 @@ class UserDetails2 extends React.Component {
                   {this.state.errors.staffId}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} controlId="fullName">
-                <Form.Label>fullname</Form.Label>
+              <Form.Group as={Col} controlId="bank">
+                <Form.Label>Bank</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.fullName}
+                  value={this.state.bank}
                   onChange={this.changeHandler}
-                  name="fullName"
+                  name="bank"
                   required
-                  isInvalid={this.state.errors.fullName}
-                  placeholder="fullName"
+                  isInvalid={this.state.errors.bank}
+                  placeholder="E.g Centenary bank"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.fullName}
+                  {this.state.errors.bank}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} controlId="relationship">
-                <Form.Label>Relationship</Form.Label>
+              <Form.Group as={Col} controlId="branch">
+                <Form.Label>Branch</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.relationship}
+                  value={this.state.branch}
                   onChange={this.changeHandler}
-                  name="relationship"
+                  name="branch"
                   required
-                  isInvalid={this.state.errors.relationship}
-                  placeholder="E.g Sister"
+                  isInvalid={this.state.errors.branch}
+                  placeholder="E.g Wandegeya branch"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.relationship}
+                  {this.state.errors.branch}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} controlId="dob">
-                <Form.Label>Date of birth</Form.Label>
+              <Form.Group as={Col} controlId="accountNumber">
+                <Form.Label>accountNumber</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.dob}
+                  value={this.state.accountNumber}
                   onChange={this.changeHandler}
-                  name="dob"
+                  name="accountNumber"
                   required
-                  isInvalid={this.state.errors.dob}
-                  placeholder="dob"
+                  isInvalid={this.state.errors.accountNumber}
+                  placeholder="E.g Sister"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.dob}
+                  {this.state.errors.accountNumber}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} controlId="phoneNumber">
-                <Form.Label>Date of birth</Form.Label>
+              <Form.Group as={Col} controlId="village">
+                <Form.Label>Village</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.phoneNumber}
+                  value={this.state.village}
                   onChange={this.changeHandler}
-                  name="phoneNumber"
+                  name="village"
                   required
-                  isInvalid={this.state.errors.phoneNumber}
-                  placeholder="E.g 0771232332"
+                  isInvalid={this.state.errors.village}
+                  placeholder="E.g Mulago"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.phoneNumber}
+                  {this.state.errors.village}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} controlId="district">
+                <Form.Label>District</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.district}
+                  onChange={this.changeHandler}
+                  name="district"
+                  required
+                  isInvalid={this.state.errors.district}
+                  placeholder="E.g Kampala"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.district}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col} controlId="currentAddress">
+                <Form.Label>Current address</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.currentAddress}
+                  onChange={this.changeHandler}
+                  name="currentAddress"
+                  required
+                  isInvalid={this.state.errors.currentAddress}
+                  placeholder="Current address"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.currentAddress}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} controlId="permanentAddress">
+                <Form.Label>Permanent address</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.permanentAddress}
+                  onChange={this.changeHandler}
+                  name="permanentAddress"
+                  required
+                  isInvalid={this.state.errors.permanentAddress}
+                  placeholder="Permanent address"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.permanentAddress}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} controlId="fatherNames">
+                <Form.Label>fatherNames</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.fatherNames}
+                  onChange={this.changeHandler}
+                  name="fatherNames"
+                  required
+                  isInvalid={this.state.errors.fatherNames}
+                  placeholder="E.g John Doe"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.fatherNames}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} controlId="motherNames">
+                <Form.Label>Mother names</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.motherNames}
+                  onChange={this.changeHandler}
+                  name="motherNames"
+                  required
+                  isInvalid={this.state.errors.motherNames}
+                  placeholder="E.g Jane Doe"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.motherNames}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>

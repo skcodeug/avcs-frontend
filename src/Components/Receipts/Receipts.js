@@ -11,9 +11,9 @@ class Receipts extends React.Component {
     this.state = {
       date: "",
       clientId: "",
-      paid: "",
-      balance: "",
-      paidInWords: "",
+      invoiceReferenceId: "",
+      amountPaid: 0,
+      amountInWords: "",
       errors: {},
     };
   }
@@ -42,9 +42,9 @@ class Receipts extends React.Component {
           this.setState(() => ({
             date: "",
             clientId: "",
-            paid: "",
-            balance: "",
-            paidInWords: "",
+            invoiceReferenceId: "",
+            amountPaid: 0,
+            amountInWords: "",
             errors: {},
           }));
           event.target.className = "needs-validation";

@@ -5,16 +5,15 @@ import axios from "axios";
 import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
 
-class UserDetails1 extends React.Component {
+class QuotationDetails extends React.Component {
   constructor() {
     super();
     this.state = {
-      staffId: "",
-      fullName: "",
-      relationship: "",
-      placeofwork: "",
-      residence: "",
-      phoneNumber: "",
+      quotationReferenceId: "",
+      position: 0,
+      detail: "",
+      unitRate: 0,
+      quantity: 0,
       errors: {},
     };
   }
@@ -34,19 +33,18 @@ class UserDetails1 extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/nextOfKin", temp, {
+        .post("https://avcs-platform.herokuapp.com/quotationDetails", temp, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         })
         .then(() => {
           this.setState(() => ({
-            staffId: "",
-            fullName: "",
-            relationship: "",
-            placeofwork: "",
-            residence: "",
-            phoneNumber: "",
+            quotationReferenceId: "",
+            position: 0,
+            detail: "",
+            unitRate: 0,
+            quantity: 0,
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -72,105 +70,89 @@ class UserDetails1 extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <NavBar /> <br />
-            <h1>Next of kin</h1>
+            <NavBar />
+            <br />
+            <h1>Quotation details</h1>
             <Form.Row>
-              <Form.Group as={Col} controlId="staffId">
-                <Form.Label>Staff ID</Form.Label>
+              <Form.Group as={Col} controlId="quotationReferenceId">
+                <Form.Label>Quotation reference ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.staffId}
+                  value={this.state.quotationReferenceId}
                   onChange={this.changeHandler}
-                  name="staffId"
+                  name="quotationReferenceId"
                   required
-                  isInvalid={this.state.errors.staffId}
+                  isInvalid={this.state.errors.quotationReferenceId}
+                  placeholder="Quotation reference ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.staffId}
+                  {this.state.errors.quotationReferenceId}
                 </Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="fullName">
-                <Form.Label>Fullname</Form.Label>
+              <Form.Group as={Col} controlId="position">
+                <Form.Label>Position</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.fullName}
+                  type="number"
+                  value={this.state.position}
                   onChange={this.changeHandler}
-                  name="fullName"
+                  name="position"
                   required
-                  isInvalid={this.state.errors.fullName}
-                  placeholder="E.g John Doe"
+                  isInvalid={this.state.errors.position}
+                  placeholder="Position"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.fullName}
+                  {this.state.errors.position}
                 </Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="relationship">
-                <Form.Label>Relationship</Form.Label>
+              <Form.Group as={Col} controlId="detail">
+                <Form.Label>Detail</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.relationship}
+                  value={this.state.detail}
                   onChange={this.changeHandler}
-                  name="relationship"
+                  name="detail"
                   required
-                  isInvalid={this.state.errors.relationship}
-                  placeholder="E.g Brother"
+                  isInvalid={this.state.errors.detail}
+                  placeholder="Detail"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.relationship}
+                  {this.state.errors.detail}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} controlId="placeOfWork">
-                <Form.Label>Place of work</Form.Label>
+              <Form.Group as={Col} controlId="unityRate">
+                <Form.Label>Unity rate</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.placeOfWork}
+                  type="number"
+                  value={this.state.unityRate}
                   onChange={this.changeHandler}
-                  name="placeOfWork"
+                  name="unityRate"
                   required
-                  isInvalid={this.state.errors.placeOfWork}
-                  placeholder="E.g Uganda House"
+                  isInvalid={this.state.errors.unityRate}
+                  placeholder="Unity rate"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.placeOfWork}
+                  {this.state.errors.unityRate}
                 </Form.Control.Feedback>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="residence">
-                <Form.Label>Residence</Form.Label>
+              <Form.Group as={Col} controlId="quantity">
+                <Form.Label>Quantity</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={this.state.residence}
+                  type="number"
+                  value={this.state.quantity}
                   onChange={this.changeHandler}
-                  name="residence"
-                  placeholder="E.g Bukoto"
+                  name="quantity"
                   required
-                  isInvalid={this.state.errors.residence}
+                  isInvalid={this.state.errors.quantity}
+                  placeholder="Quantity"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.residence}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="phoneNumber">
-                <Form.Label>phoneNumber</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.phoneNumber}
-                  onChange={this.changeHandler}
-                  name="phoneNumber"
-                  placeholder="E.g 0772347446"
-                  required
-                  isInvalid={this.state.errors.phoneNumber}
-                ></Form.Control>
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.phoneNumber}
+                  {this.state.errors.quantity}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Button id="add-button" type="submit">
               Submit
             </Button>
@@ -180,4 +162,4 @@ class UserDetails1 extends React.Component {
     );
   }
 }
-export default UserDetails1;
+export default QuotationDetails;

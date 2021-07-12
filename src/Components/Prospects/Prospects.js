@@ -5,16 +5,17 @@ import axios from "axios";
 import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
 
-class Quotations extends React.Component {
+class Prospects extends React.Component {
   constructor() {
     super();
     this.state = {
       date: "",
       clientId: "",
-      prospectReferenceId: "",
       errors: {},
     };
   }
+
+  handleChange() {}
 
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -31,7 +32,7 @@ class Quotations extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/quotations", temp, {
+        .post("https://avcs-platform.herokuapp.com/prospects", temp, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
@@ -40,7 +41,6 @@ class Quotations extends React.Component {
           this.setState(() => ({
             date: "",
             clientId: "",
-            prospectReferenceId: "",
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -66,25 +66,10 @@ class Quotations extends React.Component {
             onSubmit={this.submitHandler}
             noValidate
           >
-            <NavBar /> <br />
-            <h1>Quotations</h1>
+            <NavBar />
+            <br />
+            <h1>Prospects</h1>
             <Form.Row>
-              <Form.Group as={Col} controlId="endDate">
-                <Form.Label>End date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.endDate}
-                  onChange={this.changeHandler}
-                  name="endDate"
-                  id="defaultFormRegisterPasswordEx4"
-                  placeholder="Date Of Birth"
-                  required
-                  isInvalid={this.state.errors.endDate}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.endDate}
-                </Form.Control.Feedback>
-              </Form.Group>
               <Form.Group as={Col} controlId="clientId">
                 <Form.Label>Client ID</Form.Label>
                 <Form.Control
@@ -100,22 +85,22 @@ class Quotations extends React.Component {
                   {this.state.errors.clientId}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} controlId="prospectReferenceId">
-                <Form.Label>Prospect reference ID</Form.Label>
+              <Form.Group as={Col} controlId="date">
+                <Form.Label>Date</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.prospectReferenceId}
+                  value={this.state.date}
                   onChange={this.changeHandler}
-                  name="prospectReferenceId"
+                  name="date"
                   required
-                  isInvalid={this.state.errors.prospectReferenceId}
-                  placeholder="Prospect reference ID"
+                  isInvalid={this.state.errors.date}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.prospectReferenceId}
+                  {this.state.errors.date}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+
             <Button id="add-button" type="submit">
               Submit
             </Button>
@@ -125,4 +110,4 @@ class Quotations extends React.Component {
     );
   }
 }
-export default Quotations;
+export default Prospects;

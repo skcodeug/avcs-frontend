@@ -3,14 +3,12 @@ const findFormErrors = (state) => {
   const alphaRegex = /^[a-zA-Z\s]+$/;
 
   if (state.date === "") {
-    errors.date = "Enter a valid date";
+    errors.date = "Please provide a valid date";
   }
   if (state.clientId === "") {
-    errors.clientId = "Enter a valid ID";
+    errors.clientId = "Please provide a valid ID";
   }
-  if (state.prospectReferenceId === "") {
-    errors.prospectReferenceId = "Enter a valid ID";
-  }
+
   return errors;
 };
 

@@ -42,7 +42,7 @@ class UserDetails1 extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/userDetails1", temp, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
@@ -244,7 +244,7 @@ class UserDetails1 extends React.Component {
               <Form.Group as={Col} controlId="nssfNo">
                 <Form.Label>NSSF number</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   value={this.state.nssfNo}
                   onChange={this.changeHandler}
                   name="nssfNo"
@@ -260,7 +260,7 @@ class UserDetails1 extends React.Component {
               <Form.Group as={Col} controlId="tinNo">
                 <Form.Label>TIN number</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   value={this.state.tinNo}
                   onChange={this.changeHandler}
                   name="tinNo"
