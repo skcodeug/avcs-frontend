@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Operations from "./Components/Operations";
+import Operations from "./Components/Operations/Operations";
 import Login from "./Components/Login/Login";
 import MaritalStatus from "./Components/MaritalStatus/MaritalStatus";
 import Users from "./Components/Users/Users";
@@ -26,13 +26,13 @@ import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEval
 import Invoices from "./Components/Invoices/Invoices";
 import NextOfKin from "./Components/NextOfKin/NextOfKin";
 import Payments from "./Components/Payments/Payments";
-import ProjectStatus from "./Components/ProjectStatus";
-import Prospects from "./Components/Prospects";
+import ProjectStatus from "./Components/ProjectStatus/ProjectStatus";
+import Prospects from "./Components/Prospects/Prospects";
 import Qualifications from "./Components/Qualifications/Qualifications";
-import Quotation from "./Components/Quotation";
-import QuotationDetails from "./Components/QuotationDetails";
+import Quotation from "./Components/Quotation/Quotation";
+import QuotationDetails from "./Components/QuotationDetails/QuotationDetails";
 import Receipts from "./Components/Receipts/Receipts";
-import Requisitions from "./Components/Requisitions";
+import Requisitions from "./Components/Requisitions/Requisitions";
 import StaffVerifications from "./Components/StaffVerifications/StaffVerifications";
 import UserDetails1 from "./Components/UserDetails1/UserDetails1";
 import UserDetails2 from "./Components/UserDetails2/UserDetails2";
