@@ -37,144 +37,123 @@ import StaffVerifications from "./Components/StaffVerifications/StaffVerificatio
 import UserDetails1 from "./Components/UserDetails1/UserDetails1";
 import UserDetails2 from "./Components/UserDetails2/UserDetails2";
 import UserRelations from "./Components/UserRelations/UserRelations";
-// import { Redirect } from "react-router-dom"
+import ProtectedRoute from "./Components/ProtectedRoutes";
 
 function App() {
-  // const checkIfUserIsAuthorized = () => {
-  //   if (
-  //     localStorage.getItem("access-token") !== null &&
-  //     localStorage.getItem("access-token") !== undefined
-  //   ) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
-
   return (
     <div id="body">
       <Router>
-        <div>
-          <Switch>
-            <Route path="/" component={Login} exact></Route>
-            <Route path="/clients" component={Clients} exact></Route>
-            <Route path="/operations" component={Operations}></Route>
-            <Route path="/users" component={Users} exact></Route>
-            {/* <Route
-              path="/users"
-              render={() => {
-                console.log(checkIfUserIsAuthorized())
-                return checkIfUserIsAuthorized() ? (
-                  <Users />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }}
-              exact
-            ></Route> */}
-            <Route
-              path="/maritalstatus"
-              component={MaritalStatus}
-              exact
-            ></Route>
-            <Route path="/annualleave" component={AnnualLeave} exact></Route>
-            <Route
-              path="/annualleavedepartments"
-              component={AnnualLeaveDepartments}
-              exact
-            ></Route>
-            <Route
-              path="/annualleavemds"
-              component={AnnualLeaveMds}
-              exact
-            ></Route>
-            <Route
-              path="/annualleaverecommenders"
-              component={AnnualLeaveRecommenders}
-              exact
-            ></Route>
-            <Route path="/approvals" component={Approvals} exact></Route>
-            <Route path="/biodata" component={BioData} exact></Route>
-            <Route
-              path="/clientcategories"
-              component={ClientCategories}
-              exact
-            ></Route>
-            <Route path="/clients" component={Clients} exact></Route>
-            <Route
-              path="/consultantfirmconsultants"
-              component={ConsultantFirmConsultants}
-              exact
-            ></Route>
-            <Route
-              path="/consultantcategories"
-              component={ConsultantCategories}
-              exact
-            ></Route>
-            <Route
-              path="/consultantfirms"
-              component={ConsultantFirms}
-              exact
-            ></Route>
-            <Route path="/consultants" component={Consultants} exact></Route>
-            <Route path="/contracts" component={Contracts} exact></Route>
-            <Route
-              path="/corporateclients"
-              component={CorporateClients}
-              exact
-            ></Route>
-            <Route path="/departments" component={Departments} exact></Route>
-            <Route
-              path="/individualclients"
-              component={IndividualClients}
-              exact
-            ></Route>
-            <Route
-              path="/individualconsultants"
-              component={IndividualConsultants}
-              exact
-            ></Route>
-            <Route
-              path="/interviewevaluation"
-              component={InterviewEvaluation}
-              exact
-            ></Route>
-            <Route path="/invoices" component={Invoices} exact></Route>
-            <Route path="/nextofkin" component={NextOfKin} exact></Route>
-            <Route path="/payments" component={Payments} exact></Route>
-            <Route
-              path="/projectstatus"
-              component={ProjectStatus}
-              exact
-            ></Route>
-            <Route path="/prospects" component={Prospects} exact></Route>
-            <Route
-              path="/qualifications"
-              component={Qualifications}
-              exact
-            ></Route>
-            <Route path="/quotation" component={Quotation} exact></Route>
-            <Route
-              path="/quotationdetails"
-              component={QuotationDetails}
-              exact
-            ></Route>
-            <Route path="/receipts" component={Receipts} exact></Route>
-            <Route path="/requisitions" component={Requisitions} exact></Route>
-            <Route
-              path="/staffverifications"
-              component={StaffVerifications}
-              exact
-            ></Route>
-            <Route path="/userdetails1" component={UserDetails1} exact></Route>
-            <Route path="/userdetails2" component={UserDetails2} exact></Route>
-            <Route
-              path="/userrelations"
-              component={UserRelations}
-              exact
-            ></Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/" component={Login} exact />
+          <ProtectedRoute path="/clients" component={Clients} exact />
+          <ProtectedRoute path="/operations" component={Operations} />
+          <ProtectedRoute
+            path="/users"
+            component={Users}
+            exact
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/maritalstatus"
+            component={MaritalStatus}
+            exact
+          />
+          <ProtectedRoute path="/annualleave" component={AnnualLeave} exact />
+          <ProtectedRoute
+            path="/annualleavedepartments"
+            component={AnnualLeaveDepartments}
+            exact
+          />
+          <ProtectedRoute
+            path="/annualleavemds"
+            component={AnnualLeaveMds}
+            exact
+          />
+          <ProtectedRoute
+            path="/annualleaverecommenders"
+            component={AnnualLeaveRecommenders}
+            exact
+          />
+          <ProtectedRoute path="/approvals" component={Approvals} exact />
+          <ProtectedRoute path="/biodata" component={BioData} exact />
+          <ProtectedRoute
+            path="/clientcategories"
+            component={ClientCategories}
+            exact
+          />
+          <ProtectedRoute path="/clients" component={Clients} exact />
+          <ProtectedRoute
+            path="/consultantfirmconsultants"
+            component={ConsultantFirmConsultants}
+            exact
+          />
+          <ProtectedRoute
+            path="/consultantcategories"
+            component={ConsultantCategories}
+            exact
+          />
+          <ProtectedRoute
+            path="/consultantfirms"
+            component={ConsultantFirms}
+            exact
+          />
+          <ProtectedRoute path="/consultants" component={Consultants} exact />
+          <ProtectedRoute path="/contracts" component={Contracts} exact />
+          <ProtectedRoute
+            path="/corporateclients"
+            component={CorporateClients}
+            exact
+          />
+          <ProtectedRoute path="/departments" component={Departments} exact />
+          <ProtectedRoute
+            path="/individualclients"
+            component={IndividualClients}
+            exact
+          />
+          <ProtectedRoute
+            path="/individualconsultants"
+            component={IndividualConsultants}
+            exact
+          />
+          <ProtectedRoute
+            path="/interviewevaluation"
+            component={InterviewEvaluation}
+            exact
+          />
+          <ProtectedRoute path="/invoices" component={Invoices} exact />
+          <ProtectedRoute path="/nextofkin" component={NextOfKin} exact />
+          <ProtectedRoute path="/payments" component={Payments} exact />
+          <ProtectedRoute
+            path="/projectstatus"
+            component={ProjectStatus}
+            exact
+          />
+          <ProtectedRoute path="/prospects" component={Prospects} exact />
+          <ProtectedRoute
+            path="/qualifications"
+            component={Qualifications}
+            exact
+          />
+          <ProtectedRoute path="/quotation" component={Quotation} exact />
+          <ProtectedRoute
+            path="/quotationdetails"
+            component={QuotationDetails}
+            exact
+          />
+          <ProtectedRoute path="/receipts" component={Receipts} exact />
+          <ProtectedRoute path="/requisitions" component={Requisitions} exact />
+          <ProtectedRoute
+            path="/staffverifications"
+            component={StaffVerifications}
+            exact
+          />
+          <ProtectedRoute path="/userdetails1" component={UserDetails1} exact />
+          <ProtectedRoute path="/userdetails2" component={UserDetails2} exact />
+          <ProtectedRoute
+            path="/userrelations"
+            component={UserRelations}
+            exact
+          />
+        </Switch>
       </Router>
     </div>
   );
