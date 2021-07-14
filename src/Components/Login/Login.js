@@ -39,7 +39,7 @@ class Login extends React.Component {
             "access-token",
             JSON.stringify(res.data.access_token)
           );
-          this.props.history.push("/users");
+          this.props.history.push("/dashboard/users");
         })
         .catch((error) => console.log(error));
     } else {

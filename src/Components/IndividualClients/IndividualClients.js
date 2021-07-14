@@ -127,7 +127,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.clientId}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="dob">
                 <Form.Label>dob</Form.Label>
                 <Form.Control
@@ -143,7 +142,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.dob}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="gender">
                 <Form.Label>Gender</Form.Label>
                 <Form.Control
@@ -191,7 +189,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.maritalStatusId}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="nationalIdNumber">
                 <Form.Label>NIN</Form.Label>
                 <Form.Control
@@ -224,7 +221,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.email}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="phoneNumbers">
                 <Form.Label>Phone numbers</Form.Label>
                 <Form.Control
@@ -240,7 +236,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.phoneNumbers}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="addresses">
                 <Form.Label>Addresses</Form.Label>
                 <Form.Control
@@ -273,7 +268,6 @@ class IndividualClients extends React.Component {
                   {this.state.errors.employer}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <Form.Group as={Col} controlId="city">
                 <Form.Label>City</Form.Label>
                 <Form.Control
