@@ -55,16 +55,18 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col>
-            <Card.Body>
+      <Container >
+        <Row >
+          
+          <Col xs={12} >
+            
               <Form
                 className="needs-validation"
                 onSubmit={this.submitHandler}
                 noValidate
+                id="form"
               >
-                <h1>Login</h1>
+                <h1 id="login">Login</h1>
                 <Form.Row>
                   <Form.Group as={Col} controlId="email">
                     <Form.Label>Email address</Form.Label>
@@ -80,7 +82,9 @@ class Login extends React.Component {
                       {this.state.errors.email}
                     </Form.Control.Feedback>
                   </Form.Group>
+                  </Form.Row>
 
+                  <Form.Row>
                   <Form.Group as={Col} controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
@@ -100,9 +104,10 @@ class Login extends React.Component {
                   Submit
                 </Button>
               </Form>
-            </Card.Body>
+           
             
           </Col>
+          
         </Row>
       </Container>
       
