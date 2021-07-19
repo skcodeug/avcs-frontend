@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
+import { Card, Col, Container, Button, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
@@ -55,51 +55,62 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Card.Body>
-          <Form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
-          >
-            <h1>Login</h1>
-            <Form.Row>
-              <Form.Group as={Col} controlId="email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.changeHandler}
-                  name="email"
-                  required
-                  placeholder="E.g abc@avcs.co.ug"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
+      <Container >
+        <Row >
+          
+          <Col xs={12} >
+            
+              <Form
+                className="needs-validation"
+                onSubmit={this.submitHandler}
+                noValidate
+                id="form"
+              >
+                <h1 id="login">Login</h1>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="email">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
+                      name="email"
+                      required
+                      placeholder="E.g abc@avcs.co.ug"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.email}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  </Form.Row>
 
-              <Form.Group as={Col} controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.changeHandler}
-                  name="password"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
+                  <Form.Row>
+                  <Form.Group as={Col} controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                      name="password"
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.password}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
 
-            <Button id="add-button" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
+                <Button id="add-button" type="submit">
+                  Submit
+                </Button>
+              </Form>
+           
+            
+          </Col>
+          
+        </Row>
       </Container>
+      
     );
   }
 }

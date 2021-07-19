@@ -1,6 +1,6 @@
 #body{
   background-color: #f2f2f2;
-  height: 200vh;
+  
 }
 #navlinks{
   color: #fff;
@@ -68,6 +68,23 @@
   color: #fff;
   pointer-events: none;
   transition: .5s;
+}
+
+#form{
+  background-color: #1692da;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  max-height:50vh;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 70px;
+  color: #fff;
+}
+#login{
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
 }
 
 /* .login-box .user-box input:focus ~ label,
