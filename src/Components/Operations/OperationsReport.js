@@ -2,17 +2,17 @@ import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import axios from "axios";
 
-class UserReport extends React.Component {
+class OperationsReport extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: [],
+      operations: [],
     };
   }
 
   fetchData = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/users", {
+      .get("https://avcs-platform.herokuapp.com/operations", {
         headers: {
           Authorization:
             "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
@@ -23,7 +23,7 @@ class UserReport extends React.Component {
           console.log(res.data);
           return {
             ...prevState,
-            users: res.data,
+            operations: res.data,
           };
         });
       })
@@ -154,4 +154,4 @@ class UserReport extends React.Component {
     ) : null;
   }
 }
-export default UserReport;
+export default OperationsReport;
