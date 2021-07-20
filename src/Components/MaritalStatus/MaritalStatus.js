@@ -159,23 +159,23 @@ class MaritalStatus extends React.Component {
               }}
             >
               <h1>Marital Status</h1>
-              <Form.Row>
-                <Form.Group lg="3" controlId="maritalstatus">
-                  <Form.Label>Marital Status</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                    isInvalid={this.state.errors.name}
-                    name="name"
-                    required
-                    placeholder="Marital Status"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.name}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Form.Row>
+
+              <Form.Group lg="3" controlId="maritalstatus">
+                <Form.Label>Marital Status</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.name}
+                  onChange={this.changeHandler}
+                  isInvalid={this.state.errors.name}
+                  name="name"
+                  required
+                  placeholder="Marital Status"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.name}
+                </Form.Control.Feedback>
+              </Form.Group>
+
               <Button id="add-button" type="submit">
                 Submit
               </Button>
