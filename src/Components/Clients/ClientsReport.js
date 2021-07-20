@@ -144,8 +144,8 @@ class ClientsReport extends React.Component {
                 marginBottom: "10%",
               }}
             >
-              {this.state.users.map((user) => (
-                <li>{user.firstName}</li>
+              {this.state.clients.map((client) => (
+                <li>{client.firstName}</li>
               ))}
             </div>
           </Container>
