@@ -175,67 +175,67 @@ class Clients extends React.Component {
               }}
             >
               <h1>Clients</h1>
-              <Form.Row>
-                <Form.Group controlId="firstname">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.firstName}
-                    onChange={this.changeHandler}
-                    name="firstName"
-                    required
-                    placeholder="First Name"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.firstName}
-                  </Form.Control.Feedback>
-                </Form.Group>
 
-                <Form.Group controlId="surname">
-                  <Form.Label>Surname</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.surname}
-                    onChange={this.changeHandler}
-                    name="surname"
-                    required
-                    placeholder="Surname"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.surname}
-                  </Form.Control.Feedback>
-                </Form.Group>
+              <Form.Group controlId="firstname">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.firstName}
+                  onChange={this.changeHandler}
+                  name="firstName"
+                  required
+                  placeholder="First Name"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.firstName}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-                <Form.Group controlId="othernames">
-                  <Form.Label>Other Names</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
-                    onChange={this.changeHandler}
-                    name="otherNames"
-                    required
-                    placeholder="Other Names"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.otherNames}
-                  </Form.Control.Feedback>
-                </Form.Group>
+              <Form.Group controlId="surname">
+                <Form.Label>Surname</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.surname}
+                  onChange={this.changeHandler}
+                  name="surname"
+                  required
+                  placeholder="Surname"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.surname}
+                </Form.Control.Feedback>
+              </Form.Group>
 
-                <Form.Group controlId="clientcategoryid">
-                  <Form.Label>Client category ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.clientCategoryId}
-                    onChange={this.changeHandler}
-                    name="clientCategoryId"
-                    required
-                    placeholder="Enter ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.clientCategoryId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Form.Row>
+              <Form.Group controlId="othernames">
+                <Form.Label>Other Names</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.otherNames}
+                  onChange={this.changeHandler}
+                  name="otherNames"
+                  required
+                  placeholder="Other Names"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.otherNames}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group controlId="clientcategoryid">
+                <Form.Label>Client category ID</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.clientCategoryId}
+                  onChange={this.changeHandler}
+                  name="clientCategoryId"
+                  required
+                  placeholder="Enter ID"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.clientCategoryId}
+                </Form.Control.Feedback>
+              </Form.Group>
+
               <Button id="add-button" type="submit">
                 Submit
               </Button>
