@@ -1,10 +1,15 @@
 import { Route, useHistory, Redirect } from "react-router-dom";
+import Users from "./Users/Users";
 
-const AdminRoute = ({ ...props }) => {
+const AdminRoute = () => {
   let history = useHistory();
   if (localStorage.getItem("access-token")) {
     return localStorage.getItem("role").replace(/"/g, "") === "Admin" ? (
-      <Route {...props} />
+      <Route
+        render={(props) => (
+          <Users {...props} role={localStorage.getItem("role")} />
+        )}
+      />
     ) : (
       history.goBack()
     );
