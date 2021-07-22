@@ -1,10 +1,15 @@
 import { Route, useHistory, Redirect } from "react-router-dom";
 
-const AdminRoute = ({ ...props }) => {
+const FinanceRoute = ({ ...props }) => {
   let history = useHistory();
   if (localStorage.getItem("access-token")) {
-    return localStorage.getItem("role").replace(/"/g, "") === "Finance" ? (
-      <Route {...props} />
+    return localStorage.getItem("role").replace(/"/g, "") === "Admin" ||
+      localStorage.getItem("role").replace(/"/g, "") === "Finance" ? (
+      <Route
+        render={(props) => (
+          <Users {...props} role={localStorage.getItem("role")} />
+        )}
+      />
     ) : (
       history.goBack()
     );
@@ -13,4 +18,4 @@ const AdminRoute = ({ ...props }) => {
   }
 };
 
-export default AdminRoute;
+export default FinanceRoute;

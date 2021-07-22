@@ -4,6 +4,7 @@ import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
 
 class Users extends React.Component {
   constructor(props) {
@@ -42,7 +43,6 @@ class Users extends React.Component {
 
   componentDidMount() {
     this.fetchDropDownData();
-    console.log(this.props);
   }
 
   changeHandler = (event) => {
@@ -100,7 +100,7 @@ class Users extends React.Component {
         <AppBar />
 
         <div style={{ display: "flex" }}>
-          {this.props.role === "Admin" ? <AdminNav /> : null}
+          {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
 
           <Container>
             <Form

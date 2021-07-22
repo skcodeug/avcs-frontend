@@ -43,8 +43,7 @@ import UserDetails2 from "./Components/UserDetails2/UserDetails2";
 import UserRelations from "./Components/UserRelations/UserRelations";
 
 import ProtectedRoute from "./Components/ProtectedRoutes";
-// import HrRoute from "./Components/HrRoute";
-import AdminRoute from "./Components/AdminRoute";
+import HrRoute from "./Components/HrRoute";
 // import FinanceRoute from "./Components/FinanceRoute";
 // import SalesRoute from "./Components/SalesRoute";
 
@@ -61,9 +60,9 @@ function App() {
             return <Redirect to="/" />;
           }}
         />
+        <HrRoute path="/users" exact />
         <ProtectedRoute path="/clients" component={Clients} exact />
         <ProtectedRoute path="/operations" component={Operations} />
-        <AdminRoute path="/users" component={Users} exact />
         <ProtectedRoute path="/maritalstatus" component={MaritalStatus} exact />
         <ProtectedRoute path="/annualleave" component={AnnualLeave} exact />
         <ProtectedRoute
