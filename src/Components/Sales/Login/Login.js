@@ -47,25 +47,28 @@ class Login extends React.Component {
             })
             .then((res) => {
               switch (res.data.roles[0]) {
-                case res.data.roles.includes("Admin"):
-                  localStorage.setItem("role", JSON.stringify(true));
+                case "Admin":
+                  localStorage.setItem(
+                    "role",
+                    JSON.stringify(res.data.roles[0])
+                  );
                   this.props.history.push("/admin/users");
                   break;
-                case res.data.roles.includes("HR"):
+                case "HR":
                   localStorage.setItem(
                     "role",
                     JSON.stringify(res.data.roles[0])
                   );
                   this.props.history.push("/hr/dashboard");
                   break;
-                case res.data.roles.includes("Finance"):
+                case "Finance":
                   localStorage.setItem(
                     "role",
                     JSON.stringify(res.data.roles[0])
                   );
                   this.props.history.push("/finance/dashboard");
                   break;
-                case res.data.roles.includes("Sales"):
+                case "Sales":
                   localStorage.setItem(
                     "role",
                     JSON.stringify(res.data.roles[0])
