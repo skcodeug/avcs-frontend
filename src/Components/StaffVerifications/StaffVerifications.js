@@ -90,6 +90,12 @@ class StaffVerifications extends React.Component {
                 className="needs-validation"
                 onSubmit={this.submitHandler}
                 noValidate
+                style={{
+                  marginLeft: "15%",
+                  paddingTop: "2%",
+                  marginTop: "8%",
+                  marginBottom: "10%",
+                }}
               >
                 <h1>Staff verifications</h1>
                 <Form.Row>

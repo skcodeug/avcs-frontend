@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
@@ -82,7 +81,6 @@ class Receipts extends React.Component {
                   marginBottom: "10%",
                 }}
               >
-                <NavBar /> <br />
                 <h1>Receipts</h1>
                 <Form.Row>
                   <Form.Group as={Col} controlId="date">

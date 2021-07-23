@@ -7,7 +7,7 @@ function HrNav() {
       style={{
         height: "100%",
         width: "19%",
-        marginTop: "5%",
+        marginTop: "6%",
         paddingBottom: "8%",
         paddingTop: "1%",
         overflowX: "hidden",

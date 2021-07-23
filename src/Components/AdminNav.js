@@ -7,7 +7,7 @@ function AdminNav() {
       style={{
         height: "100%",
         width: "19%",
-        marginTop: "5%",
+        marginTop: "6%",
         paddingBottom: "8%",
         paddingTop: "1%",
         overflowX: "hidden",
@@ -20,6 +20,21 @@ function AdminNav() {
       }}
     >
       <Nav.Link href="/users">Users</Nav.Link>
+      <Nav.Link href="/operations">Operations</Nav.Link>
+      <Nav.Link href="/clients">Clients</Nav.Link>
+      <Nav.Link href="/annualleave">Annual Leave</Nav.Link>
+      <Nav.Link href="/approvals">Approvals</Nav.Link>
+      <Nav.Link href="/consultants">Consultants</Nav.Link>
+      <Nav.Link href="/invoices">Invoices</Nav.Link>
+      <Nav.Link href="/payments">Payments</Nav.Link>
+      <Nav.Link href="/prospects">Prospects</Nav.Link>
+      <Nav.Link href="/quotation">Quotation</Nav.Link>
+      <Nav.Link href="/receipts">Receipts</Nav.Link>
+      <Nav.Link href="/requisitions">Requisitions</Nav.Link>
+      <Nav.Link href="/staffverifications">Staff Verifications</Nav.Link>
+      <Nav.Link href="/interviewevaluation">Interview Evaluation</Nav.Link>
+      <Nav.Link href="/contracts">Contracts</Nav.Link>
+      {/* <Nav.Link href="/users">Users</Nav.Link>
       <Nav.Link href="/operations">Operations</Nav.Link>
       <Nav.Link href="/clients">Clients</Nav.Link>
       <Nav.Link href="/maritalstatus">Marital Status</Nav.Link>
@@ -44,7 +59,6 @@ function AdminNav() {
       <Nav.Link href="/departments">Departments</Nav.Link>
       <Nav.Link href="/individualclients">Individual Clients</Nav.Link>
       <Nav.Link href="/individualconsultants">Individual Consultants</Nav.Link>
-      <Nav.Link href="/interviewevaluation">Interview Evaluation</Nav.Link>
       <Nav.Link href="/invoices">Invoices</Nav.Link>
       <Nav.Link href="/nextofkin">Next of Kin</Nav.Link>
       <Nav.Link href="/payments">Payments</Nav.Link>
@@ -58,7 +72,7 @@ function AdminNav() {
       <Nav.Link href="/staffverifications">Staff Verifications</Nav.Link>
       <Nav.Link href="/userdetails1">User Details I</Nav.Link>
       <Nav.Link href="/userdetails2">User Details II</Nav.Link>
-      <Nav.Link href="/userrelations">User Relations</Nav.Link>
+      <Nav.Link href="/userrelations">User Relations</Nav.Link> */}
     </Nav>
   );
 }

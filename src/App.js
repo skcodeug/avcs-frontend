@@ -40,11 +40,14 @@ import StaffVerifications from "./Components/StaffVerifications/StaffVerificatio
 import UserDetails1 from "./Components/UserDetails1/UserDetails1";
 import UserDetails2 from "./Components/UserDetails2/UserDetails2";
 import UserRelations from "./Components/UserRelations/UserRelations";
+import Users from "./Components/Users/Users";
 
 import ProtectedRoute from "./Components/ProtectedRoutes";
+import AllRoute from "./Components/AllRoute";
 import HrRoute from "./Components/HrRoute";
-// import FinanceRoute from "./Components/FinanceRoute";
-// import SalesRoute from "./Components/SalesRoute";
+import HrSalesRoute from "./Components/HrSalesRoute";
+import FinanceRoute from "./Components/FinanceRoute";
+import SalesRoute from "./Components/SalesRoute";
 
 function App() {
   return (
@@ -59,11 +62,30 @@ function App() {
             return <Redirect to="/" />;
           }}
         />
-        <HrRoute path="/users" exact />
-        <ProtectedRoute path="/clients" component={Clients} exact />
-        <ProtectedRoute path="/operations" component={Operations} />
+        <AllRoute path="/annualleave" component={AnnualLeave} exact />
+        <AllRoute path="/requisitions" component={Requisitions} exact />
+        <HrRoute path="/users" component={Users} exact />
+        <HrRoute path="/consultants" component={Consultants} exact />
+        <HrSalesRoute path="/clients" component={Clients} exact />
+        <HrRoute
+          path="/interviewevaluation"
+          component={InterviewEvaluation}
+          exact
+        />
+        <HrRoute
+          path="/staffverifications"
+          component={StaffVerifications}
+          exact
+        />
+        <SalesRoute path="/prospects" component={Prospects} exact />
+        <SalesRoute path="/contracts" component={Contracts} exact />
+        <SalesRoute path="/quotation" component={Quotation} exact />
+        <SalesRoute path="/operations" component={Operations} />
+        <FinanceRoute path="/invoices" component={Invoices} exact />
+        <FinanceRoute path="/receipts" component={Receipts} exact />
+        <FinanceRoute path="/payments" component={Payments} exact />
+        <FinanceRoute path="/approvals" component={Approvals} exact />
         <ProtectedRoute path="/maritalstatus" component={MaritalStatus} exact />
-        <ProtectedRoute path="/annualleave" component={AnnualLeave} exact />
         <ProtectedRoute
           path="/annualleavedepartments"
           component={AnnualLeaveDepartment}
@@ -79,14 +101,13 @@ function App() {
           component={AnnualLeaveRecommenders}
           exact
         />
-        <ProtectedRoute path="/approvals" component={Approvals} exact />
         <ProtectedRoute path="/biodata" component={BioData} exact />
         <ProtectedRoute
           path="/clientcategories"
           component={ClientCategories}
           exact
         />
-        <ProtectedRoute path="/clients" component={Clients} exact />
+        {/* <ProtectedRoute path="/clients" component={Clients} exact /> */}
         <ProtectedRoute
           path="/consultantfirmconsultants"
           component={ConsultantFirmConsultants}
@@ -102,8 +123,6 @@ function App() {
           component={ConsultantFirms}
           exact
         />
-        <ProtectedRoute path="/consultants" component={Consultants} exact />
-        <ProtectedRoute path="/contracts" component={Contracts} exact />
         <ProtectedRoute
           path="/corporateclients"
           component={CorporateClients}
@@ -120,32 +139,16 @@ function App() {
           component={IndividualConsultants}
           exact
         />
-        <ProtectedRoute
-          path="/interviewevaluation"
-          component={InterviewEvaluation}
-          exact
-        />
-        <ProtectedRoute path="/invoices" component={Invoices} exact />
         <ProtectedRoute path="/nextofkin" component={NextOfKin} exact />
-        <ProtectedRoute path="/payments" component={Payments} exact />
         <ProtectedRoute path="/projectstatus" component={ProjectStatus} exact />
-        <ProtectedRoute path="/prospects" component={Prospects} exact />
         <ProtectedRoute
           path="/qualifications"
           component={Qualifications}
           exact
         />
-        <ProtectedRoute path="/quotation" component={Quotation} exact />
         <ProtectedRoute
           path="/quotationdetails"
           component={QuotationDetails}
-          exact
-        />
-        <ProtectedRoute path="/receipts" component={Receipts} exact />
-        <ProtectedRoute path="/requisitions" component={Requisitions} exact />
-        <ProtectedRoute
-          path="/staffverifications"
-          component={StaffVerifications}
           exact
         />
         <ProtectedRoute path="/userdetails1" component={UserDetails1} exact />

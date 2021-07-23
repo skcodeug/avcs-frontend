@@ -1,9 +1,10 @@
 import { Route, useHistory, Redirect } from "react-router-dom";
 
-const SalesRoute = ({ component: Component, ...props }) => {
+const HrSalesRoute = ({ component: Component, ...props }) => {
   let history = useHistory();
   if (localStorage.getItem("access-token")) {
     return localStorage.getItem("role").replace(/"/g, "") === "Admin" ||
+      localStorage.getItem("role").replace(/"/g, "") === "HR" ||
       localStorage.getItem("role").replace(/"/g, "") === "Sales" ? (
       <Route
         {...props}
@@ -17,4 +18,4 @@ const SalesRoute = ({ component: Component, ...props }) => {
   }
 };
 
-export default SalesRoute;
+export default HrSalesRoute;

@@ -33,6 +33,7 @@ class Login extends React.Component {
           headers: { Authorization: `Basic ${token}` },
         })
         .then((res) => {
+          console.log(res);
           localStorage.setItem(
             "access-token",
             JSON.stringify(res.data.access_token)
@@ -52,25 +53,16 @@ class Login extends React.Component {
                   this.props.history.push("/users");
                   break;
                 case res.data.roles.includes("HR"):
-                  localStorage.setItem(
-                    "role",
-                    JSON.stringify(res.data.roles[0])
-                  );
+                  localStorage.setItem("role", "HR");
                   this.props.history.push("/users");
                   break;
                 case res.data.roles.includes("Finance"):
-                  localStorage.setItem(
-                    "role",
-                    JSON.stringify(res.data.roles[0])
-                  );
-                  this.props.history.push("/finance/dashboard");
+                  localStorage.setItem("role", "Finance");
+                  this.props.history.push("/invoices");
                   break;
                 case res.data.roles.includes("Sales"):
-                  localStorage.setItem(
-                    "role",
-                    JSON.stringify(res.data.roles[0])
-                  );
-                  this.props.history.push("/sales/dashboard");
+                  localStorage.setItem("role", "Sales");
+                  this.props.history.push("/clients");
                   break;
 
                 default:

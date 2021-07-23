@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
@@ -71,8 +70,13 @@ class Quotations extends React.Component {
                 className="needs-validation"
                 onSubmit={this.submitHandler}
                 noValidate
+                style={{
+                  marginLeft: "15%",
+                  paddingTop: "2%",
+                  marginTop: "8%",
+                  marginBottom: "10%",
+                }}
               >
-                <NavBar /> <br />
                 <h1>Quotations</h1>
                 <Form.Row>
                   <Form.Group as={Col} controlId="endDate">

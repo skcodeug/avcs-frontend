@@ -99,22 +99,33 @@ class Users extends React.Component {
       <>
         <AppBar />
 
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", backgroundColor: "rgb(247, 249, 252)" }}>
           {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
 
           <Container>
+            <h2
+              style={{
+                marginLeft: "15%",
+                paddingTop: "2%",
+                marginTop: "9%",
+              }}
+            >
+              USERS
+            </h2>
             <Form
               className="needs-validation"
               onSubmit={this.submitHandler}
               noValidate
               style={{
                 marginLeft: "15%",
-                paddingTop: "2%",
-                marginTop: "8%",
+                marginTop: "4%",
                 marginBottom: "10%",
+                backgroundColor: "white",
+                borderRadius: "0.5%",
+                boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
+                padding: "2% 4%",
               }}
             >
-              <h2>USERS</h2>
               <Form.Group controlId="prefix">
                 <Form.Label>Prefix</Form.Label>
                 <Form.Control
