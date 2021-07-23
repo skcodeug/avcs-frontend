@@ -8,7 +8,6 @@ import {
 import Operations from "./Components/Operations/Operations";
 import Login from "./Components/Login/Login";
 import MaritalStatus from "./Components/MaritalStatus/MaritalStatus";
-import Users from "./Components/Users/Users";
 import AnnualLeave from "./Components/AnnualLeave/AnnualLeave";
 import AnnualLeaveDepartment from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments";
 import AnnualLeaveMds from "./Components/AnnualLeaveMds/AnnualLeaveMds";

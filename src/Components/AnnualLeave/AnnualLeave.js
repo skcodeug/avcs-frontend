@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Navbar, Nav, Container } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "../AnnualLeave/FindFormErrors";
 import AppBar from "../AppBar";
@@ -7,7 +7,6 @@ import AdminNav from "../AdminNav";
 import HrNav from "../HrNav";
 import SalesNav from "../SalesNav";
 import FinanceNav from "../FinanceNav";
-import NavBar from "../NavBar";
 
 class AnnualLeave extends React.Component {
   constructor() {
@@ -75,7 +74,7 @@ class AnnualLeave extends React.Component {
   render() {
     return (
       <>
-        <NavBar />
+        <AppBar />
         <div style={{ display: "flex" }}>
           {this.props.role === "Admin" && <AdminNav />}
           {this.props.role === "HR" && <HrNav />}

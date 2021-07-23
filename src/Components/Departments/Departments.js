@@ -3,7 +3,8 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
-import NavBar from "../NavBar";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
 
 class Departments extends React.Component {
   state = {
@@ -49,38 +50,49 @@ class Departments extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Card.Body>
-          <Form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
-          >
-            <NavBar /> <br />
-            <h1>Departments</h1>
-            <Form.Row>
-              <Form.Group as={Col} lg="3" controlId="departments">
-                <Form.Label>Departments</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.name}
-                  onChange={this.changeHandler}
-                  isInvalid={this.state.errors.name}
-                  name="name"
-                  required
-                  placeholder="Departments"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.name}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Button id="add-button" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Container>
+      <>
+        <AppBar />
+        <div style={{ display: "flex" }}>
+          {this.props.role === "Admin" && <AdminNav />}
+          <Container>
+            <Card.Body>
+              <Form
+                className="needs-validation"
+                onSubmit={this.submitHandler}
+                noValidate
+                style={{
+                  marginLeft: "15%",
+                  paddingTop: "2%",
+                  marginTop: "8%",
+                  marginBottom: "10%",
+                }}
+              >
+                <h1>Departments</h1>
+                <Form.Row>
+                  <Form.Group as={Col} lg="3" controlId="departments">
+                    <Form.Label>Departments</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.name}
+                      onChange={this.changeHandler}
+                      isInvalid={this.state.errors.name}
+                      name="name"
+                      required
+                      placeholder="Departments"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.name}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Button id="add-button" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Container>
+        </div>
+      </>
     );
   }
 }

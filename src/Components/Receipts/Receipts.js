@@ -4,6 +4,8 @@ import { Form } from "react-bootstrap";
 import axios from "axios";
 import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
 
 class Receipts extends React.Component {
   constructor() {
@@ -63,102 +65,114 @@ class Receipts extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Card.Body>
-          <Form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
-          >
-            <NavBar /> <br />
-            <h1>Receipts</h1>
-            <Form.Row>
-              <Form.Group as={Col} controlId="date">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.date}
-                  onChange={this.changeHandler}
-                  name="date"
-                  required
-                  isInvalid={this.state.errors.date}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.date}
-                </Form.Control.Feedback>
-              </Form.Group>
+      <>
+        <AppBar />
+        <div style={{ display: "flex" }}>
+          {this.props.role === "Admin" && <AdminNav />}
+          <Container>
+            <Card.Body>
+              <Form
+                className="needs-validation"
+                onSubmit={this.submitHandler}
+                noValidate
+                style={{
+                  marginLeft: "15%",
+                  paddingTop: "2%",
+                  marginTop: "8%",
+                  marginBottom: "10%",
+                }}
+              >
+                <NavBar /> <br />
+                <h1>Receipts</h1>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="date">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={this.state.date}
+                      onChange={this.changeHandler}
+                      name="date"
+                      required
+                      isInvalid={this.state.errors.date}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.date}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="clientId">
-                <Form.Label>Client ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.clientId}
-                  onChange={this.changeHandler}
-                  name="clientId"
-                  required
-                  isInvalid={this.state.errors.clientId}
-                  placeholder="Client ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.clientId}
-                </Form.Control.Feedback>
-              </Form.Group>
+                  <Form.Group as={Col} controlId="clientId">
+                    <Form.Label>Client ID</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.clientId}
+                      onChange={this.changeHandler}
+                      name="clientId"
+                      required
+                      isInvalid={this.state.errors.clientId}
+                      placeholder="Client ID"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.clientId}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="paid">
-                <Form.Label>Paid</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={this.state.paid}
-                  onChange={this.changeHandler}
-                  name="paid"
-                  required
-                  isInvalid={this.state.errors.paid}
-                  placeholder="E.g 55000"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.paid}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col} controlId="balance">
-                <Form.Label>Balance</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={this.state.balance}
-                  onChange={this.changeHandler}
-                  name="balance"
-                  required
-                  isInvalid={this.state.errors.balance}
-                  placeholder="E.g 15000"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.balance}
-                </Form.Control.Feedback>
-              </Form.Group>
+                  <Form.Group as={Col} controlId="paid">
+                    <Form.Label>Paid</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={this.state.paid}
+                      onChange={this.changeHandler}
+                      name="paid"
+                      required
+                      isInvalid={this.state.errors.paid}
+                      placeholder="E.g 55000"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.paid}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="balance">
+                    <Form.Label>Balance</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={this.state.balance}
+                      onChange={this.changeHandler}
+                      name="balance"
+                      required
+                      isInvalid={this.state.errors.balance}
+                      placeholder="E.g 15000"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.balance}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="paidInWords">
-                <Form.Label>Paid in words</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={this.state.paidInWords}
-                  onChange={this.changeHandler}
-                  name="paidInWords"
-                  required
-                  isInvalid={this.state.errors.paidInWords}
-                  placeholder="E.g 45000"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.paidInWords}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Button id="add-button" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Container>
+                  <Form.Group as={Col} controlId="paidInWords">
+                    <Form.Label>Paid in words</Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={this.state.paidInWords}
+                      onChange={this.changeHandler}
+                      name="paidInWords"
+                      required
+                      isInvalid={this.state.errors.paidInWords}
+                      placeholder="E.g 45000"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.paidInWords}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Button id="add-button" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Container>
+        </div>
+      </>
     );
   }
 }

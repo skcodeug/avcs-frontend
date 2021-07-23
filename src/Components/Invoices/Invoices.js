@@ -3,7 +3,8 @@ import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
-import Navbar from "../NavBar";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
 
 class Invoices extends React.Component {
   constructor() {
@@ -59,70 +60,81 @@ class Invoices extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Card.Body>
-          <Form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
-          >
-            <Navbar /> <br />
-            <h1>Invoices</h1>
-            <Form.Row>
-              <Form.Group as={Col} controlId="date">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.date}
-                  onChange={this.changeHandler}
-                  name="date"
-                  required
-                  isInvalid={this.state.errors.date}
-                  placeholder="Select date"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.date}
-                </Form.Control.Feedback>
-              </Form.Group>
+      <>
+        <AppBar />
+        <div style={{ display: "flex" }}>
+          {this.props.role === "Admin" && <AdminNav />}
+          <Container>
+            <Card.Body>
+              <Form
+                className="needs-validation"
+                onSubmit={this.submitHandler}
+                noValidate
+                style={{
+                  marginLeft: "15%",
+                  paddingTop: "2%",
+                  marginTop: "8%",
+                  marginBottom: "10%",
+                }}
+              >
+                <h1>Invoices</h1>
+                <Form.Row>
+                  <Form.Group as={Col} controlId="date">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={this.state.date}
+                      onChange={this.changeHandler}
+                      name="date"
+                      required
+                      isInvalid={this.state.errors.date}
+                      placeholder="Select date"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.date}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="contractReferenceId">
-                <Form.Label>Contract reference ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.contractReferenceId}
-                  onChange={this.changeHandler}
-                  name="contractReferenceId"
-                  required
-                  isInvalid={this.state.errors.contractReferenceId}
-                  placeholder="Enter contract reference ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.contractReferenceId}
-                </Form.Control.Feedback>
-              </Form.Group>
+                  <Form.Group as={Col} controlId="contractReferenceId">
+                    <Form.Label>Contract reference ID</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.contractReferenceId}
+                      onChange={this.changeHandler}
+                      name="contractReferenceId"
+                      required
+                      isInvalid={this.state.errors.contractReferenceId}
+                      placeholder="Enter contract reference ID"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.contractReferenceId}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-              <Form.Group as={Col} controlId="clientId">
-                <Form.Label>Client ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.clientId}
-                  onChange={this.changeHandler}
-                  name="clientId"
-                  required
-                  isInvalid={this.state.errors.clientId}
-                  placeholder="Enter a valid ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.clientId}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Button id="add-button" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Container>
+                  <Form.Group as={Col} controlId="clientId">
+                    <Form.Label>Client ID</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.clientId}
+                      onChange={this.changeHandler}
+                      name="clientId"
+                      required
+                      isInvalid={this.state.errors.clientId}
+                      placeholder="Enter a valid ID"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.clientId}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Button id="add-button" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Container>
+        </div>
+      </>
     );
   }
 }

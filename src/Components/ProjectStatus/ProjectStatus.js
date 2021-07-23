@@ -2,8 +2,9 @@ import React from "react";
 import { Card, Col, Container, Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import axios from "axios";
-import NavBar from "../NavBar";
 import findFormErrors from "./FindFormErrors";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
 
 class ProjectStatus extends React.Component {
   state = {
@@ -47,38 +48,43 @@ class ProjectStatus extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Card.Body>
-          <Form
-            className="needs-validation"
-            onSubmit={this.submitHandler}
-            noValidate
-          >
-            <NavBar /> <br />
-            <h1>Project status</h1>
-            <Form.Row>
-              <Form.Group as={Col} lg="3" controlId="projectStatus">
-                <Form.Label>Project status</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.name}
-                  onChange={this.changeHandler}
-                  isInvalid={this.state.errors.name}
-                  name="name"
-                  required
-                  placeholder="Project Status"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.name}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
-            <Button id="add-button" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Container>
+      <>
+        <AppBar />
+        <div style={{ display: "flex" }}>
+          {this.props.role === "Admin" && <AdminNav />}
+          <Container>
+            <Card.Body>
+              <Form
+                className="needs-validation"
+                onSubmit={this.submitHandler}
+                noValidate
+              >
+                <h1>Project status</h1>
+                <Form.Row>
+                  <Form.Group as={Col} lg="3" controlId="projectStatus">
+                    <Form.Label>Project status</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={this.state.name}
+                      onChange={this.changeHandler}
+                      isInvalid={this.state.errors.name}
+                      name="name"
+                      required
+                      placeholder="Project Status"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {this.state.errors.name}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
+                <Button id="add-button" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Container>
+        </div>
+      </>
     );
   }
 }
