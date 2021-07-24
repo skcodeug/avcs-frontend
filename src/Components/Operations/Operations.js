@@ -5,6 +5,7 @@ import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
 import Table from "../Table";
+import Canvas from "../Canvas";
 
 class Operations extends React.Component {
   constructor() {
@@ -110,6 +111,7 @@ class Operations extends React.Component {
                 paddingTop: "2%",
                 marginTop: "8%",
                 marginBottom: "10%",
+                display: "none",
               }}
             >
               <h1>Operations</h1>
@@ -209,9 +211,11 @@ class Operations extends React.Component {
               </Button>
             </Form>
 
+            <Canvas />
+
             {this.state.ops && (
               <Table
-                name="Operations Table"
+                name="Operations"
                 columns={this.columns}
                 products={this.state.ops}
               />

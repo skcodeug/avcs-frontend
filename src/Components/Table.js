@@ -6,7 +6,6 @@ import paginationFactory, {
   PaginationListStandalone,
 } from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 
 class Table extends React.Component {
   render() {
@@ -38,7 +37,11 @@ class Table extends React.Component {
         >
           {(toolkitprops) => (
             <div>
-              <SearchBar {...toolkitprops.searchProps} />
+              <SearchBar
+                style={{ width: "200%" }}
+                placeholder="Search . . ."
+                {...toolkitprops.searchProps}
+              />
               <BootstrapTable
                 hover
                 {...toolkitprops.baseProps}
