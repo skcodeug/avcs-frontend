@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import paginationFactory, {
@@ -39,8 +38,9 @@ class Table extends React.Component {
           {(toolkitprops) => (
             <div>
               <SearchBar
+                srText=""
                 style={{ width: "200%" }}
-                placeholder="Search . . ."
+                placeholder="Type here to search . . ."
                 {...toolkitprops.searchProps}
               />
               <BootstrapTable

@@ -7,7 +7,7 @@ function AdminNav() {
       style={{
         height: "100%",
         width: "19%",
-        marginTop: "6%",
+        marginTop: "5.8%",
         paddingBottom: "8%",
         paddingTop: "1%",
         overflowX: "hidden",
@@ -17,23 +17,99 @@ function AdminNav() {
         top: "0",
         left: "0",
         display: "block",
+        backgroundColor: "rgba(27, 36, 48, 0.9)",
       }}
     >
-      <Nav.Link href="/users">Users</Nav.Link>
-      <Nav.Link href="/operations">Operations</Nav.Link>
-      <Nav.Link href="/clients">Clients</Nav.Link>
-      <Nav.Link href="/annualleave">Annual Leave</Nav.Link>
-      <Nav.Link href="/approvals">Approvals</Nav.Link>
-      <Nav.Link href="/consultants">Consultants</Nav.Link>
-      <Nav.Link href="/invoices">Invoices</Nav.Link>
-      <Nav.Link href="/payments">Payments</Nav.Link>
-      <Nav.Link href="/prospects">Prospects</Nav.Link>
-      <Nav.Link href="/quotation">Quotation</Nav.Link>
-      <Nav.Link href="/receipts">Receipts</Nav.Link>
-      <Nav.Link href="/requisitions">Requisitions</Nav.Link>
-      <Nav.Link href="/staffverifications">Staff Verifications</Nav.Link>
-      <Nav.Link href="/interviewevaluation">Interview Evaluation</Nav.Link>
-      <Nav.Link href="/contracts">Contracts</Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/users"
+      >
+        Users
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/operations"
+      >
+        Operations
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/clients"
+      >
+        Clients
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/annualleave"
+      >
+        Annual Leave
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/approvals"
+      >
+        Approvals
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/consultants"
+      >
+        Consultants
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/invoices"
+      >
+        Invoices
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/payments"
+      >
+        Payments
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/prospects"
+      >
+        Prospects
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/quotation"
+      >
+        Quotation
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/receipts"
+      >
+        Receipts
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/requisitions"
+      >
+        Requisitions
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/staffverifications"
+      >
+        Staff Verifications
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/interviewevaluation"
+      >
+        Interview Evaluation
+      </Nav.Link>
+      <Nav.Link
+        style={{ color: "white", textDecoration: "none" }}
+        href="/contracts"
+      >
+        Contracts
+      </Nav.Link>
       {/* <Nav.Link href="/users">Users</Nav.Link>
       <Nav.Link href="/operations">Operations</Nav.Link>
       <Nav.Link href="/clients">Clients</Nav.Link>

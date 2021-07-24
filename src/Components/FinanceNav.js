@@ -7,7 +7,7 @@ function FinanceNav() {
       style={{
         height: "100%",
         width: "19%",
-        marginTop: "6%",
+        marginTop: "5.8%",
         paddingBottom: "8%",
         paddingTop: "1%",
         overflowX: "hidden",
@@ -17,6 +17,7 @@ function FinanceNav() {
         top: "0",
         left: "0",
         display: "block",
+        backgroundColor: "rgba(27, 36, 48, 0.9)",
       }}
     >
       <Nav.Link href="/users">Users</Nav.Link>
