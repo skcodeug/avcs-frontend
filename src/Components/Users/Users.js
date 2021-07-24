@@ -103,15 +103,20 @@ class Users extends React.Component {
           {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
 
           <Container>
-            <h2
+            <Container
               style={{
                 marginLeft: "15%",
-                paddingTop: "2%",
-                marginTop: "9%",
+                marginTop: "10%",
+                backgroundColor: "white",
+                borderRadius: "0.5%",
+                boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
+                padding: "2% 2% 1% 4%",
+                width: "85%",
               }}
             >
-              USERS
-            </h2>
+              <h2>USERS</h2>
+            </Container>
+
             <Form
               className="needs-validation"
               onSubmit={this.submitHandler}

@@ -4,6 +4,7 @@ import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
+import Table from "../Table";
 
 class Operations extends React.Component {
   constructor() {
@@ -15,9 +16,35 @@ class Operations extends React.Component {
       startDate: "",
       endDate: "",
       projecStatusId: "",
+      ops: [],
       errors: {},
     };
   }
+
+  columns = [
+    { dataField: "clientId", text: "Client ID" },
+    { dataField: "projectStatusId", text: "Project status ID" },
+    { dataField: "withHoldingTax", text: "WHT" },
+    { dataField: "", text: "Actions" },
+  ];
+
+  fetchOps = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/operations", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          ops: res.data,
+        }));
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -61,6 +88,10 @@ class Operations extends React.Component {
         };
       });
     }
+  };
+
+  componentDidMount = () => {
+    this.fetchOps();
   };
 
   render() {
@@ -177,6 +208,14 @@ class Operations extends React.Component {
                 Submit
               </Button>
             </Form>
+
+            {this.state.ops && (
+              <Table
+                name="Operations Table"
+                columns={this.columns}
+                products={this.state.ops}
+              />
+            )}
           </Container>
         </div>
       </>
