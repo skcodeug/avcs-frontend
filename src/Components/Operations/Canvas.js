@@ -1,14 +1,9 @@
 import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
-import AppBar from "../AppBar";
-import AdminNav from "../AdminNav";
-import Table from "../Table";
-import Update from "./Update";
-import Canvas from "./Canvas";
 
-class Operations extends React.Component {
+class Canvas extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -22,48 +17,6 @@ class Operations extends React.Component {
       errors: {},
     };
   }
-
-  columns = [
-    { dataField: "clientId", text: "Client ID" },
-    { dataField: "projectStatusId", text: "Project status ID" },
-    { dataField: "withHoldingTax", text: "WHT" },
-    {
-      dataField: "follow",
-      text: "Actions",
-      formatter: (cell, row) => {
-        return (
-          <span style={{ display: "flex" }}>
-            <Update id={row} />
-
-            <Button
-              onClick={() => alert("Are you sure you want to delete this?")}
-            >
-              Delete
-            </Button>
-          </span>
-        );
-      },
-    },
-  ];
-
-  fetchOps = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/operations", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
-        },
-      })
-      .then((res) => {
-        this.setState((prevState) => ({
-          ...prevState,
-          ops: res.data,
-        }));
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -81,7 +34,9 @@ class Operations extends React.Component {
       axios
         .post("https://avcs-platform.herokuapp.com/operations", temp, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            Authorization:
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
           },
         })
         .then(() => {
@@ -108,30 +63,49 @@ class Operations extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    this.fetchOps();
-  };
-
   render() {
     return (
-      <>
-        <AppBar />
-        <div style={{ display: "flex" }}>
-          {this.props.role === "Admin" && <AdminNav />}
-          <Container>
+      <div style={{ margin: "10% 0 -3% 95%" }}>
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+          style={{ marginLeft: "15%" }}
+        >
+          Add
+        </button>
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header">
+            {/* <h5 id="offcanvasRightLabel">Make a new entry</h5> */}
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
             <Form
               className="needs-validation"
               onSubmit={this.submitHandler}
               noValidate
-              style={{
-                marginLeft: "15%",
-                paddingTop: "2%",
-                marginTop: "8%",
-                marginBottom: "10%",
-                display: "none",
-              }}
             >
-              <h1>Operations</h1>
+              <h1
+                style={{
+                  marginBottom: "5%",
+                  fontSize: "2rem",
+                  fontWeight: "bolder",
+                }}
+              >
+                Create
+              </h1>
               <Form.Group controlId="clientId">
                 <Form.Label>Client ID</Form.Label>
                 <Form.Control
@@ -224,23 +198,14 @@ class Operations extends React.Component {
                 </Form.Control.Feedback>
               </Form.Group>
               <Button id="add-button" type="submit">
-                Submit
+                Create
               </Button>
             </Form>
-
-            <Canvas />
-
-            {this.state.ops && (
-              <Table
-                name="Operations"
-                columns={this.columns}
-                products={this.state.ops}
-              />
-            )}
-          </Container>
+          </div>
         </div>
-      </>
+      </div>
     );
   }
 }
-export default Operations;
+
+export default Canvas;

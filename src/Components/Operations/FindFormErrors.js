@@ -4,8 +4,8 @@ const findFormErrors = (state) => {
   if (state.clientId === "") {
     errors.clientId = "Enter a valid ID";
   }
-  if (state.contratReferenceId === "") {
-    errors.contratReferenceId = "Enter a valid ID";
+  if (state.contractReferenceId === "") {
+    errors.contractReferenceId = "Enter a valid ID";
   }
   if (state.consultantId === "") {
     errors.consultantId = "Enter a valid ID";

@@ -61,7 +61,7 @@ class Users extends React.Component {
       console.log(temp);
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/register", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -71,10 +71,10 @@ class Users extends React.Component {
         .then(() => {
           this.setState(() => ({
             prefix: "",
-            first_name: "",
+            firstName: "",
             surname: "",
-            other_names: "",
-            department_id: "",
+            otherNames: "",
+            departmentId: "",
             roles: "",
             password: "",
             departments: [],
@@ -110,11 +110,11 @@ class Users extends React.Component {
                 backgroundColor: "white",
                 borderRadius: "0.5%",
                 boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-                padding: "2% 2% 1% 4%",
+                padding: "1% 0% 1% 4%",
                 width: "85%",
               }}
             >
-              <h2>USERS</h2>
+              <h2 style={{ marginBottom: "0" }}>USERS</h2>
             </Container>
 
             <Form
@@ -123,7 +123,7 @@ class Users extends React.Component {
               noValidate
               style={{
                 marginLeft: "15%",
-                marginTop: "4%",
+                marginTop: "1%",
                 marginBottom: "10%",
                 backgroundColor: "white",
                 borderRadius: "0.5%",
