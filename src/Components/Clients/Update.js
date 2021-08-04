@@ -7,14 +7,10 @@ class Update extends React.Component {
   constructor() {
     super();
     this.state = {
-      clientId: "",
-      contractReferenceId: "",
-      consultantId: "",
-      startDate: "",
-      endDate: "",
-      projectStatusId: "",
-      commission: "",
-      withHoldingTax: "",
+      firstName: "",
+      surname: "",
+      otherNames: "",
+      clientCategoryId: "",
       errors: {},
     };
   }
@@ -35,11 +31,10 @@ class Update extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
-      console.log(temp);
 
       axios
         .put(
-          `https://avcs-platform.herokuapp.com/operations/${this.props.id}`,
+          `https://avcs-platform.herokuapp.com/clients/${this.props.row.id}`,
           temp,
           {
             headers: {
@@ -51,6 +46,13 @@ class Update extends React.Component {
         )
         .then(() => {
           alert("Updated succesfully");
+          this.setState(() => ({
+            firstName: "",
+            surname: "",
+            otherNames: "",
+            clientCategoryId: "",
+            errors: {},
+          }));
           event.target.className = "needs-validation";
         })
         .catch((error) => console.log(error));
@@ -67,24 +69,23 @@ class Update extends React.Component {
 
   fetchData = () => {
     axios
-      .get(
-        "https://avcs-platform.herokuapp.com/operations/" + this.props.id.id,
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              localStorage.getItem("access-token").replace(/"/g, ""),
-          },
-        }
-      )
+      .get("https://avcs-platform.herokuapp.com/clients/" + this.props.row.id, {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
       .then((res) => {
-        const temp = res.data;
         this.setState((prevState) => ({
           ...prevState,
-          ...temp,
+          ...res.data,
         }));
       })
       .catch((error) => console.log(error));
+  };
+
+  item = () => {
+    console.log(this.state);
   };
 
   componentDidMount = () => {
@@ -101,6 +102,7 @@ class Update extends React.Component {
           data-bs-target="#offcanvasRight1"
           aria-controls="offcanvasRight"
           style={{ marginLeft: "1%" }}
+          onClick={this.item}
         >
           Update
         </button>
@@ -141,101 +143,67 @@ class Update extends React.Component {
               >
                 Update
               </h1>
-              <Form.Group style={{ marginTop: "5%" }} controlId="clientId">
-                <Form.Label>Client ID</Form.Label>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="firstname">
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.clientId}
+                  value={this.state.firstName}
                   onChange={this.changeHandler}
-                  name="clientId"
+                  name="firstName"
                   required
-                  isInvalid={this.state.errors.clientId}
-                  placeholder="Client ID"
+                  placeholder="First Name"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.clientId}
+                  {this.state.firstName}
                 </Form.Control.Feedback>
               </Form.Group>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="surname">
+                <Form.Label>Surname</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.surname}
+                  onChange={this.changeHandler}
+                  name="surname"
+                  required
+                  placeholder="Surname"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.surname}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="othernames">
+                <Form.Label>Other Names</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.otherNames}
+                  onChange={this.changeHandler}
+                  name="otherNames"
+                  required
+                  placeholder="Other Names"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.otherNames}
+                </Form.Control.Feedback>
+              </Form.Group>
+
               <Form.Group
                 style={{ marginTop: "5%" }}
-                controlId="contractReferenceId"
+                controlId="clientcategoryid"
               >
-                <Form.Label>Contract reference ID</Form.Label>
+                <Form.Label>Client category ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.contractReferenceId}
+                  value={this.state.clientCategoryId}
                   onChange={this.changeHandler}
-                  name="contractReferenceId"
+                  name="clientCategoryId"
                   required
-                  isInvalid={this.state.errors.contractReferenceId}
-                  placeholder="Contract reference ID"
+                  placeholder="Enter ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.contractReferenceId}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="consultantId">
-                <Form.Label>Consultant ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.consultantId}
-                  onChange={this.changeHandler}
-                  name="consultantId"
-                  required
-                  isInvalid={this.state.errors.consultantId}
-                  placeholder="Consultant ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.consultantId}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="startDate">
-                <Form.Label>Start date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.startDate}
-                  onChange={this.changeHandler}
-                  name="startDate"
-                  required
-                  isInvalid={this.state.errors.startDate}
-                  placeholder="Start Date"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.startDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="endDate">
-                <Form.Label>End date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.endDate}
-                  onChange={this.changeHandler}
-                  name="endDate"
-                  id="defaultFormRegisterPasswordEx4"
-                  placeholder="Date Of Birth"
-                  required
-                  isInvalid={this.state.errors.endDate}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.endDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group
-                style={{ marginTop: "5%" }}
-                controlId="projectStatusId"
-              >
-                <Form.Label>Project status ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.projectStatusId}
-                  onChange={this.changeHandler}
-                  name="projectStatusId"
-                  placeholder="Project Status ID"
-                  required
-                  isInvalid={this.state.errors.projectStatusId}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.projectStatusId}
+                  {this.state.clientCategoryId}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -253,7 +221,7 @@ class Update extends React.Component {
                   type="reset"
                   onClick={this.reset}
                 >
-                  Reset
+                  Reset {this.state.surname}
                 </Button>
               </div>
             </Form>

@@ -1,53 +1,54 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
-} from "react-router-dom";
-import Operations from "./Components/Operations/Operations";
-import Login from "./Components/Login/Login";
-import MaritalStatus from "./Components/MaritalStatus/MaritalStatus";
-import AnnualLeave from "./Components/AnnualLeave/AnnualLeave";
-import AnnualLeaveDepartment from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments";
-import AnnualLeaveMds from "./Components/AnnualLeaveMds/AnnualLeaveMds";
-import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders/AnnualLeaveRecommenders";
-import Approvals from "./Components/Approvals/Approvals";
-import BioData from "./Components/BioData/BioData";
-import ClientCategories from "./Components/ClientCategories/ClientCategories";
-import Clients from "./Components/Clients/Clients";
-import ConsultantFirmConsultants from "./Components/ConsultantFirmConsultants/ConsultantFirmConsultants";
-import ConsultantCategories from "./Components/ConsultantCategories/ConsultantCategories";
-import ConsultantFirms from "./Components/ConsultantFirms/ConsultantFirms";
-import Consultants from "./Components/Consultants/Consultants";
-import Contracts from "./Components/Contracts/Contracts";
-import CorporateClients from "./Components/CorporateClients/CorporateClients";
-import Departments from "./Components/Departments/Departments";
-import IndividualClients from "./Components/IndividualClients/IndividualClients";
-import IndividualConsultants from "./Components/IndividualConsultants/IndividualConsultants";
-import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEvaluations";
-import Invoices from "./Components/Invoices/Invoices";
-import NextOfKin from "./Components/NextOfKin/NextOfKin";
-import Payments from "./Components/Payments/Payments";
-import ProjectStatus from "./Components/ProjectStatus/ProjectStatus";
-import Prospects from "./Components/Prospects/Prospects";
-import Qualifications from "./Components/Qualifications/Qualifications";
-import Quotation from "./Components/Quotation/Quotation";
-import QuotationDetails from "./Components/QuotationDetails/QuotationDetails";
-import Receipts from "./Components/Receipts/Receipts";
-import Requisitions from "./Components/Requisitions/Requisitions";
-import StaffVerifications from "./Components/StaffVerifications/StaffVerifications";
-import UserDetails1 from "./Components/UserDetails1/UserDetails1";
-import UserDetails2 from "./Components/UserDetails2/UserDetails2";
-import UserRelations from "./Components/UserRelations/UserRelations";
-import Users from "./Components/Users/Users";
+  Redirect
+} from "react-router-dom"
+import Operations from "./Components/Operations/Operations"
+import Login from "./Components/Login/Login"
+import MaritalStatus from "./Components/MaritalStatus/MaritalStatus"
+import AnnualLeave from "./Components/AnnualLeave/AnnualLeave"
+import AnnualLeaveDepartment from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments"
+import AnnualLeaveMds from "./Components/AnnualLeaveMds/AnnualLeaveMds"
+import AnnualLeaveRecommenders from "./Components/AnnualLeaveRecommenders/AnnualLeaveRecommenders"
+import Approvals from "./Components/Approvals/Approvals"
+import BioData from "./Components/BioData/BioData"
+import ClientCategories from "./Components/ClientCategories/ClientCategories"
+import Clients from "./Components/Clients/Clients"
+import ConsultantFirmConsultants from "./Components/ConsultantFirmConsultants/ConsultantFirmConsultants"
+import ConsultantCategories from "./Components/ConsultantCategories/ConsultantCategories"
+import ConsultantFirms from "./Components/ConsultantFirms/ConsultantFirms"
+import Consultants from "./Components/Consultants/Consultants"
+import Contracts from "./Components/Contracts/Contracts"
+import CorporateClients from "./Components/CorporateClients/CorporateClients"
+import Departments from "./Components/Departments/Departments"
+import IndividualClients from "./Components/IndividualClients/IndividualClients"
+import IndividualConsultants from "./Components/IndividualConsultants/IndividualConsultants"
+import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEvaluations"
+import Invoices from "./Components/Invoices/Invoices"
+import NextOfKin from "./Components/NextOfKin/NextOfKin"
+import Payments from "./Components/Payments/Payments"
+import ProjectStatus from "./Components/ProjectStatus/ProjectStatus"
+import Prospects from "./Components/Prospects/Prospects"
+import Qualifications from "./Components/Qualifications/Qualifications"
+import Quotation from "./Components/Quotation/Quotation"
+import QuotationDetails from "./Components/QuotationDetails/QuotationDetails"
+import Receipts from "./Components/Receipts/Receipts"
+import Requisitions from "./Components/Requisitions/Requisitions"
+import StaffVerifications from "./Components/StaffVerifications/StaffVerifications"
+import UserDetails1 from "./Components/UserDetails1/UserDetails1"
+import UserDetails2 from "./Components/UserDetails2/UserDetails2"
+import UserRelations from "./Components/UserRelations/UserRelations"
+import Users from "./Components/Users/Users"
+import UsersUpdate from "./Components/Users/Update"
 
-import ProtectedRoute from "./Components/ProtectedRoutes";
-import AllRoute from "./Components/AllRoute";
-import HrRoute from "./Components/HrRoute";
-import HrSalesRoute from "./Components/HrSalesRoute";
-import FinanceRoute from "./Components/FinanceRoute";
-import SalesRoute from "./Components/SalesRoute";
+import ProtectedRoute from "./Components/ProtectedRoutes"
+import AllRoute from "./Components/AllRoute"
+import HrRoute from "./Components/HrRoute"
+import HrSalesRoute from "./Components/HrSalesRoute"
+import FinanceRoute from "./Components/FinanceRoute"
+import SalesRoute from "./Components/SalesRoute"
 
 function App() {
   return (
@@ -57,14 +58,15 @@ function App() {
         <Route
           path="/logout"
           render={() => {
-            localStorage.removeItem("access-token");
-            localStorage.removeItem("role");
-            return <Redirect to="/" />;
+            localStorage.removeItem("access-token")
+            localStorage.removeItem("role")
+            return <Redirect to="/" />
           }}
         />
         <AllRoute path="/annualleave" component={AnnualLeave} exact />
         <AllRoute path="/requisitions" component={Requisitions} exact />
         <HrRoute path="/users" component={Users} exact />
+        <HrRoute path="/users/update" component={UsersUpdate} />
         <HrRoute path="/consultants" component={Consultants} exact />
         <HrSalesRoute path="/clients" component={Clients} exact />
         <HrRoute
@@ -156,7 +158,7 @@ function App() {
         <ProtectedRoute path="/userrelations" component={UserRelations} exact />
       </Switch>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

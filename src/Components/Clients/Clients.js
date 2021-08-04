@@ -1,45 +1,87 @@
-import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
-import axios from "axios";
-import findFormErrors from "./FindFormErrors";
-import AppBar from "../AppBar";
-import AdminNav from "../AdminNav";
-import HrNav from "../HrNav";
-import SalesNav from "../SalesNav";
+import React from "react"
+import { Button, Container } from "react-bootstrap"
+import axios from "axios"
+import findFormErrors from "./FindFormErrors"
+import AppBar from "../AppBar"
+import AdminNav from "../AdminNav"
+import HrNav from "../HrNav"
+import SalesNav from "../SalesNav"
+import Table from "../Table"
+import Update from "./Update"
+import Canvas from "./Canvas"
 
 class Clients extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       firstName: "",
       surname: "",
       otherNames: "",
       clientCategoryId: "",
-      errors: {},
-    };
+      clients: [],
+      errors: {}
+    }
+  }
+
+  columns = [
+    { dataField: "firstName", text: "Firstname" },
+    { dataField: "surname", text: "Surname" },
+    { dataField: "otherNames", text: "Other names" },
+    {
+      // dataField: "id",
+      text: "Actions",
+      formatter: (cell, row) => {
+        return (
+          <span style={{ display: "flex" }}>
+            <Update row={row} />
+
+            <Button
+              onClick={() => alert("Are you sure you want to delete this?")}
+            >
+              Delete
+            </Button>
+          </span>
+        )
+      }
+    }
+  ]
+
+  fetchUsers = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+        }
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          clients: res.data
+        }))
+      })
+      .catch((error) => console.log(error))
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated";
+      event.target.className += " was-validated"
 
-      let temp = { ...this.state };
-      delete temp.errors;
-      console.log(temp);
+      let temp = { ...this.state }
+      delete temp.errors
 
       axios
         .post("https://avcs-platform.herokuapp.com/clients", temp, {
           headers: {
             Authorization:
-              "Bearer " +
-              localStorage.getItem("access-token").replace(/"/g, ""),
-          },
+              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+          }
         })
         .then(() => {
           this.setState(() => ({
@@ -47,21 +89,25 @@ class Clients extends React.Component {
             surname: "",
             otherNames: "",
             clientCategoryId: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
+            errors: {}
+          }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = findFormErrors(this.state);
+      let errors = findFormErrors(this.state)
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors
+        }
+      })
     }
-  };
+  }
+
+  componentDidMount() {
+    this.fetchUsers()
+  }
 
   render() {
     return (
@@ -73,87 +119,19 @@ class Clients extends React.Component {
           {this.props.role === "Sales" && <SalesNav />}
 
           <Container>
-            <Form
-              className="needs-validation"
-              onSubmit={this.submitHandler}
-              noValidate
-              style={{
-                marginLeft: "15%",
-                paddingTop: "2%",
-                marginTop: "8%",
-                marginBottom: "10%",
-              }}
-            >
-              <h1>Clients</h1>
+            <Canvas />
 
-              <Form.Group controlId="firstname">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.firstName}
-                  onChange={this.changeHandler}
-                  name="firstName"
-                  required
-                  placeholder="First Name"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.firstName}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="surname">
-                <Form.Label>Surname</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.surname}
-                  onChange={this.changeHandler}
-                  name="surname"
-                  required
-                  placeholder="Surname"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.surname}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="othernames">
-                <Form.Label>Other Names</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.otherNames}
-                  onChange={this.changeHandler}
-                  name="otherNames"
-                  required
-                  placeholder="Other Names"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.otherNames}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="clientcategoryid">
-                <Form.Label>Client category ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.clientCategoryId}
-                  onChange={this.changeHandler}
-                  name="clientCategoryId"
-                  required
-                  placeholder="Enter ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.clientCategoryId}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Button id="add-button" type="submit">
-                Submit
-              </Button>
-            </Form>
+            {this.state.clients && (
+              <Table
+                name="Clients"
+                columns={this.columns}
+                products={this.state.clients}
+              />
+            )}
           </Container>
         </div>
       </>
-    );
+    )
   }
 }
-export default Clients;
+export default Clients

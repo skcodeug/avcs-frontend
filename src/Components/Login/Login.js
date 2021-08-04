@@ -20,20 +20,12 @@ class Login extends React.Component {
     if (Object.keys(findFormErrors(this.state)).length === 0) {
       event.target.className += " was-validated";
 
-      const token = Buffer.from(
-        `${this.state.email}:${this.state.password}`,
-        "utf8"
-      ).toString("base64");
-
       let temp = { ...this.state };
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/login", temp, {
-          headers: { Authorization: `Basic ${token}` },
-        })
+        .post("https://avcs-platform.herokuapp.com/login", temp)
         .then((res) => {
-          console.log(res);
           localStorage.setItem(
             "access-token",
             JSON.stringify(res.data.access_token)

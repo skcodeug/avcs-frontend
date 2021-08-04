@@ -2,16 +2,16 @@ const findFormErrors = (state) => {
   const errors = {};
   const alphaRegex = /^[a-zA-Z\s]+$/;
 
-  if (alphaRegex.test(state.firstName)) {
+  if (alphaRegex.test(state.firstName) === false) {
     errors.firstName = "Enter a valid name";
   }
-  if (alphaRegex.test(state.surname)) {
+  if (alphaRegex.test(state.surname) === false) {
     errors.surname = "Enter a valid name";
   }
-  if (alphaRegex.test(state.otherNames)) {
+  if (alphaRegex.test(state.otherNames) === false) {
     errors.otherNames = "Enter a valid name";
   }
-  if (alphaRegex.test(state.clientCategoryId)) {
+  if (alphaRegex.test(state.clientCategoryId) === false) {
     errors.clientCategoryId = "Enter valid ID";
   }
 

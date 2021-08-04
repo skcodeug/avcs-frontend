@@ -7,34 +7,26 @@ class Canvas extends React.Component {
   constructor() {
     super();
     this.state = {
-      clientId: "",
-      contractReferenceId: "",
-      consultantId: "",
-      startDate: "",
-      endDate: "",
-      projectStatusId: "",
-      ops: [],
-      errors: {},
-    };
-  }
-
-  reset = () => {
-    this.setState((prevState) => ({
-      ...prevState,
-      prefix: "",
       firstName: "",
       surname: "",
       otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      clientCategoryId: "",
+      errors: {},
+    };
+  }
+  changeHandler = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  reset = () => {
+    this.setState(() => ({
+      firstName: "",
+      surname: "",
+      otherNames: "",
+      clientCategoryId: "",
       errors: {},
     }));
     document.getElementById("btn-close").click();
-  };
-
-  changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
   };
 
   submitHandler = (event) => {
@@ -47,7 +39,7 @@ class Canvas extends React.Component {
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/operations", temp, {
+        .post("https://avcs-platform.herokuapp.com/clients", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -56,13 +48,10 @@ class Canvas extends React.Component {
         })
         .then(() => {
           this.setState(() => ({
-            clientId: "",
-            contractReferenceId: "",
-            consultantId: "",
-            startDate: "",
-            endDate: "",
-            projectStatusId: "",
-            ops: [],
+            firstName: "",
+            surname: "",
+            otherNames: "",
+            clientCategoryId: "",
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -70,12 +59,10 @@ class Canvas extends React.Component {
         .catch((error) => console.log(error));
     } else {
       let errors = findFormErrors(this.state);
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          errors: errors,
-        };
-      });
+      this.setState((prevState) => ({
+        ...prevState,
+        errors,
+      }));
     }
   };
 
@@ -129,101 +116,67 @@ class Canvas extends React.Component {
               >
                 Create
               </h1>
-              <Form.Group style={{ marginTop: "5%" }} controlId="clientId">
-                <Form.Label>Client ID</Form.Label>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="firstname">
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.clientId}
+                  value={this.state.firstName}
                   onChange={this.changeHandler}
-                  name="clientId"
+                  name="firstName"
                   required
-                  isInvalid={this.state.errors.clientId}
-                  placeholder="Client ID"
+                  placeholder="First Name"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.clientId}
+                  {this.state.errors.firstName}
                 </Form.Control.Feedback>
               </Form.Group>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="surname">
+                <Form.Label>Surname</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.surname}
+                  onChange={this.changeHandler}
+                  name="surname"
+                  required
+                  placeholder="Surname"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.surname}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group style={{ marginTop: "5%" }} controlId="othernames">
+                <Form.Label>Other Names</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={this.state.otherNames}
+                  onChange={this.changeHandler}
+                  name="otherNames"
+                  required
+                  placeholder="Other Names"
+                />
+                <Form.Control.Feedback type="invalid">
+                  {this.state.errors.otherNames}
+                </Form.Control.Feedback>
+              </Form.Group>
+
               <Form.Group
                 style={{ marginTop: "5%" }}
-                controlId="contractReferenceId"
+                controlId="clientcategoryid"
               >
-                <Form.Label>Contract reference ID</Form.Label>
+                <Form.Label>Client category ID</Form.Label>
                 <Form.Control
                   type="text"
-                  value={this.state.contractReferenceId}
+                  value={this.state.clientCategoryId}
                   onChange={this.changeHandler}
-                  name="contractReferenceId"
+                  name="clientCategoryId"
                   required
-                  isInvalid={this.state.errors.contractReferenceId}
-                  placeholder="Contract reference ID"
+                  placeholder="Enter ID"
                 />
                 <Form.Control.Feedback type="invalid">
-                  {this.state.errors.contractReferenceId}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="consultantId">
-                <Form.Label>Consultant ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.consultantId}
-                  onChange={this.changeHandler}
-                  name="consultantId"
-                  required
-                  isInvalid={this.state.errors.consultantId}
-                  placeholder="Consultant ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.consultantId}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="startDate">
-                <Form.Label>Start date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.startDate}
-                  onChange={this.changeHandler}
-                  name="startDate"
-                  required
-                  isInvalid={this.state.errors.startDate}
-                  placeholder="Start Date"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.startDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group style={{ marginTop: "5%" }} controlId="endDate">
-                <Form.Label>End date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.endDate}
-                  onChange={this.changeHandler}
-                  name="endDate"
-                  id="defaultFormRegisterPasswordEx4"
-                  placeholder="Date Of Birth"
-                  required
-                  isInvalid={this.state.errors.endDate}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.endDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group
-                style={{ marginTop: "5%" }}
-                controlId="projectStatusId"
-              >
-                <Form.Label>Project status ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.projectStatusId}
-                  onChange={this.changeHandler}
-                  name="projectStatusId"
-                  placeholder="Project Status ID"
-                  required
-                  isInvalid={this.state.errors.projectStatusId}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.projectStatusId}
+                  {this.state.errors.clientCategoryId}
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -233,7 +186,7 @@ class Canvas extends React.Component {
                   type="submit"
                   style={{ marginRight: "5%" }}
                 >
-                  Create
+                  Submit
                 </Button>
                 <Button
                   variant="secondary"
