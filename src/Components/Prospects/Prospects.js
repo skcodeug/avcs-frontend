@@ -21,6 +21,7 @@ class Prospects extends React.Component {
   columns = [
     { dataField: "clientId", text: "Client ID" },
     { dataField: "date", text: "Date" },
+    { dataField: "reference", text: "Reference" },
     {
       dataField: "follow",
       text: "Actions",
@@ -82,7 +83,7 @@ class Prospects extends React.Component {
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          users: res.data
+          prospects: res.data
         }))
       })
       .catch((error) => console.log(error))
@@ -118,4 +119,4 @@ class Prospects extends React.Component {
     )
   }
 }
-export default Prospects
+export default withRouter(Prospects)

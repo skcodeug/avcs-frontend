@@ -32,6 +32,7 @@ import Payments from "./Components/Payments/Payments"
 import PaymentsUpdate from "./Components/Payments/Update"
 import ProjectStatus from "./Components/ProjectStatus/ProjectStatus"
 import Prospects from "./Components/Prospects/Prospects"
+import ProspectsUpdate from "./Components/Prospects/Update"
 import Qualifications from "./Components/Qualifications/Qualifications"
 import Quotation from "./Components/Quotation/Quotation"
 import QuotationDetails from "./Components/QuotationDetails/QuotationDetails"
@@ -92,6 +93,11 @@ function App() {
           exact
         />
         <SalesRoute path="/prospects" component={Prospects} exact />
+        <SalesRoute
+          path="/prospects/update"
+          component={ProspectsUpdate}
+          exact
+        />
         <SalesRoute path="/contracts" component={Contracts} exact />
         <SalesRoute path="/quotation" component={Quotation} exact />
         <SalesRoute path="/operations" component={Operations} />
