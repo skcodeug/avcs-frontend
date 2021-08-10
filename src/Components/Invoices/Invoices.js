@@ -1,141 +1,90 @@
-import React from "react";
-import { Card, Col, Container, Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import axios from "axios";
-import findFormErrors from "./FindFormErrors";
-import AppBar from "../AppBar";
-import AdminNav from "../AdminNav";
+import React from "react"
+import { Container, Button } from "react-bootstrap"
+import AppBar from "../AppBar"
+import AdminNav from "../AdminNav"
+import Table from "../Table"
+import Canvas from "./Canvas"
+import DeleteBtn from "./Delete"
+import { withRouter } from "react-router-dom"
+import axios from "axios"
 
 class Invoices extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      date: "",
-      contractReferenceId: "",
-      clientId: "",
-      errors: {},
-    };
+      invoices: []
+    }
   }
 
-  changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  submitHandler = (event) => {
-    event.preventDefault();
-
-    if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated";
-
-      let temp = { ...this.state };
-      delete temp.errors;
-      console.log(temp);
-
-      axios
-        .post("https://avcs-platform.herokuapp.com/invoices", temp, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        })
-        .then(() => {
-          this.setState(() => ({
-            date: "",
-            contractReferenceId: "",
-            clientId: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
-        })
-        .catch((error) => console.log(error));
-    } else {
-      let errors = findFormErrors(this.state);
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          errors: errors,
-        };
-      });
+  columns = [
+    { dataField: "contractReferenceId", text: "Contract Ref-ID" },
+    { dataField: "clientId", text: "Client ID" },
+    { dataField: "date", text: "Date" },
+    {
+      dataField: "follow",
+      text: "Actions",
+      formatter: (cell, row) => {
+        return (
+          <span style={{ display: "flex" }}>
+            <Button onClick={() => this.redirect(row.id)}>update</Button>
+            <DeleteBtn id={row.id} />
+          </span>
+        )
+      }
     }
-  };
+  ]
+
+  redirect = (id) => {
+    this.props.history.push("/invoices/update/", { id: id })
+  }
+
+  fetchInvoices = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/invoices", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+        }
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          invoices: res.data
+        }))
+      })
+      .catch((error) => console.log(error))
+  }
+
+  componentDidMount() {
+    this.fetchInvoices()
+  }
 
   render() {
     return (
       <>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "rgb(247, 249, 252)",
+            minHeight: "100vh"
+          }}
+        >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Card.Body>
-              <Form
-                className="needs-validation"
-                onSubmit={this.submitHandler}
-                noValidate
-                style={{
-                  marginLeft: "15%",
-                  paddingTop: "2%",
-                  marginTop: "8%",
-                  marginBottom: "10%",
-                }}
-              >
-                <h1>Invoices</h1>
-                <Form.Row>
-                  <Form.Group as={Col} controlId="date">
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control
-                      type="date"
-                      value={this.state.date}
-                      onChange={this.changeHandler}
-                      name="date"
-                      required
-                      isInvalid={this.state.errors.date}
-                      placeholder="Select date"
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {this.state.errors.date}
-                    </Form.Control.Feedback>
-                  </Form.Group>
+            <Canvas />
 
-                  <Form.Group as={Col} controlId="contractReferenceId">
-                    <Form.Label>Contract reference ID</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={this.state.contractReferenceId}
-                      onChange={this.changeHandler}
-                      name="contractReferenceId"
-                      required
-                      isInvalid={this.state.errors.contractReferenceId}
-                      placeholder="Enter contract reference ID"
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {this.state.errors.contractReferenceId}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group as={Col} controlId="clientId">
-                    <Form.Label>Client ID</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={this.state.clientId}
-                      onChange={this.changeHandler}
-                      name="clientId"
-                      required
-                      isInvalid={this.state.errors.clientId}
-                      placeholder="Enter a valid ID"
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {this.state.errors.clientId}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Form.Row>
-                <Button id="add-button" type="submit">
-                  Submit
-                </Button>
-              </Form>
-            </Card.Body>
+            {this.state.invoices && (
+              <Table
+                name="Invoices"
+                columns={this.columns}
+                products={this.state.invoices}
+              />
+            )}
           </Container>
         </div>
       </>
-    );
+    )
   }
 }
-export default Invoices;
+export default withRouter(Invoices)

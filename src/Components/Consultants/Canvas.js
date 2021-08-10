@@ -7,14 +7,10 @@ class Canvas extends React.Component {
   constructor() {
     super()
     this.state = {
-      prefix: "",
       firstName: "",
       surname: "",
       otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      departments: [],
+      consultantCategoryId: "",
       errors: {}
     }
   }
@@ -22,42 +18,16 @@ class Canvas extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
-      })
-      .catch((error) => console.log(error))
-  }
-
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
       firstName: "",
       surname: "",
       otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      consultantCategoryId: "",
       errors: {}
     }))
     document.getElementById("btn-close").click()
-  }
-
-  componentDidMount() {
-    this.fetchDropDownData()
   }
 
   submitHandler = (event) => {
@@ -68,10 +38,9 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.departments
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/consultants", temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -80,13 +49,10 @@ class Canvas extends React.Component {
         .then(() => {
           alert("Created successfully!")
           this.setState(() => ({
-            prefix: "",
             firstName: "",
             surname: "",
             otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
+            consultantCategoryId: "",
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -158,26 +124,6 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="prefix"
-                >
-                  <Form.Label>Prefix</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.prefix}
-                    onChange={this.changeHandler}
-                    name="prefix"
-                    required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
                   controlId="firstname"
                 >
                   <Form.Label>First Name</Form.Label>
@@ -194,9 +140,7 @@ class Canvas extends React.Component {
                     {this.state.errors.firstName}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Row>
 
-              <Row>
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
@@ -210,13 +154,15 @@ class Canvas extends React.Component {
                     name="surname"
                     required
                     isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    placeholder="e.g Doe"
                   />
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.surname}
                   </Form.Control.Feedback>
                 </Form.Group>
+              </Row>
 
+              <Row>
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
@@ -230,87 +176,30 @@ class Canvas extends React.Component {
                     name="otherNames"
                     required
                     isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
+                    placeholder="e.g Steve"
                   />
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.otherNames}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="departmentid"
-                >
-                  <Form.Label>Department ID</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
-                    onChange={this.changeHandler}
-                    name="departmentId"
-                    required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
 
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="password"
+                  controlId="consultantCategoryId"
                 >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="roles"
-                >
-                  <Form.Label>Roles</Form.Label>
+                  <Form.Label>Consultant Category ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    value={this.state.consultantCategoryId}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="consultantCategoryId"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.consultantCategoryId}
+                    placeholder="e.g I23c2D"
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.consultantCategoryId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

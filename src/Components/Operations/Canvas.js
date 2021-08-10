@@ -7,14 +7,13 @@ class Canvas extends React.Component {
   constructor() {
     super()
     this.state = {
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      departments: [],
+      clientId: "",
+      contractReferenceId: "",
+      consultantId: "",
+      startDate: "",
+      endDate: "",
+      projectStatusId: "",
+      ops: [],
       errors: {}
     }
   }
@@ -24,7 +23,7 @@ class Canvas extends React.Component {
 
   fetchDropDownData = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
+      .get("https://avcs-platform.herokuapp.com/operations", {
         headers: {
           Authorization:
             "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -34,7 +33,7 @@ class Canvas extends React.Component {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data
+            ops: res.data
           }
         })
       })
@@ -44,13 +43,13 @@ class Canvas extends React.Component {
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      clientId: "",
+      contractReferenceId: "",
+      consultantId: "",
+      startDate: "",
+      endDate: "",
+      projectStatusId: "",
+      ops: [],
       errors: {}
     }))
     document.getElementById("btn-close").click()
@@ -68,10 +67,10 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.departments
+      delete temp.ops
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/operations", temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -80,13 +79,13 @@ class Canvas extends React.Component {
         .then(() => {
           alert("Created successfully!")
           this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
+            clientId: "",
+            contractReferenceId: "",
+            consultantId: "",
+            startDate: "",
+            endDate: "",
+            projectStatusId: "",
+            ops: [],
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -158,40 +157,39 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="prefix"
+                  controlId="clientId"
                 >
-                  <Form.Label>Prefix</Form.Label>
+                  <Form.Label>Client ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.prefix}
+                    value={this.state.clientId}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="clientId"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.clientId}
+                    placeholder="Client ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.clientId}
                   </Form.Control.Feedback>
                 </Form.Group>
-
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="firstname"
+                  controlId="contractReferenceId"
                 >
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label>Contract reference ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.contractReferenceId}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="contractReferenceId"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.contractReferenceId}
+                    placeholder="Contract reference ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
+                    {this.state.errors.contractReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -200,40 +198,39 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="surname"
+                  controlId="consultantId"
                 >
-                  <Form.Label>Surname</Form.Label>
+                  <Form.Label>Consultant ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.surname}
+                    value={this.state.consultantId}
                     onChange={this.changeHandler}
-                    name="surname"
+                    name="consultantId"
                     required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    isInvalid={this.state.errors.consultantId}
+                    placeholder="Consultant ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
+                    {this.state.errors.consultantId}
                   </Form.Control.Feedback>
                 </Form.Group>
-
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="othernames"
+                  controlId="startDate"
                 >
-                  <Form.Label>Other Names</Form.Label>
+                  <Form.Label>Start date</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
+                    type="date"
+                    value={this.state.startDate}
                     onChange={this.changeHandler}
-                    name="otherNames"
+                    name="startDate"
                     required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
+                    isInvalid={this.state.errors.startDate}
+                    placeholder="Start Date"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
+                    {this.state.errors.startDate}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -242,75 +239,40 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="departmentid"
+                  controlId="endDate"
                 >
-                  <Form.Label>Department ID</Form.Label>
+                  <Form.Label>End date</Form.Label>
                   <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
+                    type="date"
+                    value={this.state.endDate}
                     onChange={this.changeHandler}
-                    name="departmentId"
+                    name="endDate"
+                    id="defaultFormRegisterPasswordEx4"
+                    placeholder="Date Of Birth"
                     required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="password"
-                >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
+                    isInvalid={this.state.errors.endDate}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
+                    {this.state.errors.endDate}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Row>
-
-              <Row>
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="roles"
+                  controlId="projectStatusId"
                 >
-                  <Form.Label>Roles</Form.Label>
+                  <Form.Label>Project status ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    value={this.state.projectStatusId}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="projectStatusId"
+                    placeholder="Project Status ID"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.projectStatusId}
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.projectStatusId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

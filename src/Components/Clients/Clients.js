@@ -1,25 +1,20 @@
 import React from "react"
 import { Button, Container } from "react-bootstrap"
 import axios from "axios"
-import findFormErrors from "./FindFormErrors"
 import AppBar from "../AppBar"
 import AdminNav from "../AdminNav"
 import HrNav from "../HrNav"
 import SalesNav from "../SalesNav"
 import Table from "../Table"
-import Update from "./Update"
 import Canvas from "./Canvas"
+import DeleteBtn from "./Delete"
+import { withRouter } from "react-router-dom"
 
 class Clients extends React.Component {
   constructor() {
     super()
     this.state = {
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      clientCategoryId: "",
-      clients: [],
-      errors: {}
+      clients: []
     }
   }
 
@@ -33,13 +28,8 @@ class Clients extends React.Component {
       formatter: (cell, row) => {
         return (
           <span style={{ display: "flex" }}>
-            <Update row={row} />
-
-            <Button
-              onClick={() => alert("Are you sure you want to delete this?")}
-            >
-              Delete
-            </Button>
+            <Button onClick={() => this.redirect(row.id)}>update</Button>
+            <DeleteBtn id={row.id} />
           </span>
         )
       }
@@ -63,46 +53,8 @@ class Clients extends React.Component {
       .catch((error) => console.log(error))
   }
 
-  changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  submitHandler = (event) => {
-    event.preventDefault()
-
-    if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
-
-      let temp = { ...this.state }
-      delete temp.errors
-
-      axios
-        .post("https://avcs-platform.herokuapp.com/clients", temp, {
-          headers: {
-            Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
-        })
-        .then(() => {
-          this.setState(() => ({
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            clientCategoryId: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
-        })
-        .catch((error) => console.log(error))
-    } else {
-      let errors = findFormErrors(this.state)
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          errors
-        }
-      })
-    }
+  redirect = (id) => {
+    this.props.history.push("/clients/update/", { id: id })
   }
 
   componentDidMount() {
@@ -134,4 +86,4 @@ class Clients extends React.Component {
     )
   }
 }
-export default Clients
+export default withRouter(Clients)

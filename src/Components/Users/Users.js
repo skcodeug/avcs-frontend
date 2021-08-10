@@ -17,10 +17,6 @@ class Users extends React.Component {
     }
   }
 
-  redirect = (id) => {
-    this.props.history.push("/users/update/", { id: id })
-  }
-
   columns = [
     { dataField: "firstName", text: "Firstname" },
     { dataField: "surname", text: "Surname" },
@@ -54,6 +50,10 @@ class Users extends React.Component {
         }))
       })
       .catch((error) => console.log(error))
+  }
+
+  redirect = (id) => {
+    this.props.history.push("/users/update/", { id: id })
   }
 
   componentDidMount() {

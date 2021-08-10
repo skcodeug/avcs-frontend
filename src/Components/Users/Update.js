@@ -12,7 +12,6 @@ class Update extends React.Component {
     super(props)
     this.state = {
       departments: [],
-      status: false,
       errors: {}
     }
 
@@ -37,8 +36,7 @@ class Update extends React.Component {
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ...res.data,
-          status: true
+          ...res.data
         }))
       })
       .catch((error) => console.log(error))
@@ -71,7 +69,6 @@ class Update extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.status
       let id = this.props.location.state.id
 
       axios
@@ -83,17 +80,6 @@ class Update extends React.Component {
         })
         .then(() => {
           alert("Updated succesfully")
-          this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
-            departments: [],
-            errors: {}
-          }))
           event.target.className = "needs-validation"
           this.props.history.push("/users")
         })
@@ -197,7 +183,8 @@ class Update extends React.Component {
                     {this.state.errors.firstName}
                   </Form.Control.Feedback>
                 </Form.Group>
-
+              </Row>
+              <Row>
                 <Form.Group as={Col} controlId="surname">
                   <Form.Label>Surname</Form.Label>
                   <Form.Control
@@ -275,7 +262,9 @@ class Update extends React.Component {
                     {this.state.errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
+              </Row>
 
+              <Row>
                 <Form.Group as={Col} controlId="roles">
                   <Form.Label>Roles</Form.Label>
                   <Form.Control
@@ -302,6 +291,7 @@ class Update extends React.Component {
                 >
                   Update
                 </Button>
+
                 <Button
                   variant="secondary"
                   id="cancel-button"

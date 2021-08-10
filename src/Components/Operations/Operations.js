@@ -1,26 +1,19 @@
-import React from "react";
-import { Button, Container } from "react-bootstrap";
-import axios from "axios";
-import findFormErrors from "./FindFormErrors";
-import AppBar from "../AppBar";
-import AdminNav from "../AdminNav";
-import Table from "../Table";
-import Update from "./Update";
-import Canvas from "./Canvas";
+import React from "react"
+import { Button, Container } from "react-bootstrap"
+import axios from "axios"
+import AppBar from "../AppBar"
+import AdminNav from "../AdminNav"
+import Table from "../Table"
+import Canvas from "./Canvas"
+import DeleteBtn from "./Delete"
+import { withRouter } from "react-router-dom"
 
 class Operations extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      clientId: "",
-      contractReferenceId: "",
-      consultantId: "",
-      startDate: "",
-      endDate: "",
-      projectStatusId: "",
-      ops: [],
-      errors: {},
-    };
+      ops: []
+    }
   }
 
   columns = [
@@ -33,91 +26,51 @@ class Operations extends React.Component {
       formatter: (cell, row) => {
         return (
           <span style={{ display: "flex" }}>
-            <Update id={row} />
-
-            <Button
-              onClick={() => alert("Are you sure you want to delete this?")}
-            >
-              Delete
-            </Button>
+            <Button onClick={() => this.redirect(row.id)}>update</Button>
+            <DeleteBtn id={row.id} />
           </span>
-        );
-      },
-    },
-  ];
+        )
+      }
+    }
+  ]
 
   fetchOps = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/operations", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
-        },
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+        }
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ops: res.data,
-        }));
-        console.log(res.data);
+          ops: res.data
+        }))
+        console.log(res.data)
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
-  changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  submitHandler = (event) => {
-    event.preventDefault();
-
-    if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated";
-
-      let temp = { ...this.state };
-      delete temp.errors;
-      delete temp.ops;
-
-      axios
-        .post("https://avcs-platform.herokuapp.com/operations", temp, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        })
-        .then(() => {
-          this.setState(() => ({
-            clientId: "",
-            contractReferenceId: "",
-            consultantId: "",
-            startDate: "",
-            endDate: "",
-            projectStatusId: "",
-            ops: [],
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
-        })
-        .catch((error) => console.log(error));
-    } else {
-      let errors = findFormErrors(this.state);
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          errors: errors,
-        };
-      });
-    }
-  };
+  redirect = (id) => {
+    this.props.history.push("/operations/update/", { id: id })
+  }
 
   componentDidMount = () => {
-    this.fetchOps();
-  };
+    this.fetchOps()
+  }
 
   render() {
     return (
       <>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "rgb(247, 249, 252)",
+            minHeight: "100vh"
+          }}
+        >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
             <Canvas />
@@ -132,7 +85,7 @@ class Operations extends React.Component {
           </Container>
         </div>
       </>
-    );
+    )
   }
 }
-export default Operations;
+export default withRouter(Operations)

@@ -7,14 +7,13 @@ class Canvas extends React.Component {
   constructor() {
     super()
     this.state = {
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      departments: [],
+      date: "",
+      staffId: "",
+      period: "",
+      purpose: "",
+      lastDate: "",
+      returnDate: "",
+      contactAddress: "",
       errors: {}
     }
   }
@@ -22,42 +21,19 @@ class Canvas extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
-      })
-      .catch((error) => console.log(error))
-  }
-
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      date: "",
+      staffId: "",
+      period: "",
+      purpose: "",
+      lastDate: "",
+      returnDate: "",
+      contactAddress: "",
       errors: {}
     }))
     document.getElementById("btn-close").click()
-  }
-
-  componentDidMount() {
-    this.fetchDropDownData()
   }
 
   submitHandler = (event) => {
@@ -68,10 +44,9 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.departments
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/annualleave", temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -80,13 +55,13 @@ class Canvas extends React.Component {
         .then(() => {
           alert("Created successfully!")
           this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
+            date: "",
+            staffId: "",
+            period: "",
+            purpose: "",
+            lastDate: "",
+            returnDate: "",
+            contactAddress: "",
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -158,40 +133,39 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="prefix"
+                  controlId="date"
                 >
-                  <Form.Label>Prefix</Form.Label>
+                  <Form.Label>Date</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.prefix}
+                    type="date"
+                    value={this.state.date}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="date"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.date}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="firstname"
+                  controlId="staffid"
                 >
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label>Staff ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.staffId}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="staffId"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.staffId}
+                    placeholder="Staff ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
+                    {this.state.errors.staffId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -200,40 +174,40 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="surname"
+                  controlId="period"
                 >
-                  <Form.Label>Surname</Form.Label>
+                  <Form.Label>Period</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.surname}
+                    value={this.state.period}
                     onChange={this.changeHandler}
-                    name="surname"
+                    name="period"
                     required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    isInvalid={this.state.errors.period}
+                    placeholder="Period"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
+                    {this.state.errors.period}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="othernames"
+                  controlId="purpose"
                 >
-                  <Form.Label>Other Names</Form.Label>
+                  <Form.Label>Purpose</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.otherNames}
+                    value={this.state.purpose}
                     onChange={this.changeHandler}
-                    name="otherNames"
+                    name="purpose"
                     required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
+                    isInvalid={this.state.errors.purpose}
+                    placeholder="Purpose"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
+                    {this.state.errors.purpose}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -242,52 +216,40 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="departmentid"
+                  controlId="lastDate"
                 >
-                  <Form.Label>Department ID</Form.Label>
+                  <Form.Label>Last Date</Form.Label>
                   <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
+                    type="text"
+                    value={this.state.lastDate}
                     onChange={this.changeHandler}
-                    name="departmentId"
+                    name="lastDate"
+                    placeholder="Last date"
                     required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
+                    isInvalid={this.state.errors.lastDate}
+                  ></Form.Control>
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
+                    {this.state.errors.lastDate}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="password"
+                  controlId="returndate"
                 >
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Return Date</Form.Label>
                   <Form.Control
-                    type="password"
-                    value={this.state.password}
+                    type="date"
+                    value={this.state.returnDate}
                     onChange={this.changeHandler}
-                    name="password"
+                    name="returnDate"
                     required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
+                    isInvalid={this.state.errors.returnDate}
+                    placeholder="Return Date"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
+                    {this.state.errors.returnDate}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -296,21 +258,20 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="roles"
+                  controlId="contactaddress"
                 >
-                  <Form.Label>Roles</Form.Label>
+                  <Form.Label>Contact Address</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    placeholder="Enter contact address"
+                    value={this.state.contactaddress}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="contactaddress"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.contactaddress}
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.contactaddress}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

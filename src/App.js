@@ -29,6 +29,7 @@ import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEval
 import Invoices from "./Components/Invoices/Invoices"
 import NextOfKin from "./Components/NextOfKin/NextOfKin"
 import Payments from "./Components/Payments/Payments"
+import PaymentsUpdate from "./Components/Payments/Update"
 import ProjectStatus from "./Components/ProjectStatus/ProjectStatus"
 import Prospects from "./Components/Prospects/Prospects"
 import Qualifications from "./Components/Qualifications/Qualifications"
@@ -42,6 +43,12 @@ import UserDetails2 from "./Components/UserDetails2/UserDetails2"
 import UserRelations from "./Components/UserRelations/UserRelations"
 import Users from "./Components/Users/Users"
 import UsersUpdate from "./Components/Users/Update"
+import OperationsUpdate from "./Components/Operations/Update"
+import ClientsUpdate from "./Components/Clients/Update"
+import AnnualLeaveUpdate from "./Components/AnnualLeave/Update"
+import ApprovalsUpdate from "./Components/Approvals/Update"
+import ConsultantsUpdate from "./Components/Consultants/Update"
+import InvoicesUpdate from "./Components/Invoices/Update"
 
 import ProtectedRoute from "./Components/ProtectedRoutes"
 import AllRoute from "./Components/AllRoute"
@@ -67,7 +74,12 @@ function App() {
         <AllRoute path="/requisitions" component={Requisitions} exact />
         <HrRoute path="/users" component={Users} exact />
         <HrRoute path="/users/update" component={UsersUpdate} />
+        <HrRoute path="/approvals/update" component={ApprovalsUpdate} />
+        <HrRoute path="/Operations/update" component={OperationsUpdate} />
+        <HrRoute path="/annualleave/update" component={AnnualLeaveUpdate} />
+        <HrRoute path="/clients/update" component={ClientsUpdate} />
         <HrRoute path="/consultants" component={Consultants} exact />
+        <HrRoute path="/consultants/update" component={ConsultantsUpdate} />
         <HrSalesRoute path="/clients" component={Clients} exact />
         <HrRoute
           path="/interviewevaluation"
@@ -84,8 +96,18 @@ function App() {
         <SalesRoute path="/quotation" component={Quotation} exact />
         <SalesRoute path="/operations" component={Operations} />
         <FinanceRoute path="/invoices" component={Invoices} exact />
+        <FinanceRoute
+          path="/invoices/update"
+          component={InvoicesUpdate}
+          exact
+        />
         <FinanceRoute path="/receipts" component={Receipts} exact />
         <FinanceRoute path="/payments" component={Payments} exact />
+        <FinanceRoute
+          path="/payments/update"
+          component={PaymentsUpdate}
+          exact
+        />
         <FinanceRoute path="/approvals" component={Approvals} exact />
         <ProtectedRoute path="/maritalstatus" component={MaritalStatus} exact />
         <ProtectedRoute

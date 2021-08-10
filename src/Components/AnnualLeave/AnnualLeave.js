@@ -1,49 +1,84 @@
-import React from "react";
-import { Form, Button, Container } from "react-bootstrap";
-import axios from "axios";
-import findFormErrors from "../AnnualLeave/FindFormErrors";
-import AppBar from "../AppBar";
-import AdminNav from "../AdminNav";
-import HrNav from "../HrNav";
-import SalesNav from "../SalesNav";
-import FinanceNav from "../FinanceNav";
+import React from "react"
+import { Button, Container } from "react-bootstrap"
+import axios from "axios"
+import findFormErrors from "../AnnualLeave/FindFormErrors"
+import AppBar from "../AppBar"
+import DeleteBtn from "./Delete"
+import Table from "../Table"
+import Canvas from "./Canvas"
+import AdminNav from "../AdminNav"
+import HrNav from "../HrNav"
+import SalesNav from "../SalesNav"
+import FinanceNav from "../FinanceNav"
+import { withRouter } from "react-router-dom"
 
 class AnnualLeave extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      date: "",
-      staffId: "",
-      period: "",
-      purpose: "",
-      lastDate: "",
-      returnDate: "",
-      contactAddress: "",
-      errors: {},
-    };
+      entries: []
+    }
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  columns = [
+    { dataField: "staffId", text: "Staff ID" },
+    { dataField: "period", text: "Period" },
+    { dataField: "returnDate", text: "Return date" },
+    {
+      dataField: "follow",
+      text: "Actions",
+      formatter: (cell, row) => {
+        return (
+          <span style={{ display: "flex" }}>
+            <Button onClick={() => this.redirect(row.id)}>update</Button>
+            <DeleteBtn id={row.id} />
+          </span>
+        )
+      }
+    }
+  ]
+
+  fetchEntries = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/annualleave", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+        }
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          entries: res.data
+        }))
+      })
+      .catch((error) => console.log(error))
+  }
+
+  redirect = (id) => {
+    this.props.history.push("/annualleave/update/", { id: id })
+  }
 
   submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated";
+      event.target.className += " was-validated"
 
-      let temp = { ...this.state };
-      delete temp.errors;
-      console.log(temp);
+      let temp = { ...this.state }
+      delete temp.errors
+      console.log(temp)
 
       axios
         .post("https://avcs-platform.herokuapp.com/annualLeave", temp, {
           headers: {
             Authorization:
-              "Bearer " +
-              localStorage.getItem("access-token").replace(/"/g, ""),
-          },
+              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
+          }
         })
         .then(() => {
           this.setState(() => ({
@@ -51,25 +86,28 @@ class AnnualLeave extends React.Component {
             staffId: "",
             period: "",
             purpose: "",
-            backupStaffId: "",
             lastDate: "",
             returnDate: "",
             contactAddress: "",
-            errors: {},
-          }));
-          event.target.className = "needs-validation";
+            errors: {}
+          }))
+          event.target.className = "needs-validation"
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
-      let errors = findFormErrors(this.state);
+      let errors = findFormErrors(this.state)
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors,
-        };
-      });
+          errors: errors
+        }
+      })
     }
-  };
+  }
+
+  componentDidMount() {
+    this.fetchEntries()
+  }
 
   render() {
     return (
@@ -81,138 +119,19 @@ class AnnualLeave extends React.Component {
           {this.props.role === "Sales" && <SalesNav />}
           {this.props.role === "Finance" && <FinanceNav />}
           <Container>
-            <Form
-              className="needs-validation"
-              onSubmit={this.submitHandler}
-              noValidate
-              style={{
-                marginLeft: "15%",
-                paddingTop: "2%",
-                marginTop: "8%",
-                marginBottom: "10%",
-              }}
-            >
-              <h1>Annual Leave</h1>
+            <Canvas />
 
-              <Form.Group controlId="date">
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.date}
-                  onChange={this.changeHandler}
-                  name="date"
-                  required
-                  isInvalid={this.state.errors.date}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.date}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="staffid">
-                <Form.Label>Staff ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.staffId}
-                  onChange={this.changeHandler}
-                  name="staffId"
-                  required
-                  isInvalid={this.state.errors.staffId}
-                  placeholder="Staff ID"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.staffId}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="period">
-                <Form.Label>Period</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.period}
-                  onChange={this.changeHandler}
-                  name="period"
-                  required
-                  isInvalid={this.state.errors.period}
-                  placeholder="Period"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.period}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="purpose">
-                <Form.Label>Purpose</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.purpose}
-                  onChange={this.changeHandler}
-                  name="purpose"
-                  required
-                  isInvalid={this.state.errors.purpose}
-                  placeholder="Purpose"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.purpose}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="lastDate">
-                <Form.Label>Last Date</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={this.state.lastDate}
-                  onChange={this.changeHandler}
-                  name="lastDate"
-                  placeholder="Last date"
-                  required
-                  isInvalid={this.state.errors.lastDate}
-                ></Form.Control>
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.lastDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="returndate">
-                <Form.Label>Return Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={this.state.returnDate}
-                  onChange={this.changeHandler}
-                  name="returnDate"
-                  required
-                  isInvalid={this.state.errors.returnDate}
-                  placeholder="Return Date"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.returnDate}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group controlId="contactaddress">
-                <Form.Label>Contact Address</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter contact address"
-                  value={this.state.contactaddress}
-                  onChange={this.changeHandler}
-                  name="contactaddress"
-                  required
-                  isInvalid={this.state.errors.contactaddress}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {this.state.errors.contactaddress}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Button id="add-button" type="submit">
-                Submit
-              </Button>
-            </Form>
+            {this.state.entries && (
+              <Table
+                name="Annual Leave"
+                columns={this.columns}
+                products={this.state.entries}
+              />
+            )}
           </Container>
         </div>
       </>
-    );
+    )
   }
 }
-export default AnnualLeave;
+export default withRouter(AnnualLeave)
