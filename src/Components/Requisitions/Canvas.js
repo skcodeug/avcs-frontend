@@ -7,14 +7,10 @@ class Canvas extends React.Component {
   constructor() {
     super()
     this.state = {
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      departments: [],
+      date: "",
+      details: "",
+      amount: 0,
+      requisitionerId: "",
       errors: {}
     }
   }
@@ -22,42 +18,16 @@ class Canvas extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
-      })
-      .catch((error) => console.log(error))
-  }
-
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      date: "",
+      details: "",
+      amount: 0,
+      requisitionerId: "",
       errors: {}
     }))
     document.getElementById("btn-close").click()
-  }
-
-  componentDidMount() {
-    this.fetchDropDownData()
   }
 
   submitHandler = (event) => {
@@ -68,10 +38,9 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.departments
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/requisitions", temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -80,13 +49,10 @@ class Canvas extends React.Component {
         .then(() => {
           alert("Created successfully!")
           this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
+            date: "",
+            details: "",
+            amount: 0,
+            requisitionerId: "",
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -155,162 +121,66 @@ class Canvas extends React.Component {
               </h1>
 
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="prefix"
-                >
-                  <Form.Label>Prefix</Form.Label>
+                <Form.Group as={Col} controlId="date">
+                  <Form.Label>Date</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.prefix}
+                    value={this.state.date}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="date"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.date}
+                    placeholder="Date"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="firstname"
-                >
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group as={Col} controlId="details">
+                  <Form.Label>Details</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.details}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="details"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.details}
+                    placeholder="Details"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
+                    {this.state.errors.details}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="surname"
-                >
-                  <Form.Label>Surname</Form.Label>
+                <Form.Group as={Col} controlId="amount">
+                  <Form.Label>Amount</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.surname}
+                    type="number"
+                    value={this.state.amount}
                     onChange={this.changeHandler}
-                    name="surname"
+                    name="amount"
                     required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    isInvalid={this.state.errors.amount}
+                    placeholder="E.g 2500000"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
+                    {this.state.errors.amount}
                   </Form.Control.Feedback>
                 </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="othernames"
-                >
-                  <Form.Label>Other Names</Form.Label>
+                <Form.Group as={Col} controlId="requisitionerId">
+                  <Form.Label>Requisitioner ID</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
+                    type="number"
+                    value={this.state.requisitionerId}
                     onChange={this.changeHandler}
-                    name="otherNames"
+                    name="requisitionerId"
                     required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
+                    isInvalid={this.state.errors.requisitionerId}
+                    placeholder="Requisitioner ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="departmentid"
-                >
-                  <Form.Label>Department ID</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
-                    onChange={this.changeHandler}
-                    name="departmentId"
-                    required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="password"
-                >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="roles"
-                >
-                  <Form.Label>Roles</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.roles}
-                    onChange={this.changeHandler}
-                    name="roles"
-                    required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
-                  />
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.requisitionerId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
