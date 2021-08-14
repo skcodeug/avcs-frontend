@@ -21,6 +21,7 @@ import ConsultantCategories from "./Components/ConsultantCategories/ConsultantCa
 import ConsultantFirms from "./Components/ConsultantFirms/ConsultantFirms"
 import Consultants from "./Components/Consultants/Consultants"
 import Contracts from "./Components/Contracts/Contracts"
+import ContractsUpdate from "./Components/Contracts/Update"
 import CorporateClients from "./Components/CorporateClients/CorporateClients"
 import Departments from "./Components/Departments/Departments"
 import IndividualClients from "./Components/IndividualClients/IndividualClients"
@@ -118,6 +119,11 @@ function App() {
           exact
         />
         <SalesRoute path="/contracts" component={Contracts} exact />
+        <SalesRoute
+          path="/contracts/update"
+          component={ContractsUpdate}
+          exact
+        />
         <SalesRoute path="/quotations" component={Quotation} exact />
         <SalesRoute path="/operations" component={Operations} />
         <FinanceRoute path="/invoices" component={Invoices} exact />

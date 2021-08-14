@@ -11,8 +11,6 @@ class Update extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      departments: [],
-      status: false,
       errors: {}
     }
 
@@ -28,7 +26,7 @@ class Update extends React.Component {
   fetchData = () => {
     let id = this.props.location.state.id
     axios
-      .get("https://avcs-platform.herokuapp.com/users/" + id, {
+      .get("https://avcs-platform.herokuapp.com/contracts/" + id, {
         headers: {
           Authorization:
             "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -37,28 +35,8 @@ class Update extends React.Component {
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ...res.data,
-          status: true
+          ...res.data
         }))
-      })
-      .catch((error) => console.log(error))
-  }
-
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
       })
       .catch((error) => console.log(error))
   }
@@ -71,11 +49,10 @@ class Update extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.status
       let id = this.props.location.state.id
 
       axios
-        .put(`https://avcs-platform.herokuapp.com/users/${id}`, temp, {
+        .put(`https://avcs-platform.herokuapp.com/contracts/${id}`, temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -84,14 +61,12 @@ class Update extends React.Component {
         .then(() => {
           alert("Updated succesfully")
           this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
-            departments: [],
+            date: "",
+            quotationReferenceId: "",
+            clientId: "",
+            prospectDetailsId: "",
+            startDate: "",
+            endDate: "",
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -111,7 +86,6 @@ class Update extends React.Component {
 
   componentDidMount = () => {
     this.fetchData()
-    this.fetchDropDownData()
   }
 
   render() {
@@ -166,135 +140,106 @@ class Update extends React.Component {
               }}
             >
               <Row>
-                <Form.Group as={Col} controlId="prefix">
-                  <Form.Label>Prefix</Form.Label>
+                <Form.Group as={Col} controlId="date">
+                  <Form.Label>Date</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.prefix}
+                    type="date"
+                    value={this.state.date}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="date"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.date}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="firstname">
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group as={Col} controlId="quotationReferenceId">
+                  <Form.Label>Quotation reference ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.quotationReferenceId}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="quotationReferenceId"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.quotationReferenceId}
+                    placeholder="Enter ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="surname">
-                  <Form.Label>Surname</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.surname}
-                    onChange={this.changeHandler}
-                    name="surname"
-                    required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="othernames">
-                  <Form.Label>Other Names</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
-                    onChange={this.changeHandler}
-                    name="otherNames"
-                    required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
+                    {this.state.errors.quotationReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group as={Col} controlId="departmentid">
-                  <Form.Label>Department ID</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
-                    onChange={this.changeHandler}
-                    name="departmentId"
-                    required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="roles">
-                  <Form.Label>Roles</Form.Label>
+                <Form.Group as={Col} controlId="clientId">
+                  <Form.Label>Client ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    value={this.state.clientId}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="clientId"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.clientId}
+                    placeholder="Enter ID"
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.clientId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="prospectDetailsId">
+                  <Form.Label>Prospect details ID</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.prospectDetailsId}
+                    onChange={this.changeHandler}
+                    name="prospectDetailsId"
+                    required
+                    isInvalid={this.state.errors.prospectDetailsId}
+                    placeholder="Enter ID"
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.prospectDetailsId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+              <Row>
+                <Form.Group as={Col} controlId="startDate">
+                  <Form.Label>Start Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={this.state.startDate}
+                    onChange={this.changeHandler}
+                    name="startDate"
+                    id="defaultFormRegisterPasswordEx4"
+                    placeholder="Enter date"
+                    required
+                    isInvalid={this.state.errors.startDate}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.startDate}
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-              <div style={{ marginTop: "3%" }}>
+                <Form.Group as={Col} controlId="endDate">
+                  <Form.Label>End Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={this.state.endDate}
+                    onChange={this.changeHandler}
+                    name="endDate"
+                    id="defaultFormRegisterPasswordEx4"
+                    placeholder="Enter date"
+                    required
+                    isInvalid={this.state.errors.endDate}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.endDate}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <div>
                 <Button
                   id="add-button"
                   type="submit"
@@ -307,7 +252,7 @@ class Update extends React.Component {
                   id="cancel-button"
                   type="cancel"
                   onClick={() => {
-                    this.props.history.push("/users")
+                    this.props.history.push("/contracts")
                   }}
                 >
                   Cancel
