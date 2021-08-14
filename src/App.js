@@ -26,6 +26,7 @@ import Departments from "./Components/Departments/Departments"
 import IndividualClients from "./Components/IndividualClients/IndividualClients"
 import IndividualConsultants from "./Components/IndividualConsultants/IndividualConsultants"
 import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEvaluations"
+import InterviewEvaluationUpdate from "./Components/InterviewEvaluations/Update"
 import Invoices from "./Components/Invoices/Invoices"
 import NextOfKin from "./Components/NextOfKin/NextOfKin"
 import Payments from "./Components/Payments/Payments"
@@ -93,6 +94,11 @@ function App() {
         <HrRoute
           path="/interviewevaluation"
           component={InterviewEvaluation}
+          exact
+        />
+        <HrRoute
+          path="/interviewevaluation/update"
+          component={InterviewEvaluationUpdate}
           exact
         />
         <HrRoute
