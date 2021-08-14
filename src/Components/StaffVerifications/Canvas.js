@@ -7,14 +7,19 @@ class Canvas extends React.Component {
   constructor() {
     super()
     this.state = {
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      departments: [],
+      staffId: "",
+      staffRef: "",
+      applicationLetter: "",
+      cv: "",
+      academicPaper: "",
+      refereeLetter: "",
+      interviewEvaluationReferenceId: "",
+      managementRecommendation: "",
+      appointmentApproval: "",
+      appointmentLetter: "",
+      bioData: "",
+      confirmationLetter: "",
+      exitInterview: "",
       errors: {}
     }
   }
@@ -22,42 +27,25 @@ class Canvas extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
-      })
-      .catch((error) => console.log(error))
-  }
-
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
-      firstName: "",
-      surname: "",
-      otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
+      staffId: "",
+      staffRef: "",
+      applicationLetter: "",
+      cv: "",
+      academicPaper: "",
+      refereeLetter: "",
+      interviewEvaluationReferenceId: "",
+      managementRecommendation: "",
+      appointmentApproval: "",
+      appointmentLetter: "",
+      bioData: "",
+      confirmationLetter: "",
+      exitInterview: "",
       errors: {}
     }))
     document.getElementById("btn-close").click()
-  }
-
-  componentDidMount() {
-    this.fetchDropDownData()
   }
 
   submitHandler = (event) => {
@@ -68,10 +56,9 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.departments
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/staffVerifications", temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -80,13 +67,19 @@ class Canvas extends React.Component {
         .then(() => {
           alert("Created successfully!")
           this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
+            staffId: "",
+            staffRef: "",
+            applicationLetter: "",
+            cv: "",
+            academicPaper: "",
+            refereeLetter: "",
+            interviewEvaluationReferenceId: "",
+            managementRecommendation: "",
+            appointmentApproval: "",
+            appointmentLetter: "",
+            bioData: "",
+            confirmationLetter: "",
+            exitInterview: "",
             errors: {}
           }))
           event.target.className = "needs-validation"
@@ -155,166 +148,216 @@ class Canvas extends React.Component {
               </h1>
 
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="prefix"
-                >
-                  <Form.Label>Prefix</Form.Label>
+                <Form.Group as={Col} controlId="staffId">
+                  <Form.Label>Staff ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.prefix}
+                    value={this.state.staffId}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="staffId"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.staffId}
+                    placeholder="Staff ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.staffId}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="firstname"
-                >
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group as={Col} controlId="staffRef">
+                  <Form.Label>Staff Ref</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.staffRef}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="staffRef"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.staffRef}
+                    placeholder="Staff Ref"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
+                    {this.state.errors.staffRef}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="surname"
-                >
-                  <Form.Label>Surname</Form.Label>
+                <Form.Group as={Col} controlId="applicationLetter">
+                  <Form.Label>Application letter</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.surname}
+                    type="file"
+                    value={this.state.applicationLetter}
                     onChange={this.changeHandler}
-                    name="surname"
+                    name="applicationLetter"
                     required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    isInvalid={this.state.errors.applicationLetter}
+                    placeholder="Application letter"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="othernames"
-                >
-                  <Form.Label>Other Names</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
-                    onChange={this.changeHandler}
-                    name="otherNames"
-                    required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
+                    {this.state.errors.applicationLetter}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="departmentid"
-                >
-                  <Form.Label>Department ID</Form.Label>
+                <Form.Group as={Col} controlId="cv">
+                  <Form.Label>Curriculum vitae</Form.Label>
                   <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
+                    type="file"
+                    value={this.state.cv}
                     onChange={this.changeHandler}
-                    name="departmentId"
+                    name="cv"
                     required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="password"
-                >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
+                    isInvalid={this.state.errors.cv}
+                    placeholder="Curriculum vitae"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
+                    {this.state.errors.cv}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="roles"
-                >
-                  <Form.Label>Roles</Form.Label>
+                <Form.Group as={Col} controlId="academicPaper">
+                  <Form.Label>Academic paper</Form.Label>
+                  <Form.Control
+                    type="file"
+                    value={this.state.academicPaper}
+                    onChange={this.changeHandler}
+                    name="academicPaper"
+                    required
+                    isInvalid={this.state.errors.academicPaper}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.academicPaper}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} controlId="refereeLetter">
+                  <Form.Label>Referee letter</Form.Label>
+                  <Form.Control
+                    type="file"
+                    value={this.state.refereeLetter}
+                    onChange={this.changeHandler}
+                    name="refereeLetter"
+                    required
+                    isInvalid={this.state.errors.refereeLetter}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.refereeLetter}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} controlId="interviewEvaluationReferenceId">
+                  <Form.Label>Interview evaluation reference ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    value={this.state.interviewEvaluationReferenceId}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="interviewEvaluationReferenceId"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.interviewEvaluationReferenceId}
+                    placeholder="Enter ID"
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.interviewEvaluationReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+              <Row>
+                <Form.Group as={Col} controlId="managementRecommendation">
+                  <Form.Label>Management recommendation</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.managementRecommendation}
+                    onChange={this.changeHandler}
+                    name="managementRecommendation"
+                    required
+                    isInvalid={this.state.errors.managementRecommendation}
+                    placeholder="E.g This is a strong fit for this role."
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.managementRecommendation}
+                  </Form.Control.Feedback>
+                </Form.Group>
 
+                <Form.Group as={Col} controlId="appointmentApproval">
+                  <Form.Label>Appointment approval</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.appointmentApproval}
+                    onChange={this.changeHandler}
+                    name="appointmentApproval"
+                    required
+                    isInvalid={this.state.errors.appointmentApproval}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.appointmentApproval}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} controlId="appointmentLetter">
+                  <Form.Label>Appointment letter</Form.Label>
+                  <Form.Control
+                    type="file"
+                    value={this.state.appointmentLetter}
+                    onChange={this.changeHandler}
+                    name="appointmentLetter"
+                    required
+                    isInvalid={this.state.errors.appointmentLetter}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.appointmentLetter}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} controlId="bioData">
+                  <Form.Label>Bio Data</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.bioData}
+                    onChange={this.changeHandler}
+                    name="bioData"
+                    required
+                    isInvalid={this.state.errors.bioData}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.bioData}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col} controlId="confirmationLetter">
+                  <Form.Label>Confirmation letter</Form.Label>
+                  <Form.Control
+                    type="file"
+                    value={this.state.confirmationLetter}
+                    onChange={this.changeHandler}
+                    name="confirmationLetter"
+                    required
+                    isInvalid={this.state.errors.confirmationLetter}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.confirmationLetter}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="exitInterview">
+                  <Form.Label>Exit interview</Form.Label>
+                  <Form.Control
+                    type="file"
+                    value={this.state.exitInterview}
+                    onChange={this.changeHandler}
+                    name="exitInterview"
+                    required
+                    isInvalid={this.state.errors.exitInterview}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.exitInterview}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
               <div style={{ marginTop: "10%" }}>
                 <Button
                   id="add-button"

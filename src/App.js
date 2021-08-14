@@ -41,6 +41,7 @@ import ReceiptsUpdate from "./Components/Receipts/Update"
 import Requisitions from "./Components/Requisitions/Requisitions"
 import RequisitionsUpdate from "./Components/Requisitions/Update"
 import StaffVerifications from "./Components/StaffVerifications/StaffVerifications"
+import StaffVerificationsUpdate from "./Components/StaffVerifications/Update"
 import UserDetails1 from "./Components/UserDetails1/UserDetails1"
 import UserDetails2 from "./Components/UserDetails2/UserDetails2"
 import UserRelations from "./Components/UserRelations/UserRelations"
@@ -97,6 +98,11 @@ function App() {
         <HrRoute
           path="/staffverifications"
           component={StaffVerifications}
+          exact
+        />
+        <HrRoute
+          path="/staffverifications/update"
+          component={StaffVerificationsUpdate}
           exact
         />
         <SalesRoute path="/prospects" component={Prospects} exact />
