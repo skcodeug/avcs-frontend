@@ -11,8 +11,6 @@ class Update extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      departments: [],
-      status: false,
       errors: {}
     }
 
@@ -28,7 +26,7 @@ class Update extends React.Component {
   fetchData = () => {
     let id = this.props.location.state.id
     axios
-      .get("https://avcs-platform.herokuapp.com/users/" + id, {
+      .get("https://avcs-platform.herokuapp.com/receipts/" + id, {
         headers: {
           Authorization:
             "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -37,28 +35,8 @@ class Update extends React.Component {
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ...res.data,
-          status: true
+          ...res.data
         }))
-      })
-      .catch((error) => console.log(error))
-  }
-
-  fetchDropDownData = () => {
-    axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
-        headers: {
-          Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
-      })
-      .then((res) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            departments: res.data
-          }
-        })
       })
       .catch((error) => console.log(error))
   }
@@ -71,11 +49,10 @@ class Update extends React.Component {
 
       let temp = { ...this.state }
       delete temp.errors
-      delete temp.status
       let id = this.props.location.state.id
 
       axios
-        .put(`https://avcs-platform.herokuapp.com/users/${id}`, temp, {
+        .put(`https://avcs-platform.herokuapp.com/receipts/${id}`, temp, {
           headers: {
             Authorization:
               "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
@@ -83,19 +60,8 @@ class Update extends React.Component {
         })
         .then(() => {
           alert("Updated succesfully")
-          this.setState(() => ({
-            prefix: "",
-            firstName: "",
-            surname: "",
-            otherNames: "",
-            departmentId: "",
-            roles: "",
-            password: "",
-            departments: [],
-            errors: {}
-          }))
           event.target.className = "needs-validation"
-          this.props.history.push("/users")
+          this.props.history.push("/receipts")
         })
         .catch((error) => console.log(error))
     } else {
@@ -111,7 +77,6 @@ class Update extends React.Component {
 
   componentDidMount = () => {
     this.fetchData()
-    this.fetchDropDownData()
   }
 
   render() {
@@ -166,130 +131,80 @@ class Update extends React.Component {
               }}
             >
               <Row>
-                <Form.Group as={Col} controlId="prefix">
-                  <Form.Label>Prefix</Form.Label>
+                <Form.Group as={Col} controlId="date">
+                  <Form.Label>Date</Form.Label>
                   <Form.Control
-                    type="text"
-                    value={this.state.prefix}
+                    type="date"
+                    value={this.state.date}
                     onChange={this.changeHandler}
-                    name="prefix"
+                    name="date"
                     required
-                    isInvalid={this.state.errors.prefix}
-                    placeholder="e.g Mr"
+                    isInvalid={this.state.errors.date}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prefix}
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="firstname">
-                  <Form.Label>First Name</Form.Label>
+                <Form.Group as={Col} controlId="clientId">
+                  <Form.Label>Client ID</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.firstName}
+                    value={this.state.clientId}
                     onChange={this.changeHandler}
-                    name="firstName"
+                    name="clientId"
                     required
-                    isInvalid={this.state.errors.firstName}
-                    placeholder="e.g John"
+                    isInvalid={this.state.errors.clientId}
+                    placeholder="Client ID"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.firstName}
+                    {this.state.errors.clientId}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="surname">
-                  <Form.Label>Surname</Form.Label>
+                <Form.Group as={Col} controlId="paid">
+                  <Form.Label>Paid</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.surname}
+                    value={this.state.amountPaid}
                     onChange={this.changeHandler}
-                    name="surname"
+                    name="amountPaid"
                     required
-                    isInvalid={this.state.errors.surname}
-                    placeholder="e.g Ongom"
+                    isInvalid={this.state.errors.amountPaid}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.surname}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="othernames">
-                  <Form.Label>Other Names</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.otherNames}
-                    onChange={this.changeHandler}
-                    name="otherNames"
-                    required
-                    isInvalid={this.state.errors.otherNames}
-                    placeholder="e.g Derrick"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.otherNames}
+                    {this.state.errors.amountPaid}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
-                <Form.Group as={Col} controlId="departmentid">
-                  <Form.Label>Department ID</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={this.state.departmentId}
-                    onChange={this.changeHandler}
-                    name="departmentId"
-                    required
-                    placeholder="Enter a department ID"
-                    isInvalid={this.state.errors.departmentId}
-                  >
-                    <div className="invalid-feedback">
-                      Enter your department ID!
-                    </div>
-                    <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
-                  </Form.Control>
-
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.departmentId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changeHandler}
-                    name="password"
-                    required
-                    isInvalid={this.state.errors.password}
-                    placeholder="Enter password"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="roles">
-                  <Form.Label>Roles</Form.Label>
+                <Form.Group as={Col} controlId="balance">
+                  <Form.Label>Balance</Form.Label>
                   <Form.Control
                     type="text"
-                    value={this.state.roles}
+                    value={this.state.amountOutstanding}
                     onChange={this.changeHandler}
-                    name="roles"
+                    name="amountOutstanding"
                     required
-                    placeholder="e.g Admin"
-                    isInvalid={this.state.errors.roles}
+                    isInvalid={this.state.errors.amountOutstanding}
                   />
-
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.roles}
+                    {this.state.errors.amountOutstanding}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="paidInWords">
+                  <Form.Label>Paid in words</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.amountInWords}
+                    onChange={this.changeHandler}
+                    name="amountInWords"
+                    required
+                    isInvalid={this.state.errors.amountInWords}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.amountInWords}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -307,7 +222,7 @@ class Update extends React.Component {
                   id="cancel-button"
                   type="cancel"
                   onClick={() => {
-                    this.props.history.push("/users")
+                    this.props.history.push("/receipts")
                   }}
                 >
                   Cancel
