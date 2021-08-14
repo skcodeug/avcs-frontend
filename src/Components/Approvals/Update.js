@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, Button, Container, Col, Row } from "react-bootstrap"
+import { Form, Button, Container, Row } from "react-bootstrap"
 import axios from "axios"
 import findFormErrors from "./FindFormErrors"
 import { withRouter } from "react-router-dom"

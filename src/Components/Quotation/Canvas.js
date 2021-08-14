@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, Button, Row, Col } from "react-bootstrap"
+import { Form, Button, Col } from "react-bootstrap"
 import axios from "axios"
 import findFormErrors from "./FindFormErrors"
 

@@ -1,6 +1,5 @@
 import React from "react"
-import { Card, Col, Container, Button } from "react-bootstrap"
-import { Form } from "react-bootstrap"
+import { Container, Button } from "react-bootstrap"
 import axios from "axios"
 import AppBar from "../AppBar"
 import AdminNav from "../AdminNav"
