@@ -8,6 +8,8 @@ import Table from "../Table"
 import Canvas from "./Canvas"
 import DeleteBtn from "./Delete"
 import { withRouter } from "react-router-dom"
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class Prospects extends React.Component {
   constructor() {
@@ -26,8 +28,17 @@ class Prospects extends React.Component {
       text: "Actions",
       formatter: (cell, row) => {
         return (
-          <span style={{ display: "flex" }}>
-            <Button onClick={() => this.redirect(row.id)}>update</Button>
+          <span style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              onClick={() => this.redirect(row.id)}
+              style={{
+                backgroundColor: "white",
+                border: "none",
+                marginRight: "2.5%"
+              }}
+            >
+              <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
+            </Button>
             <DeleteBtn id={row.id} />
           </span>
         )

@@ -1,6 +1,8 @@
 import React from "react"
 import { Button } from "react-bootstrap"
 import axios from "axios"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class Delete extends React.Component {
   deleteRow = () => {
@@ -18,7 +20,14 @@ class Delete extends React.Component {
   }
 
   render() {
-    return <Button onClick={this.deleteRow}>Delete</Button>
+    return (
+      <Button
+        onClick={this.deleteRow}
+        style={{ backgroundColor: "white", border: "none", marginLeft: "2.5%" }}
+      >
+        <FontAwesomeIcon icon={faTrashAlt} style={{ color: "blue" }} />
+      </Button>
+    )
   }
 }
 
