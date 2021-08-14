@@ -1,4 +1,4 @@
-import { Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap"
 
 function AdminNav() {
   return (
@@ -17,7 +17,7 @@ function AdminNav() {
         top: "0",
         left: "0",
         display: "block",
-        backgroundColor: "rgba(27, 36, 48, 0.9)",
+        backgroundColor: "rgba(27, 36, 48, 0.9)"
       }}
     >
       <Nav.Link
@@ -76,7 +76,7 @@ function AdminNav() {
       </Nav.Link>
       <Nav.Link
         style={{ color: "white", textDecoration: "none" }}
-        href="/quotation"
+        href="/quotations"
       >
         Quotation
       </Nav.Link>
@@ -150,6 +150,6 @@ function AdminNav() {
       <Nav.Link href="/userdetails2">User Details II</Nav.Link>
       <Nav.Link href="/userrelations">User Relations</Nav.Link> */}
     </Nav>
-  );
+  )
 }
-export default AdminNav;
+export default AdminNav

@@ -37,7 +37,9 @@ import Qualifications from "./Components/Qualifications/Qualifications"
 import Quotation from "./Components/Quotation/Quotation"
 import QuotationDetails from "./Components/QuotationDetails/QuotationDetails"
 import Receipts from "./Components/Receipts/Receipts"
+import ReceiptsUpdate from "./Components/Receipts/Update"
 import Requisitions from "./Components/Requisitions/Requisitions"
+import RequisitionsUpdate from "./Components/Requisitions/Update"
 import StaffVerifications from "./Components/StaffVerifications/StaffVerifications"
 import UserDetails1 from "./Components/UserDetails1/UserDetails1"
 import UserDetails2 from "./Components/UserDetails2/UserDetails2"
@@ -73,10 +75,15 @@ function App() {
         />
         <AllRoute path="/annualleave" component={AnnualLeave} exact />
         <AllRoute path="/requisitions" component={Requisitions} exact />
+        <AllRoute
+          path="/requisitions/update"
+          component={RequisitionsUpdate}
+          exact
+        />
         <HrRoute path="/users" component={Users} exact />
         <HrRoute path="/users/update" component={UsersUpdate} />
         <HrRoute path="/approvals/update" component={ApprovalsUpdate} />
-        <HrRoute path="/Operations/update" component={OperationsUpdate} />
+        <HrRoute path="/operations/update" component={OperationsUpdate} />
         <HrRoute path="/annualleave/update" component={AnnualLeaveUpdate} />
         <HrRoute path="/clients/update" component={ClientsUpdate} />
         <HrRoute path="/consultants" component={Consultants} exact />
@@ -99,7 +106,7 @@ function App() {
           exact
         />
         <SalesRoute path="/contracts" component={Contracts} exact />
-        <SalesRoute path="/quotation" component={Quotation} exact />
+        <SalesRoute path="/quotations" component={Quotation} exact />
         <SalesRoute path="/operations" component={Operations} />
         <FinanceRoute path="/invoices" component={Invoices} exact />
         <FinanceRoute
@@ -108,6 +115,11 @@ function App() {
           exact
         />
         <FinanceRoute path="/receipts" component={Receipts} exact />
+        <FinanceRoute
+          path="/receipts/update"
+          component={ReceiptsUpdate}
+          exact
+        />
         <FinanceRoute path="/payments" component={Payments} exact />
         <FinanceRoute
           path="/payments/update"
