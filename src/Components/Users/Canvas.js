@@ -2,6 +2,8 @@ import React from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
 import axios from "axios"
 import findFormErrors from "./FindFormErrors"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 class Canvas extends React.Component {
   constructor() {
@@ -105,17 +107,23 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: "10% 0 -3% 95%" }}>
-        <button
+      <div style={{ margin: "15% 0 -3% 95%" }}>
+        <Button
           class="btn btn-primary"
+          size="lg"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
-          style={{ marginLeft: "15%", marginTop: "-10%" }}
+          style={{
+            position: "fixed",
+            top: "26%",
+            right: "8%",
+            borderRadius: "50%"
+          }}
         >
-          Add
-        </button>
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
         <div
           class="offcanvas offcanvas-end"
           tabindex="-1"

@@ -1,5 +1,4 @@
 import React from "react"
-import { Container } from "react-bootstrap"
 import BootstrapTable from "react-bootstrap-table-next"
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
 import paginationFactory, {
@@ -39,7 +38,7 @@ class Table extends React.Component {
           {(toolkitprops) => (
             <div
               style={{
-                marginTop: "1%",
+                marginTop: "0%",
                 backgroundColor: "white",
                 borderRadius: "0.5%",
                 boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
@@ -49,8 +48,8 @@ class Table extends React.Component {
             >
               <SearchBar
                 srText=""
-                style={{ width: "500%", marginBottom: "6%" }}
-                placeholder="Type here to search . . ."
+                style={{ width: "500%", marginBottom: "12%" }}
+                placeholder="Search.."
                 {...toolkitprops.searchProps}
               />
               <BootstrapTable
@@ -72,27 +71,15 @@ class Table extends React.Component {
           width: "85%"
         }}
       >
-        <Container
+        <h1
           style={{
-            margin: "0 0 3% 0",
-            fontSize: "2rem",
-            fontWeight: "bolder",
-            backgroundColor: "white",
-            borderRadius: "0.5%",
-            boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-            padding: "1% 0% 1% 4%"
+            marginBottom: "8vh",
+            fontSize: "1.8rem",
+            fontWeight: "bold"
           }}
         >
-          <h2
-            style={{
-              marginBottom: "0",
-              fontSize: "2rem",
-              fontWeight: "bolder"
-            }}
-          >
-            {this.props.name}
-          </h2>
-        </Container>
+          {this.props.name}
+        </h1>
         <PaginationProvider pagination={paginationFactory(options)}>
           {contentTable}
         </PaginationProvider>
