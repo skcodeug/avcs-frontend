@@ -1,4 +1,6 @@
 import { Nav } from "react-bootstrap"
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 function AdminNav() {
   return (
@@ -17,97 +19,235 @@ function AdminNav() {
         top: "0",
         left: "0",
         display: "block",
-        backgroundColor: "rgba(27, 36, 48, 0.9)"
+        borderRight: "1px solid rgb(220,220,220)",
+        backgroundColor: "rgb(247, 249, 252)"
+        // backgroundColor: "rgba(27, 36, 48, 0.9)"
       }}
     >
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh",
+          backgroundColor: "lightblue"
+        }}
         href="/users"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Users
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/operations"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Operations
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/clients"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Clients
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/annualleave"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Annual Leave
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/approvals"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Approvals
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/consultants"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Consultants
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/invoices"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Invoices
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/payments"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Payments
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
         href="/prospects"
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Prospects
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/quotations"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Quotation
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/receipts"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Receipts
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/requisitions"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Requisitions
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/staffverifications"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Staff Verifications
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/interviewevaluation"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Interview Evaluation
       </Nav.Link>
       <Nav.Link
-        style={{ color: "white", textDecoration: "none" }}
+        style={{
+          color: "black",
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh"
+        }}
         href="/contracts"
       >
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          style={{ color: "black", marginRight: "7%" }}
+        />
         Contracts
       </Nav.Link>
       {/* <Nav.Link href="/users">Users</Nav.Link>
