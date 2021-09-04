@@ -10,7 +10,6 @@ class Canvas extends React.Component {
       firstName: "",
       surname: "",
       otherNames: "",
-      clientCategoryId: "",
       errors: {}
     }
   }
