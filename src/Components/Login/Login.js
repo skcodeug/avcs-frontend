@@ -79,7 +79,6 @@ class Login extends React.Component {
     return (
       <div
         style={{
-          backgroundColor: "rgb(220,220,220)",
           width: "100%",
           height: "100vh",
           display: "flex",
@@ -93,7 +92,8 @@ class Login extends React.Component {
             backgroundColor: "white",
             width: "50%",
             margin: "13% 0",
-            borderRadius: "5px"
+            borderRadius: "5px",
+            boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)"
           }}
         >
           <h1
