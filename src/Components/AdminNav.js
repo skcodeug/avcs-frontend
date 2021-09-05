@@ -2,14 +2,14 @@ import { Nav } from "react-bootstrap"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-function AdminNav() {
+function AdminNav(props) {
   return (
     <Nav
       defaultActiveKey="/home"
       style={{
         height: "100%",
         width: "19%",
-        marginTop: "5.8%",
+        // marginTop: "5.8%",
         paddingBottom: "8%",
         paddingTop: "1%",
         overflowX: "hidden",
@@ -24,6 +24,18 @@ function AdminNav() {
         // backgroundColor: "rgba(27, 36, 48, 0.9)"
       }}
     >
+      <h1
+        style={{
+          paddingLeft: "6%",
+          marginTop: "5%",
+          marginBottom: "10%",
+          fontWeight: "bolder",
+          fontSize: "2rem",
+          color: "#0d6efd"
+        }}
+      >
+        AVCS
+      </h1>
       <Nav.Link
         style={{
           color: "black",

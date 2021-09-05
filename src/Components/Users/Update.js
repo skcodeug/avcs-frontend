@@ -114,43 +114,31 @@ class Update extends React.Component {
           {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
 
           <Container>
-            <Container
-              style={{
-                margin: "10% 0 2% 15%",
-                fontSize: "2rem",
-                fontWeight: "bolder",
-                backgroundColor: "white",
-                borderRadius: "0.5%",
-                boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-                padding: "1% 0% 1% 4%",
-                width: "85%"
-              }}
-            >
-              <h2
-                style={{
-                  marginBottom: "0",
-                  fontSize: "2rem",
-                  fontWeight: "bolder"
-                }}
-              >
-                Update
-              </h2>
-            </Container>
-
             <Form
               className="needs-validation"
               onSubmit={this.submitHandler}
               noValidate
               style={{
                 marginLeft: "15%",
-                marginTop: "1%",
+                marginTop: "9%",
                 marginBottom: "10%",
                 backgroundColor: "white",
-                borderRadius: "0.5%",
-                boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-                padding: "2% 4%"
+                borderRadius: "1em",
+                boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)",
+                padding: "4% 3%"
               }}
             >
+              <h1
+                style={{
+                  marginBottom: "2vh",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  color: "rgb(100,100,100)"
+                }}
+              >
+                Update
+              </h1>
+
               <Row>
                 <Form.Group as={Col} controlId="prefix">
                   <Form.Label>Prefix</Form.Label>
@@ -184,6 +172,7 @@ class Update extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group as={Col} controlId="surname">
                   <Form.Label>Surname</Form.Label>

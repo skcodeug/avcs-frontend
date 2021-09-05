@@ -40,15 +40,25 @@ class Table extends React.Component {
               style={{
                 marginTop: "0%",
                 backgroundColor: "white",
-                borderRadius: "0.5%",
-                boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-                padding: "2% 4%",
+                borderRadius: "1em",
+                boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)",
+                padding: "4% 3%",
                 width: "100%"
               }}
             >
+              <h1
+                style={{
+                  marginBottom: "2vh",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  color: "rgb(100,100,100)"
+                }}
+              >
+                {this.props.name}
+              </h1>
               <SearchBar
                 srText=""
-                style={{ width: "500%", marginBottom: "12%" }}
+                style={{ width: "450%", marginBottom: "5%" }}
                 placeholder="Search.."
                 {...toolkitprops.searchProps}
               />
@@ -71,15 +81,6 @@ class Table extends React.Component {
           width: "85%"
         }}
       >
-        <h1
-          style={{
-            marginBottom: "8vh",
-            fontSize: "1.8rem",
-            fontWeight: "bold"
-          }}
-        >
-          {this.props.name}
-        </h1>
         <PaginationProvider pagination={paginationFactory(options)}>
           {contentTable}
         </PaginationProvider>

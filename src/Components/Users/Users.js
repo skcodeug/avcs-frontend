@@ -79,7 +79,6 @@ class Users extends React.Component {
         <div
           style={{
             display: "flex",
-            backgroundColor: "rgb(247, 249, 252)",
             minHeight: "100vh"
           }}
         >
