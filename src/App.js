@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import Operations from "./Components/Operations/Operations"
 import Login from "./Components/Login/Login"
+import Register from "./Components/Register/Register"
 import MaritalStatus from "./Components/MaritalStatus/MaritalStatus"
 import AnnualLeave from "./Components/AnnualLeave/AnnualLeave"
 import AnnualLeaveDepartment from "./Components/AnnualLeaveDepartment/AnnualLeaveDepartments"
@@ -29,8 +30,8 @@ import IndividualConsultants from "./Components/IndividualConsultants/Individual
 import InterviewEvaluation from "./Components/InterviewEvaluations/InterviewEvaluations"
 import InterviewEvaluationUpdate from "./Components/InterviewEvaluations/Update"
 import Invoices from "./Components/Invoices/Invoices"
-import NextOfKin from "./Components/NextOfKin/NextOfKin"
 import Payments from "./Components/Payments/Payments"
+import NextOfKin from "./Components/NextOfKin/NextOfKin"
 import PaymentsUpdate from "./Components/Payments/Update"
 import ProjectStatus from "./Components/ProjectStatus/ProjectStatus"
 import Prospects from "./Components/Prospects/Prospects"
@@ -40,8 +41,8 @@ import Quotation from "./Components/Quotation/Quotation"
 import QuotationDetails from "./Components/QuotationDetails/QuotationDetails"
 import Receipts from "./Components/Receipts/Receipts"
 import ReceiptsUpdate from "./Components/Receipts/Update"
-import Requisitions from "./Components/Requisitions/Requisitions"
 import RequisitionsUpdate from "./Components/Requisitions/Update"
+import Requisitions from "./Components/Requisitions/Requisitions"
 import StaffVerifications from "./Components/StaffVerifications/StaffVerifications"
 import StaffVerificationsUpdate from "./Components/StaffVerifications/Update"
 import UserDetails1 from "./Components/UserDetails1/UserDetails1"
@@ -68,6 +69,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" component={Login} exact />
+        <Route path="/register" component={Register} exact />
         <Route
           path="/logout"
           render={() => {

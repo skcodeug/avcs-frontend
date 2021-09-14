@@ -2,6 +2,7 @@ import React from "react"
 import { Form, Col, Button } from "react-bootstrap"
 import axios from "axios"
 import findFormErrors from "./FindFormErrors"
+import { Link } from "react-router-dom"
 
 class Login extends React.Component {
   state = {
@@ -147,7 +148,6 @@ class Login extends React.Component {
                 {this.state.errors.email}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Form.Group as={Col} controlId="password" style={{ width: "20vw" }}>
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -161,14 +161,16 @@ class Login extends React.Component {
                 {this.state.errors.password}
               </Form.Control.Feedback>
             </Form.Group>
-
             <Button
               id="add-button"
               type="submit"
-              style={{ marginTop: "7%", width: "30%" }}
+              style={{ margin: "10% 0% 2% 0%", width: "20vw" }}
             >
               Login
-            </Button>
+            </Button>{" "}
+            <br />
+            Are you new to AVCS?
+            <Link to="/register"> Click here to register!</Link>
           </Form>
         </div>
       </div>
