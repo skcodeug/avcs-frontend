@@ -1,21 +1,21 @@
-import React from "react"
-import { Button, Container } from "react-bootstrap"
-import axios from "axios"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import DeleteBtn from "./Delete"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Button, Container } from "react-bootstrap";
+import axios from "axios";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import DeleteBtn from "./Delete";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Operations extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      ops: []
-    }
+      ops: [],
+    };
   }
 
   columns = [
@@ -33,43 +33,43 @@ class Operations extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchOps = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/operations", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ops: res.data
-        }))
-        console.log(res.data)
+          ops: res.data,
+        }));
+        console.log(res.data);
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/operations/update/", { id: id })
-  }
+    this.props.history.push("/operations/update/", { id: id });
+  };
 
   componentDidMount = () => {
-    this.fetchOps()
-  }
+    this.fetchOps();
+  };
 
   render() {
     return (
@@ -79,12 +79,12 @@ class Operations extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Add an operation" />
 
             {this.state.ops && (
               <Table
@@ -96,7 +96,7 @@ class Operations extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(Operations)
+export default withRouter(Operations);

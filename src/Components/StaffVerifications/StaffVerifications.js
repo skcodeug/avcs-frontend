@@ -1,21 +1,21 @@
-import React from "react"
-import { Container, Button } from "react-bootstrap"
-import AppBar from "../AppBar"
-import axios from "axios"
-import AdminNav from "../AdminNav"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import DeleteBtn from "./Delete"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Container, Button } from "react-bootstrap";
+import AppBar from "../AppBar";
+import axios from "axios";
+import AdminNav from "../AdminNav";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import DeleteBtn from "./Delete";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class StaffVerifications extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      items: []
-    }
+      items: [],
+    };
   }
 
   columns = [
@@ -32,52 +32,58 @@ class StaffVerifications extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchUsers = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/staffVerifications", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
-        console.log(this.state.items)
+        console.log(this.state.items);
         this.setState((prevState) => ({
           ...prevState,
-          items: res.data
-        }))
+          items: res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/staffVerifications/update/", { id: id })
-  }
+    this.props.history.push("/staffVerifications/update/", { id: id });
+  };
 
   componentDidMount() {
-    this.fetchUsers()
+    this.fetchUsers();
   }
 
   render() {
     return (
       <>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "rgb(247, 249, 252)",
+            minHeight: "100vh",
+          }}
+        >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Add a staff verification" />
 
             {this.state.items && (
               <Table
@@ -89,7 +95,7 @@ class StaffVerifications extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(StaffVerifications)
+export default withRouter(StaffVerifications);

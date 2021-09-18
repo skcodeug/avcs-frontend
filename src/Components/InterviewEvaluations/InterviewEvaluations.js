@@ -1,19 +1,19 @@
-import React from "react"
-import { Container, Button } from "react-bootstrap"
-import axios from "axios"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import DeleteBtn from "./Delete"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Container, Button } from "react-bootstrap";
+import axios from "axios";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import DeleteBtn from "./Delete";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class InterviewEvaluations extends React.Component {
   state = {
-    items: []
-  }
+    items: [],
+  };
 
   columns = [
     { dataField: "fullName", text: "Fullname" },
@@ -22,8 +22,8 @@ class InterviewEvaluations extends React.Component {
       dataField: "date",
       text: "Date",
       formatter: (cell, row) => {
-        return <span>{new Date(row.date).toDateString()}</span>
-      }
+        return <span>{new Date(row.date).toDateString()}</span>;
+      },
     },
     {
       dataField: "follow",
@@ -36,51 +36,57 @@ class InterviewEvaluations extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchUsers = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/interviewEvaluations", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          items: res.data
-        }))
+          items: res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/interviewevaluation/update/", { id: id })
-  }
+    this.props.history.push("/interviewevaluation/update/", { id: id });
+  };
 
   componentDidMount() {
-    this.fetchUsers()
+    this.fetchUsers();
   }
 
   render() {
     return (
       <>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "rgb(247, 249, 252)",
+            minHeight: "100vh",
+          }}
+        >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Add an interview evaluation" />
 
             {this.state.items && (
               <Table
@@ -92,7 +98,7 @@ class InterviewEvaluations extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(InterviewEvaluations)
+export default withRouter(InterviewEvaluations);

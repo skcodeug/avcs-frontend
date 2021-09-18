@@ -1,20 +1,80 @@
-import React from "react"
-import { Form, Button, Col } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
+import React from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
 
 class Canvas extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       date: "",
       clientId: "",
       prospectReferenceId: "",
-      errors: {}
-    }
+      clients: [],
+      prospects: [],
+      filteredProspects: [],
+      errors: {},
+    };
   }
+
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  filter = () => {
+    let ans = this.filteredProspects();
+    this.setState({ filteredProspects: ans });
+  };
+
+  filteredProspects = () => {
+    let ans = this.state.prospects.filter((prospect) =>
+      prospect.clientId.includes(this.state.clientId) ? prospect : null
+    );
+    let value = JSON.stringify(ans);
+    return JSON.parse(value);
+  };
+
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            clients: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchProspects = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/prospects", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            prospects: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  componentDidMount() {
+    this.fetchClients();
+    this.fetchProspects();
   }
 
   reset = () => {
@@ -23,48 +83,57 @@ class Canvas extends React.Component {
       date: "",
       clientId: "",
       prospectReferenceId: "",
-      errors: {}
-    }))
-    document.getElementById("btn-close").click()
-  }
+      clients: [],
+      prospects: [],
+      errors: {},
+    }));
+    document.getElementById("btn-close").click();
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      console.log(this.props.location);
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
+      let temp = { ...this.state };
+      delete temp.clients;
+      delete temp.prospects;
+      delete temp.filteredProspects;
+      delete temp.errors;
 
       axios
         .post("https://avcs-platform.herokuapp.com/quotations", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Created successfully!")
+          alert("Created successfully!");
           this.setState(() => ({
             date: "",
             clientId: "",
             prospectReferenceId: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            clients: [],
+            prospects: [],
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -104,40 +173,20 @@ class Canvas extends React.Component {
               style={{
                 paddingLeft: "2%",
                 paddingRight: "2%",
-                paddingBottom: "15%"
+                paddingBottom: "15%",
               }}
             >
               <h1
                 style={{
                   marginBottom: "5%",
                   fontSize: "2rem",
-                  fontWeight: "bolder"
+                  fontWeight: "bolder",
                 }}
               >
-                Create
+                {this.props.entry}
               </h1>
 
-              <Form.Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="endDate"
-                >
-                  <Form.Label>End date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={this.state.endDate}
-                    onChange={this.changeHandler}
-                    name="endDate"
-                    id="defaultFormRegisterPasswordEx4"
-                    placeholder="Date Of Birth"
-                    required
-                    isInvalid={this.state.errors.endDate}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.endDate}
-                  </Form.Control.Feedback>
-                </Form.Group>
+              <Row>
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
@@ -145,20 +194,26 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Client ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.clientId}
                     onChange={this.changeHandler}
                     name="clientId"
                     required
                     isInvalid={this.state.errors.clientId}
-                    placeholder="Client ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.clients &&
+                      this.state.clients.map((client, index) => (
+                        <option key={index} value={client.id}>
+                          {client.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.clientId}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Form.Row>
-              <Form.Row>
+
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
@@ -166,19 +221,47 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Prospect reference ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.prospectReferenceId}
                     onChange={this.changeHandler}
+                    onClick={this.filter}
                     name="prospectReferenceId"
                     required
                     isInvalid={this.state.errors.prospectReferenceId}
-                    placeholder="Prospect reference ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.filteredProspects &&
+                      this.state.filteredProspects.map((prospect, index) => (
+                        <option key={index} value={prospect.id}>
+                          {prospect.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.prospectReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Form.Row>
+              </Row>
+              <Row>
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
+                  controlId="date"
+                >
+                  <Form.Label>End date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={this.state.date}
+                    onChange={this.changeHandler}
+                    name="date"
+                    required
+                    isInvalid={this.state.errors.date}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.date}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
 
               <div style={{ marginTop: "10%" }}>
                 <Button
@@ -201,8 +284,8 @@ class Canvas extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Canvas
+export default Canvas;

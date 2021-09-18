@@ -1,21 +1,21 @@
-import React from "react"
-import { Form, Button, Row, Col } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
+import React from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
 
 class Canvas extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       date: "",
       contractReferenceId: "",
       clientId: "",
-      errors: {}
-    }
+      errors: {},
+    };
   }
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   reset = () => {
     this.setState((prevState) => ({
@@ -23,48 +23,49 @@ class Canvas extends React.Component {
       date: "",
       contractReferenceId: "",
       clientId: "",
-      errors: {}
-    }))
-    document.getElementById("btn-close").click()
-  }
+      errors: {},
+    }));
+    document.getElementById("btn-close").click();
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
+      let temp = { ...this.state };
+      delete temp.errors;
 
       axios
         .post("https://avcs-platform.herokuapp.com/invoices", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Created successfully!")
+          alert("Created successfully!");
           this.setState(() => ({
             date: "",
             contractReferenceId: "",
             clientId: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -104,17 +105,17 @@ class Canvas extends React.Component {
               style={{
                 paddingLeft: "2%",
                 paddingRight: "2%",
-                paddingBottom: "15%"
+                paddingBottom: "15%",
               }}
             >
               <h1
                 style={{
                   marginBottom: "5%",
                   fontSize: "2rem",
-                  fontWeight: "bolder"
+                  fontWeight: "bolder",
                 }}
               >
-                Create
+                {this.props.entry}
               </h1>
 
               <Row>
@@ -190,8 +191,8 @@ class Canvas extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Canvas
+export default Canvas;

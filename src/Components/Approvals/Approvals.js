@@ -1,26 +1,26 @@
-import React from "react"
-import { Button, Container } from "react-bootstrap"
-import axios from "axios"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import DeleteBtn from "./Delete"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Button, Container } from "react-bootstrap";
+import axios from "axios";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import DeleteBtn from "./Delete";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Approvals extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      approvals: []
-    }
+      approvals: [],
+    };
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   columns = [
     { dataField: "approverId", text: "Approver ID" },
@@ -37,41 +37,41 @@ class Approvals extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchApprovals = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/approvals", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          approvals: res.data
-        }))
+          approvals: res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/approvals/update/", { id: id })
-  }
+    this.props.history.push("/approvals/update/", { id: id });
+  };
 
   componentDidMount() {
-    this.fetchApprovals()
+    this.fetchApprovals();
   }
 
   render() {
@@ -82,12 +82,12 @@ class Approvals extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Create an approval" />
 
             {this.state.approvals && (
               <Table
@@ -99,7 +99,7 @@ class Approvals extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(Approvals)
+export default withRouter(Approvals);

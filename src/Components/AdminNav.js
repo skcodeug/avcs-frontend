@@ -1,6 +1,6 @@
-import { Nav } from "react-bootstrap"
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Nav } from "react-bootstrap";
+// import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AdminNav(props) {
   return (
@@ -20,7 +20,7 @@ function AdminNav(props) {
         left: "0",
         display: "block",
         borderRight: "1px solid rgb(220,220,220)",
-        backgroundColor: "rgb(247, 249, 252)"
+        backgroundColor: "rgb(247, 249, 252)",
         // backgroundColor: "rgba(27, 36, 48, 0.9)"
       }}
     >
@@ -31,242 +31,504 @@ function AdminNav(props) {
           marginBottom: "10%",
           fontWeight: "bolder",
           fontSize: "2rem",
-          color: "#0d6efd"
+          color: "#0d6efd",
         }}
       >
         AVCS
       </h1>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/clients"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/clients" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/clients"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/clients"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/clients" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Clients
       </Nav.Link>
 
       <Nav.Link
         href="/prospects"
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/prospects"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/prospects" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/prospects"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/prospects" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Prospects
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/quotations"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/quotations" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/quotations"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/quotations"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/quotations" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Quotation
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/contracts"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/contracts" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/contracts"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/contracts"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/contracts" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Contracts
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/operations"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/operations" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/operations"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/operations"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/operations" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Operations
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/users" ? "blue" : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${window.location.pathname === "/users" ? "bold" : ""}`,
           textDecoration: "none",
           paddingLeft: "15%",
           lineHeight: "4.5vh",
-          backgroundColor: "lightblue"
+          background: `${
+            window.location.pathname === "/users"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/users"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/users" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Users
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/annualleave"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/annualleave" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/annualleave"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/annualleave"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/annualleave" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Annual Leave
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/approvals"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/approvals" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/approvals"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/approvals"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/approvals" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Approvals
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/consultants"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/consultants" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/consultants"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/consultants"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/consultants" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Consultants
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/invoices"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/invoices" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/invoices"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/invoices"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/invoices" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Invoices
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/payments"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/payments" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/payments"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/payments"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/payments" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Payments
       </Nav.Link>
 
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/receipts"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/receipts" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/receipts"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/receipts"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/receipts" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Receipts
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/requisitions"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/requisitions" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/requisitions"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/requisitions"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/requisitions" ? "blue" : "rgb(100,100,100)"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Requisitions
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/staffverifications"
+              ? "blue"
+              : "black"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/staffverifications" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/staffverifications"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/staffverifications"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/staffverifications"
+                ? "blue"
+                : "black"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Staff Verifications
       </Nav.Link>
+
       <Nav.Link
         style={{
-          color: "black",
+          color: `${
+            window.location.pathname === "/interviewevaluation"
+              ? "blue"
+              : "black"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/interviewevaluation" ? "bold" : ""
+          }`,
           textDecoration: "none",
           paddingLeft: "15%",
-          lineHeight: "4.5vh"
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/interviewevaluation"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
         }}
         href="/interviewevaluation"
       >
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faTrashAlt}
-          style={{ color: "black", marginRight: "7%" }}
-        />
+          style={{
+            color: `${
+              window.location.pathname === "/interviewevaluation"
+                ? "blue"
+                : "black"
+            }`,
+            marginRight: "7%",
+          }}
+        /> */}
         Interview Evaluation
       </Nav.Link>
 
@@ -310,6 +572,6 @@ function AdminNav(props) {
       <Nav.Link href="/userdetails2">User Details II</Nav.Link>
       <Nav.Link href="/userrelations">User Relations</Nav.Link> */}
     </Nav>
-  )
+  );
 }
-export default AdminNav
+export default AdminNav;

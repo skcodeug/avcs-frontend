@@ -1,28 +1,28 @@
-import React from "react"
-import { Form, Col, Button } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Form, Col, Button } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
   state = {
     email: "",
     password: "",
-    errors: ""
-  }
+    errors: "",
+  };
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
+      let temp = { ...this.state };
+      delete temp.errors;
 
       axios
         .post("https://avcs-platform.herokuapp.com/login", temp)
@@ -30,51 +30,51 @@ class Login extends React.Component {
           localStorage.setItem(
             "access-token",
             JSON.stringify(res.data.access_token)
-          )
+          );
           axios
             .get(`https://avcs-platform.herokuapp.com/users/${res.data.id}`, {
               headers: {
                 Authorization:
                   "Bearer " +
-                  localStorage.getItem("access-token").replace(/"/g, "")
-              }
+                  localStorage.getItem("access-token").replace(/"/g, ""),
+              },
             })
             .then((res) => {
               switch (true) {
                 case res.data.roles.includes("Admin"):
-                  localStorage.setItem("role", "Admin")
-                  this.props.history.push("/users")
-                  break
+                  localStorage.setItem("role", "Admin");
+                  this.props.history.push("/clients");
+                  break;
                 case res.data.roles.includes("HR"):
-                  localStorage.setItem("role", "HR")
-                  this.props.history.push("/users")
-                  break
+                  localStorage.setItem("role", "HR");
+                  this.props.history.push("/users");
+                  break;
                 case res.data.roles.includes("Finance"):
-                  localStorage.setItem("role", "Finance")
-                  this.props.history.push("/invoices")
-                  break
+                  localStorage.setItem("role", "Finance");
+                  this.props.history.push("/invoices");
+                  break;
                 case res.data.roles.includes("Sales"):
-                  localStorage.setItem("role", "Sales")
-                  this.props.history.push("/clients")
-                  break
+                  localStorage.setItem("role", "Sales");
+                  this.props.history.push("/clients");
+                  break;
 
                 default:
-                  break
+                  break;
               }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -83,7 +83,7 @@ class Login extends React.Component {
           width: "100%",
           height: "100vh",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <div
@@ -94,7 +94,7 @@ class Login extends React.Component {
             width: "50%",
             margin: "13% 0",
             borderRadius: "5px",
-            boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)"
+            boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)",
           }}
         >
           <h1
@@ -105,7 +105,7 @@ class Login extends React.Component {
               justifyContent: "center",
               alignItems: "center",
               fontWeight: "bolder",
-              color: "#0d6efd"
+              color: "#0d6efd",
             }}
           >
             AVCS
@@ -115,7 +115,7 @@ class Login extends React.Component {
               display: "flex",
               borderRight: "1px solid rgb(220,220,220)",
               margin: "5% 0",
-              height: "80%"
+              height: "80%",
             }}
           ></div>
           <Form
@@ -127,7 +127,7 @@ class Login extends React.Component {
               flex: "1.5",
               marginTop: "9%",
               marginBottom: "8%",
-              marginLeft: "12%"
+              marginLeft: "12%",
             }}
           >
             <Form.Group
@@ -174,7 +174,7 @@ class Login extends React.Component {
           </Form>
         </div>
       </div>
-    )
+    );
   }
 }
-export default Login
+export default Login;

@@ -11,7 +11,7 @@ const findFormErrors = (state) => {
   if (alphaRegex.test(state.otherNames) === false) {
     errors.otherNames = "Enter a valid name";
   }
-  if (alphaRegex.test(state.clientCategoryId) === false) {
+  if (state.clientCategoryId === "") {
     errors.clientCategoryId = "Enter valid ID";
   }
 

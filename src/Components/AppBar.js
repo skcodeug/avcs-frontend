@@ -1,6 +1,6 @@
-import { Navbar, Nav } from "react-bootstrap"
-import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Navbar, Nav } from "react-bootstrap";
+import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AppBar() {
   return (
@@ -13,7 +13,8 @@ function AppBar() {
         right: "0",
         left: "19%",
         backgroundColor: "white",
-        boxShadow: "0 20px 35px rgb(110, 110, 110,0.2)"
+        boxShadow: "0 3px 15px rgb(110, 110, 110,0.2)",
+        height: "12vh",
       }}
     >
       <Navbar.Brand
@@ -23,7 +24,7 @@ function AppBar() {
           fontSize: "1.5rem",
           paddingTop: "0.8%",
           paddingBottom: "0.8%",
-          color: "rgb(100,100,100)"
+          color: "rgba(0,0,0, 0.75)",
         }}
       >
         Dashboard
@@ -34,23 +35,23 @@ function AppBar() {
           className="me-auto"
           style={{
             position: "fixed",
-            right: "12%",
-            top: "2%"
+            right: "5%",
+            top: "3%",
           }}
         >
           <Nav.Link
             href="/settings"
             style={{ color: "rgb(100,100,100)", textDecoration: "none" }}
           >
-            <FontAwesomeIcon icon={faCog} style={{ color: "blue" }} />
-            Settings
+            <FontAwesomeIcon icon={faCog} size="1x" color="blue" />
+            {/* Settings */}
           </Nav.Link>
         </Nav>
         <Nav
           style={{
             position: "fixed",
-            right: "5%",
-            top: "2%"
+            right: "2%",
+            top: "3%",
           }}
         >
           <Nav.Link
@@ -58,12 +59,12 @@ function AppBar() {
             href="/logout"
             style={{ color: "rgb(100,100,100)", textDecoration: "none" }}
           >
-            <FontAwesomeIcon icon={faSignOutAlt} style={{ color: "blue" }} />
-            Logout
+            <FontAwesomeIcon icon={faSignOutAlt} color="blue" />
+            {/* Logout */}
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
+  );
 }
-export default AppBar
+export default AppBar;

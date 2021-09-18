@@ -1,101 +1,110 @@
-import React from "react"
-import { Form, Button, Row, Col } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Canvas extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       firstName: "",
       surname: "",
       otherNames: "",
-      errors: {}
-    }
+      clientCategoryId: "",
+      departments: [],
+      errors: {},
+    };
   }
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   fetchDropDownData = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/departments", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data
-          }
-        })
+            departments: res.data,
+          };
+        });
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
-      prefix: "",
       firstName: "",
       surname: "",
       otherNames: "",
-      departmentId: "",
-      roles: "",
-      password: "",
-      errors: {}
-    }))
-    document.getElementById("btn-close").click()
-  }
+      clientCategoryId: "",
+      departments: [],
+      errors: {},
+    }));
+    document.getElementById("btn-close").click();
+  };
 
   componentDidMount() {
-    this.fetchDropDownData()
+    this.fetchDropDownData();
   }
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          errors: {},
+        };
+      });
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      delete temp.departments
+      let temp = { ...this.state };
+      delete temp.departments;
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Created successfully!")
+          alert("Created successfully!");
           this.setState(() => ({
             firstName: "",
             surname: "",
             otherNames: "",
             clientCategoryId: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            departments: [],
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -110,7 +119,7 @@ class Canvas extends React.Component {
           style={{
             position: "absolute",
             top: "32.1%",
-            right: "10%"
+            right: "10%",
           }}
         >
           <FontAwesomeIcon icon={faPlus} /> Add
@@ -141,17 +150,17 @@ class Canvas extends React.Component {
               style={{
                 paddingLeft: "2%",
                 paddingRight: "2%",
-                paddingBottom: "15%"
+                paddingBottom: "15%",
               }}
             >
               <h1
                 style={{
                   marginBottom: "5%",
                   fontSize: "2rem",
-                  fontWeight: "bolder"
+                  fontWeight: "bolder",
                 }}
               >
-                Create
+                {this.props.entry}
               </h1>
 
               <Row>
@@ -167,10 +176,11 @@ class Canvas extends React.Component {
                     onChange={this.changeHandler}
                     name="firstName"
                     required
-                    placeholder="First Name"
+                    placeholder="Firstname"
+                    isInvalid={this.state.errors.firstName}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.firstName}
+                    {this.state.errors.firstName}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -187,9 +197,10 @@ class Canvas extends React.Component {
                     name="surname"
                     required
                     placeholder="Surname"
+                    isInvalid={this.state.errors.surname}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.surname}
+                    {this.state.errors.surname}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -208,9 +219,10 @@ class Canvas extends React.Component {
                     name="otherNames"
                     required
                     placeholder="Other Names"
+                    isInvalid={this.state.errors.otherNames}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.otherNames}
+                    {this.state.errors.otherNames}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -221,15 +233,24 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Client category ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.clientCategoryId}
                     onChange={this.changeHandler}
                     name="clientCategoryId"
                     required
-                    placeholder="Enter ID"
-                  />
+                    isInvalid={this.state.errors.clientCategoryId}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.departments &&
+                      this.state.departments.map((dept, index) => (
+                        <option key={index} value={dept.id}>
+                          {dept.name}
+                        </option>
+                      ))}
+                  </Form.Control>
+
                   <Form.Control.Feedback type="invalid">
-                    {this.state.clientCategoryId}
+                    {this.state.errors.clientCategoryId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
@@ -255,8 +276,8 @@ class Canvas extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Canvas
+export default Canvas;

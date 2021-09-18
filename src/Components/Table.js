@@ -1,11 +1,11 @@
-import React from "react"
-import BootstrapTable from "react-bootstrap-table-next"
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css"
+import React from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import paginationFactory, {
   PaginationProvider,
-  PaginationListStandalone
-} from "react-bootstrap-table2-paginator"
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit"
+  PaginationListStandalone,
+} from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 class Table extends React.Component {
   render() {
@@ -23,9 +23,9 @@ class Table extends React.Component {
       lastPageTitle: "Last page",
       showTotal: true,
       totalSize: this.props.products.length,
-      sizePerPage: 5
-    }
-    const { SearchBar } = Search
+      sizePerPage: 5,
+    };
+    const { SearchBar } = Search;
 
     const contentTable = ({ paginationProps, paginationTableProps }) => (
       <div>
@@ -41,24 +41,24 @@ class Table extends React.Component {
                 marginTop: "0%",
                 backgroundColor: "white",
                 borderRadius: "1em",
-                boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)",
+                boxShadow: "0 10px 30px rgb(110, 110, 110,0.2)",
                 padding: "4% 3%",
-                width: "100%"
+                width: "100%",
               }}
             >
               <h1
                 style={{
                   marginBottom: "2vh",
-                  fontSize: "1.5rem",
+                  fontSize: "1.2rem",
                   fontWeight: "bold",
-                  color: "rgb(100,100,100)"
+                  color: "rgba(0,0,0, 0.75)",
                 }}
               >
                 {this.props.name}
               </h1>
               <SearchBar
                 srText=""
-                style={{ width: "450%", marginBottom: "5%" }}
+                style={{ width: "50vw", marginBottom: "1%" }}
                 placeholder="Search.."
                 {...toolkitprops.searchProps}
               />
@@ -72,21 +72,21 @@ class Table extends React.Component {
         </ToolkitProvider>
         <PaginationListStandalone {...paginationProps} />
       </div>
-    )
+    );
 
     return (
       <div
         style={{
           marginLeft: "15%",
-          width: "85%"
+          width: "85%",
         }}
       >
         <PaginationProvider pagination={paginationFactory(options)}>
           {contentTable}
         </PaginationProvider>
       </div>
-    )
+    );
   }
 }
 
-export default Table
+export default Table;

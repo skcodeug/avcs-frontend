@@ -1,21 +1,21 @@
-import React from "react"
-import axios from "axios"
-import { Container, Button } from "react-bootstrap"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import DeleteBtn from "./Delete"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import axios from "axios";
+import { Container, Button } from "react-bootstrap";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import DeleteBtn from "./Delete";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Requisitions extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      requisitions: []
-    }
+      requisitions: [],
+    };
   }
 
   columns = [
@@ -33,41 +33,41 @@ class Requisitions extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchUsers = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/requisitions", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          requisitions: res.data
-        }))
+          requisitions: res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/requisitions/update/", { id: id })
-  }
+    this.props.history.push("/requisitions/update/", { id: id });
+  };
 
   componentDidMount() {
-    this.fetchUsers()
+    this.fetchUsers();
   }
 
   render() {
@@ -78,12 +78,12 @@ class Requisitions extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Create a requisition" />
 
             {this.state.requisitions && (
               <Table
@@ -95,7 +95,7 @@ class Requisitions extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(Requisitions)
+export default withRouter(Requisitions);

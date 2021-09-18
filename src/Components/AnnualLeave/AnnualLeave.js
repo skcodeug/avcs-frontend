@@ -1,30 +1,30 @@
-import React from "react"
-import { Button, Container } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "../AnnualLeave/FindFormErrors"
-import AppBar from "../AppBar"
-import DeleteBtn from "./Delete"
-import Table from "../Table"
-import Canvas from "./Canvas"
-import AdminNav from "../AdminNav"
-import HrNav from "../HrNav"
-import SalesNav from "../SalesNav"
-import FinanceNav from "../FinanceNav"
-import { withRouter } from "react-router-dom"
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Button, Container } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "../AnnualLeave/FindFormErrors";
+import AppBar from "../AppBar";
+import DeleteBtn from "./Delete";
+import Table from "../Table";
+import Canvas from "./Canvas";
+import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
+import SalesNav from "../SalesNav";
+import FinanceNav from "../FinanceNav";
+import { withRouter } from "react-router-dom";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class AnnualLeave extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      entries: []
-    }
+      entries: [],
+    };
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   columns = [
     { dataField: "staffId", text: "Staff ID" },
@@ -41,55 +41,56 @@ class AnnualLeave extends React.Component {
               style={{
                 backgroundColor: "white",
                 border: "none",
-                marginRight: "2.5%"
+                marginRight: "2.5%",
               }}
             >
               <FontAwesomeIcon icon={faPencilAlt} style={{ color: "blue" }} />
             </Button>
             <DeleteBtn id={row.id} />
           </span>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   fetchEntries = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/annualleave", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          entries: res.data
-        }))
+          entries: res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   redirect = (id) => {
-    this.props.history.push("/annualleave/update/", { id: id })
-  }
+    this.props.history.push("/annualleave/update/", { id: id });
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      console.log(temp)
+      let temp = { ...this.state };
+      delete temp.errors;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/annualLeave", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
           this.setState(() => ({
@@ -100,37 +101,43 @@ class AnnualLeave extends React.Component {
             lastDate: "",
             returnDate: "",
             contactAddress: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors: errors
-        }
-      })
+          errors: errors,
+        };
+      });
     }
-  }
+  };
 
   componentDidMount() {
-    this.fetchEntries()
+    this.fetchEntries();
   }
 
   render() {
     return (
       <>
         <AppBar />
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            backgroundColor: "rgb(247, 249, 252)",
+            minHeight: "100vh",
+          }}
+        >
           {this.props.role === "Admin" && <AdminNav />}
           {this.props.role === "HR" && <HrNav />}
           {this.props.role === "Sales" && <SalesNav />}
           {this.props.role === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas />
+            <Canvas entry="Create an annual leave entry" />
 
             {this.state.entries && (
               <Table
@@ -142,7 +149,7 @@ class AnnualLeave extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
-export default withRouter(AnnualLeave)
+export default withRouter(AnnualLeave);
