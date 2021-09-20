@@ -53,6 +53,7 @@ class Canvas extends React.Component {
       departmentId: "",
       roles: "",
       password: "",
+      departments: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -90,6 +91,7 @@ class Canvas extends React.Component {
             departmentId: "",
             roles: "",
             password: "",
+            departments: [],
             errors: {},
           }));
           event.target.className = "needs-validation";

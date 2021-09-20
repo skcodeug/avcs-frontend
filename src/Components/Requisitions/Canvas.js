@@ -11,6 +11,7 @@ class Canvas extends React.Component {
       details: "",
       amount: 0,
       requisitionerId: "",
+      requisitions: [],
       errors: {},
     };
   }
@@ -25,6 +26,7 @@ class Canvas extends React.Component {
       details: "",
       amount: 0,
       requisitionerId: "",
+      requisitions: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -38,6 +40,7 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.requisitions;
 
       axios
         .post("https://avcs-platform.herokuapp.com/requisitions", temp, {
@@ -54,6 +57,7 @@ class Canvas extends React.Component {
             details: "",
             amount: 0,
             requisitionerId: "",
+            requisitions: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -69,6 +73,29 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  fetchRequisitions = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/requisitions", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            requisitions: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  componentDidMount() {
+    this.fetchRequisitions();
+  }
 
   render() {
     return (
@@ -125,7 +152,7 @@ class Canvas extends React.Component {
                 <Form.Group as={Col} controlId="date">
                   <Form.Label>Date</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="date"
                     value={this.state.date}
                     onChange={this.changeHandler}
                     name="date"
@@ -137,6 +164,7 @@ class Canvas extends React.Component {
                     {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
+
                 <Form.Group as={Col} controlId="details">
                   <Form.Label>Details</Form.Label>
                   <Form.Control
@@ -153,6 +181,7 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group as={Col} controlId="amount">
                   <Form.Label>Amount</Form.Label>
@@ -169,17 +198,25 @@ class Canvas extends React.Component {
                     {this.state.errors.amount}
                   </Form.Control.Feedback>
                 </Form.Group>
+
                 <Form.Group as={Col} controlId="requisitionerId">
                   <Form.Label>Requisitioner ID</Form.Label>
                   <Form.Control
-                    type="number"
+                    as="select"
                     value={this.state.requisitionerId}
                     onChange={this.changeHandler}
                     name="requisitionerId"
                     required
                     isInvalid={this.state.errors.requisitionerId}
-                    placeholder="Requisitioner ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.requisitions &&
+                      this.state.requisitions.map((requisition, index) => (
+                        <option key={index} value={requisition.id}>
+                          {requisition.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.requisitionerId}
                   </Form.Control.Feedback>

@@ -11,6 +11,8 @@ class Canvas extends React.Component {
       consultantId: "",
       contractReferenceId: "",
       paid: 0,
+      contracts: [],
+      consultants: [],
       errors: {},
     };
   }
@@ -25,6 +27,8 @@ class Canvas extends React.Component {
       consultantId: "",
       contractReferenceId: "",
       paid: 0,
+      contracts: [],
+      consultants: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -54,6 +58,8 @@ class Canvas extends React.Component {
             consultantId: "",
             contractReferenceId: "",
             paid: 0,
+            contracts: [],
+            consultants: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -69,6 +75,49 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  fetchContracts = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/contracts", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            contracts: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchConsultants = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/consultants", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            consultants: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  componentDidMount() {
+    this.fetchContracts();
+    this.fetchConsultants();
+  }
 
   render() {
     return (
@@ -122,54 +171,56 @@ class Canvas extends React.Component {
               </h1>
 
               <Row>
-                <Form.Group as={Col} controlId="date">
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={this.state.date}
-                    onChange={this.changeHandler}
-                    name="date"
-                    required
-                    isInvalid={this.state.errors.date}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.date}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="consultantId">
-                  <Form.Label>Consultant ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.consultantId}
-                    onChange={this.changeHandler}
-                    name="consultantId"
-                    required
-                    isInvalid={this.state.errors.consultantId}
-                    placeholder="Consultant ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.consultantId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
                 <Form.Group as={Col} controlId="contractReferenceId">
                   <Form.Label>Contract reference ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.contractReferenceId}
                     onChange={this.changeHandler}
                     name="contractReferenceId"
                     required
                     isInvalid={this.state.errors.contractReferenceId}
                     placeholder="Contract reference ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.contracts &&
+                      this.state.contracts.map((contract, index) => (
+                        <option key={index} value={contract.id}>
+                          {contract.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.contractReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
 
+                <Form.Group as={Col} controlId="consultantId">
+                  <Form.Label>Consultant ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.consultantId}
+                    onChange={this.changeHandler}
+                    name="consultantId"
+                    required
+                    isInvalid={this.state.errors.consultantId}
+                    placeholder="Consultant ID"
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.consultants &&
+                      this.state.consultants.map((consultant, index) => (
+                        <option key={index} value={consultant.id}>
+                          {consultant.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.consultantId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row>
                 <Form.Group as={Col} controlId="paid">
                   <Form.Label>Paid</Form.Label>
                   <Form.Control
@@ -183,6 +234,21 @@ class Canvas extends React.Component {
                   />
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.paid}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="date">
+                  <Form.Label>Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={this.state.date}
+                    onChange={this.changeHandler}
+                    name="date"
+                    required
+                    isInvalid={this.state.errors.date}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

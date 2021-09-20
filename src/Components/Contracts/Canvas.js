@@ -13,11 +13,109 @@ class Canvas extends React.Component {
       prospectDetailsId: "",
       startDate: "",
       endDate: "",
+      quotations: [],
+      clients: [],
+      prospects: [],
+      filteredProspects: [],
+      filteredQuotations: [],
       errors: {},
     };
   }
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            clients: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchProspects = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/prospects", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            prospects: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchQuotations = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/quotations", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            quotations: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  filterProspects = () => {
+    let ans = this.filteredProspects();
+    this.setState((prevState) => {
+      return { ...prevState, filteredProspects: ans };
+    });
+  };
+
+  filterQuotations = () => {
+    let ans = this.filteredQuotations();
+    this.setState((prevState) => {
+      return { ...prevState, filteredQuotations: ans };
+    });
+  };
+
+  filteredProspects = () => {
+    if (this.state.clientId !== "") {
+      let ans = this.state.prospects.filter((prospect) =>
+        prospect.clientId.includes(this.state.clientId) ? prospect : null
+      );
+      let value = JSON.stringify(ans);
+      return JSON.parse(value);
+    }
+  };
+
+  filteredQuotations = () => {
+    if (this.state.prospectDetailsId !== "") {
+      let ans = this.state.quotations.filter((quotation) =>
+        quotation.prospectReferenceId.includes(this.state.prospectDetailsId)
+          ? quotation
+          : null
+      );
+      let value = JSON.stringify(ans);
+      return JSON.parse(value);
+    }
   };
 
   reset = () => {
@@ -29,6 +127,11 @@ class Canvas extends React.Component {
       prospectDetailsId: "",
       startDate: "",
       endDate: "",
+      quotations: [],
+      clients: [],
+      prospects: [],
+      filteredProspects: [],
+      filteredQuotations: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -41,6 +144,11 @@ class Canvas extends React.Component {
       event.target.className += " was-validated";
 
       let temp = { ...this.state };
+      delete temp.clients;
+      delete temp.prospects;
+      delete temp.quotations;
+      delete temp.filteredProspects;
+      delete temp.filteredQuotations;
       delete temp.errors;
 
       axios
@@ -60,6 +168,11 @@ class Canvas extends React.Component {
             prospectDetailsId: "",
             startDate: "",
             endDate: "",
+            quotations: [],
+            clients: [],
+            prospects: [],
+            filteredProspects: [],
+            filteredQuotations: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -75,6 +188,12 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  componentDidMount() {
+    this.fetchClients();
+    this.fetchProspects();
+    this.fetchQuotations();
+  }
 
   render() {
     return (
@@ -131,6 +250,91 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
+                  controlId="clientId"
+                >
+                  <Form.Label>Client ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.clientId}
+                    onChange={this.changeHandler}
+                    name="clientId"
+                    required
+                    isInvalid={this.state.errors.clientId}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.clients &&
+                      this.state.clients.map((client, index) => (
+                        <option key={index} value={client.id}>
+                          {client.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.clientId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
+                  controlId="prospectDetailsId"
+                >
+                  <Form.Label>Prospect details ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.prospectDetailsId}
+                    onChange={this.changeHandler}
+                    name="prospectDetailsId"
+                    required
+                    isInvalid={this.state.errors.prospectDetailsId}
+                    onClick={this.filterProspects}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.filteredProspects &&
+                      this.state.filteredProspects.map((prospect, index) => (
+                        <option key={index} value={prospect.id}>
+                          {prospect.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.prospectDetailsId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row>
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
+                  controlId="quotationReferenceId"
+                >
+                  <Form.Label>Quotation reference ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.quotationReferenceId}
+                    onChange={this.changeHandler}
+                    name="quotationReferenceId"
+                    required
+                    onClick={this.filterQuotations}
+                    isInvalid={this.state.errors.quotationReferenceId}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.filteredQuotations &&
+                      this.state.filteredQuotations.map((quotation, index) => (
+                        <option key={index} value={quotation.id}>
+                          {quotation.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.quotationReferenceId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
                   controlId="date"
                 >
                   <Form.Label>Date</Form.Label>
@@ -146,68 +350,8 @@ class Canvas extends React.Component {
                     {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="quotationReferenceId"
-                >
-                  <Form.Label>Quotation reference ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.quotationReferenceId}
-                    onChange={this.changeHandler}
-                    name="quotationReferenceId"
-                    required
-                    isInvalid={this.state.errors.quotationReferenceId}
-                    placeholder="Enter ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.quotationReferenceId}
-                  </Form.Control.Feedback>
-                </Form.Group>
               </Row>
-              <Row>
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="clientId"
-                >
-                  <Form.Label>Client ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.clientId}
-                    onChange={this.changeHandler}
-                    name="clientId"
-                    required
-                    isInvalid={this.state.errors.clientId}
-                    placeholder="Enter ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.clientId}
-                  </Form.Control.Feedback>
-                </Form.Group>
 
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
-                  controlId="prospectDetailsId"
-                >
-                  <Form.Label>Prospect details ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.prospectDetailsId}
-                    onChange={this.changeHandler}
-                    name="prospectDetailsId"
-                    required
-                    isInvalid={this.state.errors.prospectDetailsId}
-                    placeholder="Enter ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.prospectDetailsId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
               <Row>
                 <Form.Group
                   as={Col}
@@ -251,6 +395,7 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <div style={{ marginTop: "10%" }}>
                 <Button
                   id="add-button"

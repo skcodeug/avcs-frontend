@@ -11,6 +11,7 @@ class Canvas extends React.Component {
       surname: "",
       otherNames: "",
       consultantCategoryId: "",
+      consultantCategories: [],
       errors: {},
     };
   }
@@ -25,9 +26,29 @@ class Canvas extends React.Component {
       surname: "",
       otherNames: "",
       consultantCategoryId: "",
+      consultantCategories: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
+  };
+
+  fetchConsultantCategories = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/consultantCategories", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            consultantCategories: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   submitHandler = (event) => {
@@ -38,6 +59,7 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.consultantCategories;
 
       axios
         .post("https://avcs-platform.herokuapp.com/consultants", temp, {
@@ -54,6 +76,7 @@ class Canvas extends React.Component {
             surname: "",
             otherNames: "",
             consultantCategoryId: "",
+            consultantCategories: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -69,6 +92,10 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  componentDidMount() {
+    this.fetchConsultantCategories();
+  }
 
   render() {
     return (
@@ -191,14 +218,23 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Consultant Category ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.consultantCategoryId}
                     onChange={this.changeHandler}
                     name="consultantCategoryId"
                     required
                     isInvalid={this.state.errors.consultantCategoryId}
-                    placeholder="e.g I23c2D"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.consultantCategories &&
+                      this.state.consultantCategories.map(
+                        (consultantCategory, index) => (
+                          <option key={index} value={consultantCategory.id}>
+                            {consultantCategory.name}
+                          </option>
+                        )
+                      )}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.consultantCategoryId}
                   </Form.Control.Feedback>

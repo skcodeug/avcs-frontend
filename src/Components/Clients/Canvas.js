@@ -61,18 +61,11 @@ class Canvas extends React.Component {
     event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          errors: {},
-        };
-      });
       event.target.className += " was-validated";
 
       let temp = { ...this.state };
       delete temp.departments;
       delete temp.errors;
-      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/users", temp, {

@@ -45,6 +45,7 @@ class Canvas extends React.Component {
       ...prevState,
       clientId: "",
       date: "",
+      clients: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -58,6 +59,7 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.clients;
 
       axios
         .post("https://avcs-platform.herokuapp.com/prospects", temp, {
@@ -72,6 +74,7 @@ class Canvas extends React.Component {
           this.setState(() => ({
             clientId: "",
             date: "",
+            clients: [],
             errors: {},
           }));
           event.target.className = "needs-validation";

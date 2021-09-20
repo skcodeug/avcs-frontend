@@ -1,6 +1,6 @@
 const findFormErrors = (state) => {
   const errors = {};
-  const alphaRegex = /^[a-zA-Z\s]+$/;
+  const NumRegex = /^[0-9]+$/;
 
   if (state.date === "") {
     errors.date = "Enter a valid date";
@@ -11,10 +11,10 @@ const findFormErrors = (state) => {
   if (state.invoiceReferenceId === "") {
     errors.invoiceReferenceId = "Enter a valid ID";
   }
-  if (state.amountPaid === "") {
+  if (NumRegex.test(state.amountPaid)) {
     errors.amountPaid = "Enter a valid amount e.g 45000";
   }
-  if (alphaRegex.test(state.amountInWords)) {
+  if (state.amountInWords === "") {
     errors.amountInWords = "Enter a valid amount e.g Forty five thousand";
   }
   return errors;

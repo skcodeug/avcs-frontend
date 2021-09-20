@@ -12,6 +12,7 @@ class Canvas extends React.Component {
       invoiceReferenceId: "",
       amountPaid: 0,
       amountInWords: "",
+      clients: [],
       errors: {},
     };
   }
@@ -27,9 +28,29 @@ class Canvas extends React.Component {
       invoiceReferenceId: "",
       amountPaid: 0,
       amountInWords: "",
+      clients: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
+  };
+
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            clients: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   submitHandler = (event) => {
@@ -39,6 +60,7 @@ class Canvas extends React.Component {
       event.target.className += " was-validated";
 
       let temp = { ...this.state };
+      delete temp.clients;
       delete temp.errors;
 
       axios
@@ -57,6 +79,7 @@ class Canvas extends React.Component {
             invoiceReferenceId: "",
             amountPaid: 0,
             amountInWords: "",
+            clients: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -72,6 +95,10 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  componentDidMount() {
+    this.fetchClients();
+  }
 
   render() {
     return (
@@ -128,37 +155,25 @@ class Canvas extends React.Component {
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="date"
-                >
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={this.state.date}
-                    onChange={this.changeHandler}
-                    name="date"
-                    required
-                    isInvalid={this.state.errors.date}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.date}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group
-                  as={Col}
-                  style={{ marginTop: "3%" }}
                   controlId="clientId"
                 >
                   <Form.Label>Client ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.clientId}
                     onChange={this.changeHandler}
                     name="clientId"
                     required
                     isInvalid={this.state.errors.clientId}
-                    placeholder="Client ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.clients &&
+                      this.state.clients.map((client, index) => (
+                        <option key={index} value={client.id}>
+                          {client.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.clientId}
                   </Form.Control.Feedback>
@@ -184,6 +199,7 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group
                   as={Col}
@@ -210,18 +226,40 @@ class Canvas extends React.Component {
                   style={{ marginTop: "3%" }}
                   controlId="paidInWords"
                 >
-                  <Form.Label>Paid in words</Form.Label>
+                  <Form.Label>Amount in words</Form.Label>
                   <Form.Control
-                    type="number"
-                    value={this.state.paidInWords}
+                    type="text"
+                    value={this.state.amountInWords}
                     onChange={this.changeHandler}
-                    name="paidInWords"
+                    name="amountInWords"
                     required
-                    isInvalid={this.state.errors.paidInWords}
-                    placeholder="E.g 45000"
+                    isInvalid={this.state.errors.amountInWords}
+                    placeholder="E.g Forty five thousand shillings"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {this.state.errors.paidInWords}
+                    {this.state.errors.amountInWords}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  style={{ marginTop: "3%" }}
+                  controlId="date"
+                >
+                  <Form.Label>Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={this.state.date}
+                    onChange={this.changeHandler}
+                    name="date"
+                    required
+                    isInvalid={this.state.errors.date}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.date}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

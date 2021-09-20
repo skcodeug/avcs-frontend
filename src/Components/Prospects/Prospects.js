@@ -21,8 +21,14 @@ class Prospects extends React.Component {
   }
 
   columns = [
-    { dataField: "clientName", text: "Client" },
-    { dataField: "date", text: "Date" },
+    { dataField: "clientName", text: "Client Name" },
+    {
+      dataField: "date",
+      text: "Date",
+      formatter: (cell, row) => {
+        return <span>{new Date(row.date).toDateString()}</span>;
+      },
+    },
     { dataField: "reference", text: "Reference" },
     {
       dataField: "follow",
@@ -120,16 +126,19 @@ class Prospects extends React.Component {
   itemsArray = () => {
     let items = this.state.prospects;
 
-    this.state.prospects.map((prospect, index) => {
-      this.state.clients.map((client) => {
-        if (prospect.clientId === client.id) {
+    for (let i = 0; i < this.state.prospects.length; i++) {
+      for (let j = 0; j < this.state.clients.length; j++) {
+        if (this.state.prospects[i].clientId === this.state.clients[j].id) {
           let fullname =
-            client.firstName + " " + client.surname + " " + client.otherNames;
-          items[index].clientName = fullname;
+            this.state.clients[j].firstName +
+            " " +
+            this.state.clients[j].surname +
+            " " +
+            this.state.clients[j].otherNames;
+          items[i].clientName = fullname;
         }
-      });
-    });
-    console.log(items);
+      }
+    }
     return items;
   };
 

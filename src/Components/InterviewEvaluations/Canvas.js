@@ -299,9 +299,11 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group
                   as={Col}
+                  lg={6}
                   style={{ marginTop: "3%" }}
                   controlId="organizationalFit"
                 >

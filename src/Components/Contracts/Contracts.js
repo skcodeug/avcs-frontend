@@ -83,7 +83,7 @@ class Contracts extends React.Component {
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas entry="dd a contract" />
+            <Canvas entry="Add a contract" />
 
             {this.state.items && (
               <Table

@@ -16,11 +16,31 @@ class Canvas extends React.Component {
       lastDate: "",
       returnDate: "",
       contactAddress: "",
+      users: [],
       errors: {},
     };
   }
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  fetchUsers = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/users", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            users: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   reset = () => {
@@ -33,6 +53,7 @@ class Canvas extends React.Component {
       lastDate: "",
       returnDate: "",
       contactAddress: "",
+      users: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -46,6 +67,7 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.users;
 
       axios
         .post("https://avcs-platform.herokuapp.com/annualleave", temp, {
@@ -65,6 +87,7 @@ class Canvas extends React.Component {
             lastDate: "",
             returnDate: "",
             contactAddress: "",
+            users: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -80,6 +103,10 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  componentDidMount() {
+    this.fetchUsers();
+  }
 
   render() {
     return (
@@ -165,14 +192,22 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Staff ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.staffId}
                     onChange={this.changeHandler}
                     name="staffId"
                     required
                     isInvalid={this.state.errors.staffId}
                     placeholder="Staff ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.users &&
+                      this.state.users.map((user, index) => (
+                        <option key={index} value={user.staffId}>
+                          {user.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.staffId}
                   </Form.Control.Feedback>
@@ -229,11 +264,10 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Last Date</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="date"
                     value={this.state.lastDate}
                     onChange={this.changeHandler}
                     name="lastDate"
-                    placeholder="Last date"
                     required
                     isInvalid={this.state.errors.lastDate}
                   ></Form.Control>

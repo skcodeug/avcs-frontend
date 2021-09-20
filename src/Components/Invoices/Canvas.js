@@ -10,6 +10,9 @@ class Canvas extends React.Component {
       date: "",
       contractReferenceId: "",
       clientId: "",
+      clients: [],
+      contracts: [],
+      filteredContracts: [],
       errors: {},
     };
   }
@@ -23,6 +26,7 @@ class Canvas extends React.Component {
       date: "",
       contractReferenceId: "",
       clientId: "",
+      filteredContracts: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -36,6 +40,9 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.clients;
+      delete temp.contracts;
+      delete temp.filteredContracts;
 
       axios
         .post("https://avcs-platform.herokuapp.com/invoices", temp, {
@@ -51,6 +58,9 @@ class Canvas extends React.Component {
             date: "",
             contractReferenceId: "",
             clientId: "",
+            clients: [],
+            contracts: [],
+            filteredContracts: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -66,6 +76,66 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            clients: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchContracts = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/contracts", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            contracts: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  filteredContracts = () => {
+    if (this.state.clientId !== "") {
+      let ans = this.state.contracts.filter((contract) =>
+        contract.clientId.includes(this.state.clientId) ? contract : null
+      );
+      let value = JSON.stringify(ans);
+      return JSON.parse(value);
+    }
+  };
+
+  filterContracts = () => {
+    let ans = this.filteredContracts();
+    this.setState((prevState) => {
+      return { ...prevState, filteredContracts: ans };
+    });
+  };
+
+  componentDidMount() {
+    this.fetchClients();
+    this.fetchContracts();
+  }
 
   render() {
     return (
@@ -119,7 +189,64 @@ class Canvas extends React.Component {
               </h1>
 
               <Row>
-                <Form.Group as={Col} controlId="date">
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
+                  controlId="clientId"
+                >
+                  <Form.Label>Client ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.clientId}
+                    onChange={this.changeHandler}
+                    name="clientId"
+                    required
+                    isInvalid={this.state.errors.clientId}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.clients &&
+                      this.state.clients.map((client, index) => (
+                        <option key={index} value={client.id}>
+                          {client.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.clientId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  style={{ marginTop: "3%" }}
+                  controlId="contractRefId"
+                >
+                  <Form.Label>Contract ID</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.state.contractReferenceId}
+                    onChange={this.changeHandler}
+                    name="contractReferenceId"
+                    required
+                    onClick={this.filterContracts}
+                    isInvalid={this.state.errors.contractReferenceId}
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.filteredContracts &&
+                      this.state.filteredContracts.map((contract, index) => (
+                        <option key={index} value={contract.id}>
+                          {contract.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.errors.contractReferenceId}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+
+              <Row>
+                <Form.Group as={Col} lg={6} controlId="date">
                   <Form.Label>Date</Form.Label>
                   <Form.Control
                     type="date"
@@ -132,40 +259,6 @@ class Canvas extends React.Component {
                   />
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.date}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="contractReferenceId">
-                  <Form.Label>Contract reference ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.contractReferenceId}
-                    onChange={this.changeHandler}
-                    name="contractReferenceId"
-                    required
-                    isInvalid={this.state.errors.contractReferenceId}
-                    placeholder="Enter contract reference ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.contractReferenceId}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group as={Col} controlId="clientId">
-                  <Form.Label>Client ID</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.clientId}
-                    onChange={this.changeHandler}
-                    name="clientId"
-                    required
-                    isInvalid={this.state.errors.clientId}
-                    placeholder="Enter a valid ID"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.clientId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>

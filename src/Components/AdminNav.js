@@ -50,10 +50,13 @@ function AdminNav(props) {
           textDecoration: "none",
           paddingLeft: "15%",
           lineHeight: "4.5vh",
-          background: `${
+          backgroundColor: `${
             window.location.pathname === "/clients"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/clients" ? "5px solid blue" : "none"
           }`,
         }}
         href="/clients"
@@ -89,6 +92,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/prospects"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
       >
         {/* <FontAwesomeIcon
@@ -120,6 +128,11 @@ function AdminNav(props) {
             window.location.pathname === "/quotations"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/quotations"
+              ? "5px solid blue"
+              : "none"
           }`,
         }}
         href="/quotations"
@@ -154,6 +167,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/contracts"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
         href="/contracts"
       >
@@ -187,6 +205,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/operations"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
         href="/operations"
       >
@@ -215,6 +238,9 @@ function AdminNav(props) {
             window.location.pathname === "/users"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/users" ? "5px solid blue" : "none"
           }`,
         }}
         href="/users"
@@ -249,6 +275,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/annualleave"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
         href="/annualleave"
       >
@@ -281,6 +312,11 @@ function AdminNav(props) {
             window.location.pathname === "/approvals"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/approvals"
+              ? "5px solid blue"
+              : "none"
           }`,
         }}
         href="/approvals"
@@ -315,6 +351,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/consultants"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
         href="/consultants"
       >
@@ -347,6 +388,9 @@ function AdminNav(props) {
             window.location.pathname === "/invoices"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/invoices" ? "5px solid blue" : "none"
           }`,
         }}
         href="/invoices"
@@ -381,6 +425,9 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/payments" ? "5px solid blue" : "none"
+          }`,
         }}
         href="/payments"
       >
@@ -413,6 +460,9 @@ function AdminNav(props) {
             window.location.pathname === "/receipts"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/receipts" ? "5px solid blue" : "none"
           }`,
         }}
         href="/receipts"
@@ -447,6 +497,11 @@ function AdminNav(props) {
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
           }`,
+          borderRight: `${
+            window.location.pathname === "/requisitions"
+              ? "5px solid blue"
+              : "none"
+          }`,
         }}
         href="/requisitions"
       >
@@ -479,6 +534,11 @@ function AdminNav(props) {
             window.location.pathname === "/staffverifications"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/staffverifications"
+              ? "5px solid blue"
+              : "none"
           }`,
         }}
         href="/staffverifications"
@@ -514,6 +574,11 @@ function AdminNav(props) {
             window.location.pathname === "/interviewevaluation"
               ? "rgb(51, 153, 255, 0.2)"
               : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/interviewevaluations"
+              ? "5px solid blue"
+              : "none"
           }`,
         }}
         href="/interviewevaluation"

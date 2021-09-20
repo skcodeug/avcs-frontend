@@ -27,11 +27,13 @@ class Canvas extends React.Component {
   };
 
   filteredProspects = () => {
-    let ans = this.state.prospects.filter((prospect) =>
-      prospect.clientId.includes(this.state.clientId) ? prospect : null
-    );
-    let value = JSON.stringify(ans);
-    return JSON.parse(value);
+    if (this.state.clientId !== "") {
+      let ans = this.state.prospects.filter((prospect) =>
+        prospect.clientId.includes(this.state.clientId) ? prospect : null
+      );
+      let value = JSON.stringify(ans);
+      return JSON.parse(value);
+    }
   };
 
   fetchClients = () => {
@@ -85,6 +87,7 @@ class Canvas extends React.Component {
       prospectReferenceId: "",
       clients: [],
       prospects: [],
+      filteredProspects: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -119,6 +122,7 @@ class Canvas extends React.Component {
             prospectReferenceId: "",
             clients: [],
             prospects: [],
+            filteredProspects: [],
             errors: {},
           }));
           event.target.className = "needs-validation";

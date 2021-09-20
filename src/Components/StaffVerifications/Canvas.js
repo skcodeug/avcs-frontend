@@ -9,17 +9,19 @@ class Canvas extends React.Component {
     this.state = {
       staffId: "",
       staffRef: "",
-      applicationLetter: "",
-      cv: "",
-      academicPaper: "",
-      refereeLetter: "",
+      applicationLetter: false,
+      cv: false,
+      academicPaper: false,
+      refereeLetter: false,
       interviewEvaluationReferenceId: "",
-      managementRecommendation: "",
-      appointmentApproval: "",
-      appointmentLetter: "",
-      bioData: "",
-      confirmationLetter: "",
-      exitInterview: "",
+      managementRecommendation: false,
+      appointmentApproval: false,
+      appointmentLetter: false,
+      bioData: false,
+      confirmationLetter: false,
+      exitInterview: false,
+      users: [],
+      interviewEvaluations: [],
       errors: {},
     };
   }
@@ -32,17 +34,19 @@ class Canvas extends React.Component {
       ...prevState,
       staffId: "",
       staffRef: "",
-      applicationLetter: "",
-      cv: "",
-      academicPaper: "",
-      refereeLetter: "",
+      applicationLetter: false,
+      cv: false,
+      academicPaper: false,
+      refereeLetter: false,
       interviewEvaluationReferenceId: "",
-      managementRecommendation: "",
-      appointmentApproval: "",
-      appointmentLetter: "",
-      bioData: "",
-      confirmationLetter: "",
-      exitInterview: "",
+      managementRecommendation: false,
+      appointmentApproval: false,
+      appointmentLetter: false,
+      bioData: false,
+      confirmationLetter: false,
+      exitInterview: false,
+      users: [],
+      interviewEvaluations: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -56,6 +60,8 @@ class Canvas extends React.Component {
 
       let temp = { ...this.state };
       delete temp.errors;
+      delete temp.users;
+      delete temp.interviewEvaluations;
 
       axios
         .post("https://avcs-platform.herokuapp.com/staffVerifications", temp, {
@@ -70,17 +76,19 @@ class Canvas extends React.Component {
           this.setState(() => ({
             staffId: "",
             staffRef: "",
-            applicationLetter: "",
-            cv: "",
-            academicPaper: "",
-            refereeLetter: "",
+            applicationLetter: false,
+            cv: false,
+            academicPaper: false,
+            refereeLetter: false,
             interviewEvaluationReferenceId: "",
-            managementRecommendation: "",
-            appointmentApproval: "",
-            appointmentLetter: "",
-            bioData: "",
-            confirmationLetter: "",
-            exitInterview: "",
+            managementRecommendation: false,
+            appointmentApproval: false,
+            appointmentLetter: false,
+            bioData: false,
+            confirmationLetter: false,
+            exitInterview: false,
+            users: [],
+            interviewEvaluations: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -96,6 +104,49 @@ class Canvas extends React.Component {
       });
     }
   };
+
+  fetchUsers = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/users", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            users: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchIntEvaluations = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/interviewEvaluations", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            interviewEvaluations: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  componentDidMount() {
+    this.fetchUsers();
+    this.fetchIntEvaluations();
+  }
 
   render() {
     return (
@@ -152,14 +203,22 @@ class Canvas extends React.Component {
                 <Form.Group as={Col} controlId="staffId">
                   <Form.Label>Staff ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.staffId}
                     onChange={this.changeHandler}
                     name="staffId"
                     required
                     isInvalid={this.state.errors.staffId}
                     placeholder="Staff ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.users &&
+                      this.state.users.map((user, index) => (
+                        <option key={index} value={user.id}>
+                          {user.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.staffId}
                   </Form.Control.Feedback>
@@ -168,197 +227,238 @@ class Canvas extends React.Component {
                 <Form.Group as={Col} controlId="staffRef">
                   <Form.Label>Staff Ref</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.staffRef}
                     onChange={this.changeHandler}
                     name="staffRef"
                     required
                     isInvalid={this.state.errors.staffRef}
                     placeholder="Staff Ref"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.users &&
+                      this.state.users.map((user, index) => (
+                        <option key={index} value={user.id}>
+                          {user.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.staffRef}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
-                <Form.Group as={Col} controlId="applicationLetter">
-                  <Form.Label>Application letter</Form.Label>
+                <Form.Group
+                  as={Col}
+                  lg={6}
+                  controlId="interviewEvaluationReferenceId"
+                >
+                  <Form.Label>Interview evaluation Ref-ID</Form.Label>
                   <Form.Control
-                    type="file"
-                    value={this.state.applicationLetter}
-                    onChange={this.changeHandler}
-                    name="applicationLetter"
-                    required
-                    isInvalid={this.state.errors.applicationLetter}
-                    placeholder="Application letter"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.applicationLetter}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
-                <Form.Group as={Col} controlId="cv">
-                  <Form.Label>Curriculum vitae</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.cv}
-                    onChange={this.changeHandler}
-                    name="cv"
-                    required
-                    isInvalid={this.state.errors.cv}
-                    placeholder="Curriculum vitae"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.cv}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
-                <Form.Group as={Col} controlId="academicPaper">
-                  <Form.Label>Academic paper</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.academicPaper}
-                    onChange={this.changeHandler}
-                    name="academicPaper"
-                    required
-                    isInvalid={this.state.errors.academicPaper}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.academicPaper}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
-                <Form.Group as={Col} controlId="refereeLetter">
-                  <Form.Label>Referee letter</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.refereeLetter}
-                    onChange={this.changeHandler}
-                    name="refereeLetter"
-                    required
-                    isInvalid={this.state.errors.refereeLetter}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.refereeLetter}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
-                <Form.Group as={Col} controlId="interviewEvaluationReferenceId">
-                  <Form.Label>Interview evaluation reference ID</Form.Label>
-                  <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.interviewEvaluationReferenceId}
                     onChange={this.changeHandler}
                     name="interviewEvaluationReferenceId"
                     required
                     isInvalid={this.state.errors.interviewEvaluationReferenceId}
                     placeholder="Enter ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.interviewEvaluations &&
+                      this.state.interviewEvaluations.map(
+                        (interviewEvaluation, index) => (
+                          <option key={index} value={interviewEvaluation.id}>
+                            {interviewEvaluation.fullName}
+                          </option>
+                        )
+                      )}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.interviewEvaluationReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
-                <Form.Group as={Col} controlId="managementRecommendation">
-                  <Form.Label>Management recommendation</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.managementRecommendation}
-                    onChange={this.changeHandler}
-                    name="managementRecommendation"
-                    required
-                    isInvalid={this.state.errors.managementRecommendation}
-                    placeholder="E.g This is a strong fit for this role."
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.managementRecommendation}
-                  </Form.Control.Feedback>
+                <Form.Group as={Col} controlId="applicationLetter">
+                  <Form.Check custom type="check" id="applicationLetter">
+                    <Form.Check.Input
+                      checked={this.state.applicationLetter}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            applicationLetter: !this.state.applicationLetter,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Application letter</Form.Check.Label>
+                  </Form.Check>
                 </Form.Group>
 
+                <Form.Group as={Col} controlId="academicPaper">
+                  <Form.Check custom type="check" id="academicPaper">
+                    <Form.Check.Input
+                      checked={this.state.academicPaper}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            academicPaper: !this.state.academicPaper,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Academic paper</Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="cv">
+                  <Form.Check custom type="check" id="cv">
+                    <Form.Check.Input
+                      checked={this.state.cv}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            cv: !this.state.cv,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Curriculum vitae</Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+              </Row>
+
+              <Row>
+                <Form.Group as={Col} lg={4} controlId="refereeLetter">
+                  <Form.Check custom type="check" id="refereeLetter">
+                    <Form.Check.Input
+                      checked={this.state.refereeLetter}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            refereeLetter: !this.state.refereeLetter,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Referee letter</Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  lg={8}
+                  controlId="managementRecommendation"
+                >
+                  <Form.Check custom type="check" id="managementRecommendation">
+                    <Form.Check.Input
+                      checked={this.state.managementRecommendation}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            managementRecommendation:
+                              !this.state.managementRecommendation,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>
+                      Management recommendation
+                    </Form.Check.Label>
+                  </Form.Check>
+                </Form.Group>
+              </Row>
+
+              <Row>
                 <Form.Group as={Col} controlId="appointmentApproval">
-                  <Form.Label>Appointment approval</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.appointmentApproval}
-                    onChange={this.changeHandler}
-                    name="appointmentApproval"
-                    required
-                    isInvalid={this.state.errors.appointmentApproval}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.appointmentApproval}
-                  </Form.Control.Feedback>
+                  <Form.Check custom type="check" id="appointmentApproval">
+                    <Form.Check.Input
+                      checked={this.state.appointmentApproval}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            appointmentApproval:
+                              !this.state.appointmentApproval,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Appointment approval</Form.Check.Label>
+                  </Form.Check>
                 </Form.Group>
-              </Row>
-              <Row>
-                <Form.Group as={Col} controlId="appointmentLetter">
-                  <Form.Label>Appointment letter</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.appointmentLetter}
-                    onChange={this.changeHandler}
-                    name="appointmentLetter"
-                    required
-                    isInvalid={this.state.errors.appointmentLetter}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.appointmentLetter}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row>
+
                 <Form.Group as={Col} controlId="bioData">
-                  <Form.Label>Bio Data</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={this.state.bioData}
-                    onChange={this.changeHandler}
-                    name="bioData"
-                    required
-                    isInvalid={this.state.errors.bioData}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.bioData}
-                  </Form.Control.Feedback>
+                  <Form.Check custom type="check" id="bioData">
+                    <Form.Check.Input
+                      checked={this.state.bioData}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            bioData: !this.state.bioData,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Bio Data</Form.Check.Label>
+                  </Form.Check>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group as={Col} controlId="confirmationLetter">
-                  <Form.Label>Confirmation letter</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.confirmationLetter}
-                    onChange={this.changeHandler}
-                    name="confirmationLetter"
-                    required
-                    isInvalid={this.state.errors.confirmationLetter}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.confirmationLetter}
-                  </Form.Control.Feedback>
+                  <Form.Check custom type="check" id="confirmationLetter">
+                    <Form.Check.Input
+                      checked={this.state.confirmationLetter}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            confirmationLetter: !this.state.confirmationLetter,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Confirmation letter</Form.Check.Label>
+                  </Form.Check>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="exitInterview">
-                  <Form.Label>Exit interview</Form.Label>
-                  <Form.Control
-                    type="file"
-                    value={this.state.exitInterview}
-                    onChange={this.changeHandler}
-                    name="exitInterview"
-                    required
-                    isInvalid={this.state.errors.exitInterview}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.errors.exitInterview}
-                  </Form.Control.Feedback>
+                  <Form.Check custom type="check" id="exitInterview">
+                    <Form.Check.Input
+                      checked={this.state.exitInterview}
+                      onClick={() =>
+                        this.setState((prevState) => {
+                          return {
+                            ...prevState,
+                            exitInterview: !this.state.exitInterview,
+                          };
+                        })
+                      }
+                      style={{ marginRight: "5px" }}
+                    />
+                    <Form.Check.Label>Exit interview</Form.Check.Label>
+                  </Form.Check>
                 </Form.Group>
               </Row>
+
               <div style={{ marginTop: "10%" }}>
                 <Button
                   id="add-button"

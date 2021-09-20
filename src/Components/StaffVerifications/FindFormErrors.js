@@ -7,9 +7,6 @@ const findFormErrors = (state) => {
   if (state.staffRef === "") {
     errors.staffRef = "Enter a valid reference";
   }
-  if (state.applicationLetter === "") {
-    errors.applicationLetter = "Enter a valid letter";
-  }
   if (state.refereeLetter === "") {
     errors.refereeLetter = "Enter a valid letter";
   }

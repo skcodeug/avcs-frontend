@@ -16,6 +16,10 @@ class Canvas extends React.Component {
       endDate: "",
       projectStatusId: "",
       ops: [],
+      clients: [],
+      contracts: [],
+      consultants: [],
+      filteredContracts: [],
       errors: {},
     };
   }
@@ -23,7 +27,7 @@ class Canvas extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  fetchDropDownData = () => {
+  fetchOperations = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/operations", {
         headers: {
@@ -42,6 +46,83 @@ class Canvas extends React.Component {
       .catch((error) => console.log(error));
   };
 
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            clients: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchContracts = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/contracts", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            contracts: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchConsultants = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/consultants", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            consultants: res.data,
+          };
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  filteredContracts = () => {
+    if (this.state.clientId !== "") {
+      console.log(this.state.clientId);
+      let ans = this.state.contracts.filter((contract) =>
+        contract.clientId.includes(this.state.clientId) ? contract : null
+      );
+      let value = JSON.stringify(ans);
+      console.log(JSON.parse(value));
+      return JSON.parse(value);
+    }
+  };
+
+  filterContracts = () => {
+    let ans = this.filteredContracts();
+    console.log(ans);
+    this.setState((prevState) => {
+      return { ...prevState, filteredContracts: ans };
+    });
+  };
+
   reset = () => {
     this.setState((prevState) => ({
       ...prevState,
@@ -52,13 +133,20 @@ class Canvas extends React.Component {
       endDate: "",
       projectStatusId: "",
       ops: [],
+      clients: [],
+      contracts: [],
+      consultants: [],
+      filteredContracts: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
   };
 
   componentDidMount() {
-    this.fetchDropDownData();
+    this.fetchOperations();
+    this.fetchClients();
+    this.fetchContracts();
+    this.fetchConsultants();
   }
 
   submitHandler = (event) => {
@@ -70,6 +158,10 @@ class Canvas extends React.Component {
       let temp = { ...this.state };
       delete temp.errors;
       delete temp.ops;
+      delete temp.clients;
+      delete temp.contracts;
+      delete temp.consultants;
+      delete temp.filteredContracts;
 
       axios
         .post("https://avcs-platform.herokuapp.com/operations", temp, {
@@ -89,6 +181,10 @@ class Canvas extends React.Component {
             endDate: "",
             projectStatusId: "",
             ops: [],
+            clients: [],
+            contracts: [],
+            consultants: [],
+            filteredContracts: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -169,39 +265,54 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Client ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.clientId}
                     onChange={this.changeHandler}
                     name="clientId"
                     required
                     isInvalid={this.state.errors.clientId}
-                    placeholder="Client ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.clients &&
+                      this.state.clients.map((client, index) => (
+                        <option key={index} value={client.id}>
+                          {client.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.clientId}
                   </Form.Control.Feedback>
                 </Form.Group>
+
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
-                  controlId="contractReferenceId"
+                  controlId="contractRefId"
                 >
-                  <Form.Label>Contract reference ID</Form.Label>
+                  <Form.Label>Contract ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.contractReferenceId}
                     onChange={this.changeHandler}
                     name="contractReferenceId"
                     required
+                    onClick={this.filterContracts}
                     isInvalid={this.state.errors.contractReferenceId}
-                    placeholder="Contract reference ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.filteredContracts &&
+                      this.state.filteredContracts.map((contract, index) => (
+                        <option key={index} value={contract.id}>
+                          {contract.reference}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.contractReferenceId}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
-
               <Row>
                 <Form.Group
                   as={Col}
@@ -210,18 +321,27 @@ class Canvas extends React.Component {
                 >
                   <Form.Label>Consultant ID</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     value={this.state.consultantId}
                     onChange={this.changeHandler}
                     name="consultantId"
                     required
+                    onClick={this.filterConsultants}
                     isInvalid={this.state.errors.consultantId}
-                    placeholder="Consultant ID"
-                  />
+                  >
+                    <option value="">--Choose--</option>
+                    {this.state.consultants &&
+                      this.state.consultants.map((consultant, index) => (
+                        <option key={index} value={consultant.id}>
+                          {consultant.fullName}
+                        </option>
+                      ))}
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {this.state.errors.consultantId}
                   </Form.Control.Feedback>
                 </Form.Group>
+
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}
@@ -264,6 +384,7 @@ class Canvas extends React.Component {
                     {this.state.errors.endDate}
                   </Form.Control.Feedback>
                 </Form.Group>
+
                 <Form.Group
                   as={Col}
                   style={{ marginTop: "3%" }}

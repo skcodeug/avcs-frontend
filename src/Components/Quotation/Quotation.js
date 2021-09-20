@@ -15,12 +15,15 @@ class Quotations extends React.Component {
     super();
     this.state = {
       quotations: [],
+      clients: [],
+      prospects: [],
     };
   }
 
   columns = [
-    { dataField: "clientId", text: "Client ID" },
-    { dataField: "prospectReferenceId", text: "Prospect Reference ID" },
+    { dataField: "clientName", text: "Client Name" },
+    { dataField: "prospectReferenceId", text: "Prospect Reference" },
+    { dataField: "reference", text: "Quotation Reference" },
     {
       dataField: "follow",
       text: "Actions",
@@ -44,7 +47,7 @@ class Quotations extends React.Component {
     },
   ];
 
-  fetchUsers = () => {
+  fetchQuotations = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/quotations", {
         headers: {
@@ -61,8 +64,70 @@ class Quotations extends React.Component {
       .catch((error) => console.log(error));
   };
 
+  fetchClients = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/clients", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          clients: res.data,
+        }));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchProspects = () => {
+    axios
+      .get("https://avcs-platform.herokuapp.com/prospects", {
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
+      })
+      .then((res) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          prospects: res.data,
+        }));
+      })
+      .catch((error) => console.log(error));
+  };
+
+  itemsArray = () => {
+    let items = this.state.quotations;
+
+    for (let i = 0; i < this.state.quotations.length; i++) {
+      for (let j = 0; j < this.state.clients.length; j++) {
+        if (this.state.quotations[i].clientId === this.state.clients[j].id) {
+          let fullname =
+            this.state.clients[j].firstName +
+            " " +
+            this.state.clients[j].surname +
+            " " +
+            this.state.clients[j].otherNames;
+          items[i].clientName = fullname;
+        }
+      }
+      // for (let k = 0; k < this.state.prospects.length; k++) {
+      //   if (
+      //     this.state.quotations[i].prospectReferenceId ===
+      //     this.state.prospects[k].id
+      //   ) {
+      //     items[i].prospectRef = this.state.prospects[k].reference;
+      //   }
+      // }
+    }
+    console.log(items);
+    return items;
+  };
+
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchQuotations();
   }
 
   redirect = (id) => {
@@ -88,7 +153,7 @@ class Quotations extends React.Component {
               <Table
                 name="Quotations"
                 columns={this.columns}
-                products={this.state.quotations}
+                products={this.itemsArray()}
               />
             )}
           </Container>
