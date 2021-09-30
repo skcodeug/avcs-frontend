@@ -21,7 +21,7 @@ class Quotations extends React.Component {
   }
 
   columns = [
-    { dataField: "clientName", text: "Client Name" },
+    { dataField: "clientId", text: "Client ID" },
     { dataField: "prospectReferenceId", text: "Prospect Reference" },
     { dataField: "reference", text: "Quotation Reference" },
     {
@@ -153,7 +153,7 @@ class Quotations extends React.Component {
               <Table
                 name="Quotations"
                 columns={this.columns}
-                products={this.itemsArray()}
+                products={this.state.quotations}
               />
             )}
           </Container>

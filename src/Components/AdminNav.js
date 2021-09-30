@@ -1,4 +1,5 @@
 import { Nav } from "react-bootstrap";
+import styles from "./AdminNav.css";
 // import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -61,15 +62,6 @@ function AdminNav(props) {
         }}
         href="/clients"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/clients" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Clients
       </Nav.Link>
 
@@ -99,15 +91,6 @@ function AdminNav(props) {
           }`,
         }}
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/prospects" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Prospects
       </Nav.Link>
 
@@ -137,15 +120,6 @@ function AdminNav(props) {
         }}
         href="/quotations"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/quotations" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Quotation
       </Nav.Link>
 
@@ -175,15 +149,6 @@ function AdminNav(props) {
         }}
         href="/contracts"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/contracts" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Contracts
       </Nav.Link>
 
@@ -213,15 +178,6 @@ function AdminNav(props) {
         }}
         href="/operations"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/operations" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Operations
       </Nav.Link>
 
@@ -245,54 +201,7 @@ function AdminNav(props) {
         }}
         href="/users"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/users" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Users
-      </Nav.Link>
-
-      <Nav.Link
-        style={{
-          color: `${
-            window.location.pathname === "/annualleave"
-              ? "blue"
-              : "rgb(100,100,100)"
-          }`,
-          fontWeight: `${
-            window.location.pathname === "/annualleave" ? "bold" : ""
-          }`,
-          textDecoration: "none",
-          paddingLeft: "15%",
-          lineHeight: "4.5vh",
-          background: `${
-            window.location.pathname === "/annualleave"
-              ? "rgb(51, 153, 255, 0.2)"
-              : "rgb(247, 249, 252)"
-          }`,
-          borderRight: `${
-            window.location.pathname === "/annualleave"
-              ? "5px solid blue"
-              : "none"
-          }`,
-        }}
-        href="/annualleave"
-      >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/annualleave" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
-        Annual Leave
       </Nav.Link>
 
       <Nav.Link
@@ -321,15 +230,6 @@ function AdminNav(props) {
         }}
         href="/approvals"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/approvals" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Approvals
       </Nav.Link>
 
@@ -359,15 +259,6 @@ function AdminNav(props) {
         }}
         href="/consultants"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/consultants" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Consultants
       </Nav.Link>
 
@@ -395,15 +286,6 @@ function AdminNav(props) {
         }}
         href="/invoices"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/invoices" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Invoices
       </Nav.Link>
 
@@ -431,15 +313,6 @@ function AdminNav(props) {
         }}
         href="/payments"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/payments" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Payments
       </Nav.Link>
 
@@ -467,15 +340,6 @@ function AdminNav(props) {
         }}
         href="/receipts"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/receipts" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Receipts
       </Nav.Link>
 
@@ -505,15 +369,6 @@ function AdminNav(props) {
         }}
         href="/requisitions"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/requisitions" ? "blue" : "rgb(100,100,100)"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Requisitions
       </Nav.Link>
 
@@ -543,17 +398,6 @@ function AdminNav(props) {
         }}
         href="/staffverifications"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/staffverifications"
-                ? "blue"
-                : "black"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Staff Verifications
       </Nav.Link>
 
@@ -583,60 +427,98 @@ function AdminNav(props) {
         }}
         href="/interviewevaluation"
       >
-        {/* <FontAwesomeIcon
-          icon={faTrashAlt}
-          style={{
-            color: `${
-              window.location.pathname === "/interviewevaluation"
-                ? "blue"
-                : "black"
-            }`,
-            marginRight: "7%",
-          }}
-        /> */}
         Interview Evaluation
       </Nav.Link>
 
-      {/* <Nav.Link href="/users">Users</Nav.Link>
-      <Nav.Link href="/operations">Operations</Nav.Link>
-      <Nav.Link href="/clients">Clients</Nav.Link>
-      <Nav.Link href="/maritalstatus">Marital Status</Nav.Link>
-      <Nav.Link href="/annualleave">Annual Leave</Nav.Link>
-      <Nav.Link href="/annualleavedepartments">
-        Annual Leave Departments
+      <hr
+        style={{
+          color: "rgba(0,0,0, 0.3)",
+          height: "2px",
+          margin: "12% 0% 15% 0",
+        }}
+      ></hr>
+      <h6
+        style={{
+          margin: "0 0 6% 12%",
+          textTransform: "uppercase",
+          fontSize: "0.8rem",
+          fontWeight: "bold",
+          color: "blue",
+        }}
+      >
+        Personal Settings
+      </h6>
+
+      <Nav.Link
+        style={{
+          color: `${
+            window.location.pathname === "/annualleave"
+              ? "blue"
+              : "rgb(100,100,100)"
+          }`,
+          fontWeight: `${
+            window.location.pathname === "/annualleave" ? "bold" : ""
+          }`,
+          textDecoration: "none",
+          paddingLeft: "15%",
+          lineHeight: "4.5vh",
+          background: `${
+            window.location.pathname === "/annualleave"
+              ? "rgb(51, 153, 255, 0.2)"
+              : "rgb(247, 249, 252)"
+          }`,
+          borderRight: `${
+            window.location.pathname === "/annualleave"
+              ? "5px solid blue"
+              : "none"
+          }`,
+        }}
+        href="/annualleave"
+        className={styles.nav_link}
+      >
+        Annual Leave
       </Nav.Link>
-      <Nav.Link href="/annualleavemds">Annual Leave Mds</Nav.Link>
-      <Nav.Link href="/annualleaverecommenders">
-        Annual Leave Recommenders
-      </Nav.Link>
-      <Nav.Link href="/approvals">Approvals</Nav.Link>
-      <Nav.Link href="/biodata">Bio data</Nav.Link>
-      <Nav.Link href="/clientcategories">Client Categories</Nav.Link>
-      <Nav.Link href="/consultantfirmconsultants">
-        Consultant Firm Consultants
-      </Nav.Link>
-      <Nav.Link href="/consultantcategories">Consultant Categories</Nav.Link>
-      <Nav.Link href="/consultantfirms">Consultant Firms</Nav.Link>
-      <Nav.Link href="/consultants">Consultants</Nav.Link>
-      <Nav.Link href="/corporateclients">Corporate Clients</Nav.Link>
-      <Nav.Link href="/departments">Departments</Nav.Link>
-      <Nav.Link href="/individualclients">Individual Clients</Nav.Link>
-      <Nav.Link href="/individualconsultants">Individual Consultants</Nav.Link>
-      <Nav.Link href="/invoices">Invoices</Nav.Link>
-      <Nav.Link href="/nextofkin">Next of Kin</Nav.Link>
-      <Nav.Link href="/payments">Payments</Nav.Link>
-      <Nav.Link href="/projectstatus">Project Status</Nav.Link>
-      <Nav.Link href="/prospects">Prospects</Nav.Link>
-      <Nav.Link href="/qualifications">Qualifications</Nav.Link>
-      <Nav.Link href="/quotation">Quotation</Nav.Link>
-      <Nav.Link href="/quotationdetails">Quotation Details</Nav.Link>
-      <Nav.Link href="/receipts">Receipts</Nav.Link>
-      <Nav.Link href="/requisitions">Requisitions</Nav.Link>
-      <Nav.Link href="/staffverifications">Staff Verifications</Nav.Link>
-      <Nav.Link href="/userdetails1">User Details I</Nav.Link>
-      <Nav.Link href="/userdetails2">User Details II</Nav.Link>
-      <Nav.Link href="/userrelations">User Relations</Nav.Link> */}
     </Nav>
+
+    /* <Nav.Link href="/users">Users</Nav.Link>
+          <Nav.Link href="/operations">Operations</Nav.Link>
+          <Nav.Link href="/clients">Clients</Nav.Link>
+          <Nav.Link href="/maritalstatus">Marital Status</Nav.Link>
+          <Nav.Link href="/annualleave">Annual Leave</Nav.Link>
+          <Nav.Link href="/annualleavedepartments">
+            Annual Leave Departments
+          </Nav.Link>
+          <Nav.Link href="/annualleavemds">Annual Leave Mds</Nav.Link>
+          <Nav.Link href="/annualleaverecommenders">
+            Annual Leave Recommenders
+          </Nav.Link>
+          <Nav.Link href="/approvals">Approvals</Nav.Link>
+          <Nav.Link href="/biodata">Bio data</Nav.Link>
+          <Nav.Link href="/clientcategories">Client Categories</Nav.Link>
+          <Nav.Link href="/consultantfirmconsultants">
+            Consultant Firm Consultants
+          </Nav.Link>
+          <Nav.Link href="/consultantcategories">Consultant Categories</Nav.Link>
+          <Nav.Link href="/consultantfirms">Consultant Firms</Nav.Link>
+          <Nav.Link href="/consultants">Consultants</Nav.Link>
+          <Nav.Link href="/corporateclients">Corporate Clients</Nav.Link>
+          <Nav.Link href="/departments">Departments</Nav.Link>
+          <Nav.Link href="/individualclients">Individual Clients</Nav.Link>
+          <Nav.Link href="/individualconsultants">Individual Consultants</Nav.Link>
+          <Nav.Link href="/invoices">Invoices</Nav.Link>
+          <Nav.Link href="/nextofkin">Next of Kin</Nav.Link>
+          <Nav.Link href="/payments">Payments</Nav.Link>
+          <Nav.Link href="/projectstatus">Project Status</Nav.Link>
+          <Nav.Link href="/prospects">Prospects</Nav.Link>
+          <Nav.Link href="/qualifications">Qualifications</Nav.Link>
+          <Nav.Link href="/quotation">Quotation</Nav.Link>
+          <Nav.Link href="/quotationdetails">Quotation Details</Nav.Link>
+          <Nav.Link href="/receipts">Receipts</Nav.Link>
+          <Nav.Link href="/requisitions">Requisitions</Nav.Link>
+          <Nav.Link href="/staffverifications">Staff Verifications</Nav.Link>
+          <Nav.Link href="/userdetails1">User Details I</Nav.Link>
+          <Nav.Link href="/userdetails2">User Details II</Nav.Link>
+          <Nav.Link href="/userrelations">User Relations</Nav.Link> */
   );
 }
 export default AdminNav;

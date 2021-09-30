@@ -17,6 +17,7 @@ class Clients extends React.Component {
     super();
     this.state = {
       clients: [],
+      roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
   }
 
@@ -83,9 +84,13 @@ class Clients extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {this.props.role === "Admin" && <AdminNav />}
-          {this.props.role === "HR" && <HrNav />}
-          {this.props.role === "Sales" && <SalesNav />}
+          {localStorage.getItem("role").replace(/"/g, "") === "Admin" && (
+            <AdminNav />
+          )}
+          {localStorage.getItem("role").replace(/"/g, "") === "HR" && <HrNav />}
+          {localStorage.getItem("role").replace(/"/g, "") === "Sales" && (
+            <SalesNav />
+          )}
 
           <Container>
             <Canvas entry="Add a client" />

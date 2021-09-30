@@ -246,6 +246,7 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
               <Row>
                 <Form.Group
                   as={Col}

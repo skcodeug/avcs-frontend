@@ -40,21 +40,29 @@ class Login extends React.Component {
               },
             })
             .then((res) => {
+              let roles = res.data.roles;
+              console.log(roles);
+              console.log(roles[0]);
+
               switch (true) {
-                case res.data.roles.includes("Admin"):
-                  localStorage.setItem("role", "Admin");
+                case roles[0] === "Admin":
+                  localStorage.setItem("role", roles[0]);
+                  localStorage.setItem("roles", roles);
                   this.props.history.push("/clients");
                   break;
-                case res.data.roles.includes("HR"):
-                  localStorage.setItem("role", "HR");
+                case roles[0] === "HR":
+                  localStorage.setItem("role", roles[0]);
+                  localStorage.setItem("roles", roles);
                   this.props.history.push("/users");
                   break;
-                case res.data.roles.includes("Finance"):
-                  localStorage.setItem("role", "Finance");
+                case roles[0] === "Finance":
+                  localStorage.setItem("role", roles[0]);
+                  localStorage.setItem("roles", roles);
                   this.props.history.push("/invoices");
                   break;
-                case res.data.roles.includes("Sales"):
-                  localStorage.setItem("role", "Sales");
+                case roles[0] === "Sales":
+                  localStorage.setItem("role", roles[0]);
+                  localStorage.setItem("roles", roles);
                   this.props.history.push("/clients");
                   break;
 

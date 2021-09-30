@@ -5,6 +5,9 @@ import findFormErrors from "./FindFormErrors";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// 60927f77-56de-4f75-82a0-b1284549efa1
+// 6eca3ffa-981c-41b7-8fb1-25ffc6fa6d82
+
 class Canvas extends React.Component {
   constructor() {
     super();
@@ -13,7 +16,7 @@ class Canvas extends React.Component {
       surname: "",
       otherNames: "",
       clientCategoryId: "",
-      departments: [],
+      clientCategories: [],
       errors: {},
     };
   }
@@ -23,7 +26,7 @@ class Canvas extends React.Component {
 
   fetchDropDownData = () => {
     axios
-      .get("https://avcs-platform.herokuapp.com/departments", {
+      .get("https://avcs-platform.herokuapp.com/clientCategories", {
         headers: {
           Authorization:
             "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
@@ -33,7 +36,7 @@ class Canvas extends React.Component {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data,
+            clientCategories: res.data,
           };
         });
       })
@@ -47,7 +50,7 @@ class Canvas extends React.Component {
       surname: "",
       otherNames: "",
       clientCategoryId: "",
-      departments: [],
+      clientCategories: [],
       errors: {},
     }));
     document.getElementById("btn-close").click();
@@ -64,7 +67,7 @@ class Canvas extends React.Component {
       event.target.className += " was-validated";
 
       let temp = { ...this.state };
-      delete temp.departments;
+      delete temp.clientCategories;
       delete temp.errors;
 
       axios
@@ -82,7 +85,7 @@ class Canvas extends React.Component {
             surname: "",
             otherNames: "",
             clientCategoryId: "",
-            departments: [],
+            clientCategories: [],
             errors: {},
           }));
           event.target.className = "needs-validation";
@@ -109,11 +112,7 @@ class Canvas extends React.Component {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
-          style={{
-            position: "absolute",
-            top: "32.1%",
-            right: "10%",
-          }}
+          style={{ marginLeft: "15%", marginTop: "-10%" }}
         >
           <FontAwesomeIcon icon={faPlus} /> Add
         </Button>
@@ -224,7 +223,7 @@ class Canvas extends React.Component {
                   style={{ marginTop: "3%" }}
                   controlId="clientcategoryid"
                 >
-                  <Form.Label>Client category ID</Form.Label>
+                  <Form.Label>Client category</Form.Label>
                   <Form.Control
                     as="select"
                     value={this.state.clientCategoryId}
@@ -234,12 +233,14 @@ class Canvas extends React.Component {
                     isInvalid={this.state.errors.clientCategoryId}
                   >
                     <option value="">--Choose--</option>
-                    {this.state.departments &&
-                      this.state.departments.map((dept, index) => (
-                        <option key={index} value={dept.id}>
-                          {dept.name}
-                        </option>
-                      ))}
+                    {this.state.clientCategories &&
+                      this.state.clientCategories.map(
+                        (clientCategory, index) => (
+                          <option key={index} value={clientCategory.id}>
+                            {clientCategory.name}
+                          </option>
+                        )
+                      )}
                   </Form.Control>
 
                   <Form.Control.Feedback type="invalid">
@@ -247,6 +248,15 @@ class Canvas extends React.Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Row>
+
+              {this.state.clientCategoryId ===
+              "60927f77-56de-4f75-82a0-b1284549efa1"
+                ? () => {
+                    return <></>;
+                  }
+                : () => {
+                    return <></>;
+                  }}
 
               <div style={{ marginTop: "10%" }}>
                 <Button

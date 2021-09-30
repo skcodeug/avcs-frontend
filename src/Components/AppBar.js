@@ -1,8 +1,22 @@
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AppBar() {
+  const [roles, setRoles] = useState([]);
+  const [role, setRole] = useState();
+
+  const handleChange = (event) => {
+    localStorage.setItem("role", event.target.value);
+  };
+
+  useEffect(() => {
+    const temp = localStorage.getItem("roles").split(",");
+    setRole(localStorage.getItem("role"));
+    setRoles(temp);
+  }, [role]);
+
   return (
     <Navbar
       collapseOnSelect
@@ -31,6 +45,26 @@ function AppBar() {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
+        {roles.length > 1 && (
+          <span
+            className="me-auto"
+            style={{
+              position: "fixed",
+              right: "9%",
+              top: "4%",
+            }}
+          >
+            <select name="role" onChange={handleChange}>
+              {roles &&
+                roles.map((roleItem, index) => (
+                  <option key={index} value={roleItem}>
+                    {roleItem}
+                  </option>
+                ))}
+            </select>
+          </span>
+        )}
+
         <Nav
           className="me-auto"
           style={{
@@ -47,6 +81,7 @@ function AppBar() {
             {/* Settings */}
           </Nav.Link>
         </Nav>
+
         <Nav
           style={{
             position: "fixed",
@@ -67,4 +102,5 @@ function AppBar() {
     </Navbar>
   );
 }
+
 export default AppBar;
