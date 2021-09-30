@@ -84,6 +84,7 @@ class Clients extends React.Component {
             minHeight: "100vh",
           }}
         >
+          {console.log(this.roleProp)}
           {localStorage.getItem("role").replace(/"/g, "") === "Admin" && (
             <AdminNav />
           )}

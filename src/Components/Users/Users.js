@@ -83,7 +83,11 @@ class Users extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
+          {localStorage.getItem("role").replace(/"/g, "") === "Admin" ? (
+            <AdminNav />
+          ) : (
+            <HrNav />
+          )}
 
           <Container>
             <Canvas entry="Add a user" />

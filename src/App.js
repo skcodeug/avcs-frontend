@@ -76,6 +76,7 @@ function App() {
           render={() => {
             localStorage.removeItem("access-token");
             localStorage.removeItem("role");
+            localStorage.removeItem("roles");
             return <Redirect to="/" />;
           }}
         />

@@ -60,6 +60,7 @@ class Canvas extends React.Component {
       let temp = { ...this.state };
       delete temp.errors;
       delete temp.clients;
+      console.log(temp);
 
       axios
         .post("https://avcs-platform.herokuapp.com/prospects", temp, {
@@ -156,7 +157,7 @@ class Canvas extends React.Component {
                     <option value="">--Choose--</option>
                     {this.state.clients &&
                       this.state.clients.map((client, index) => (
-                        <option key={index} value={client.clientId}>
+                        <option key={index} value={client.id}>
                           {client.fullName}
                         </option>
                       ))}

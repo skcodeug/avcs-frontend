@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { Navbar, Nav } from "react-bootstrap";
 import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,9 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function AppBar() {
   const [roles, setRoles] = useState([]);
   const [role, setRole] = useState();
+  const history = useHistory();
 
   const handleChange = (event) => {
+    let path = window.location.pathname;
     localStorage.setItem("role", event.target.value);
+    history.push({
+      pathname: path,
+    });
   };
 
   useEffect(() => {
