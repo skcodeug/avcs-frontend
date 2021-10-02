@@ -84,8 +84,6 @@ class Clients extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {console.log("-----------------")}
-          {console.log(this.state.roleProp)}
           {this.state.roleProp === "Admin" && <AdminNav />}
           {this.state.roleProp === "HR" && <HrNav />}
           {this.state.roleProp === "Sales" && <SalesNav />}
