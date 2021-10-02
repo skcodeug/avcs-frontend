@@ -69,7 +69,7 @@ function AppBar() {
             className="me-auto"
             style={{
               position: "fixed",
-              right: "9%",
+              right: "5%",
               top: "4%",
             }}
           >
@@ -90,7 +90,7 @@ function AppBar() {
           </span>
         )}
 
-        <Nav
+        {/* <Nav
           className="me-auto"
           style={{
             position: "fixed",
@@ -103,9 +103,10 @@ function AppBar() {
             style={{ color: "rgb(100,100,100)", textDecoration: "none" }}
           >
             <FontAwesomeIcon icon={faCog} size="1x" color="blue" />
-            {/* Settings */}
+            Settings
           </Nav.Link>
-        </Nav>
+        </Nav> 
+        */}
 
         <Nav
           style={{
