@@ -3,6 +3,9 @@ import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
+import SalesNav from "../SalesNav";
+import FinanceNav from "../FinanceNav";
 import Table from "../Table";
 import Canvas from "./Canvas";
 import DeleteBtn from "./Delete";
@@ -15,6 +18,7 @@ class Operations extends React.Component {
     super();
     this.state = {
       ops: [],
+      roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
   }
 
@@ -82,7 +86,10 @@ class Operations extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {this.props.role === "Admin" && <AdminNav />}
+          {this.state.roleProp === "Admin" && <AdminNav />}
+          {this.state.roleProp === "HR" && <HrNav />}
+          {this.state.roleProp === "Sales" && <SalesNav />}
+          {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
             <Canvas entry="Add an operation" />
 

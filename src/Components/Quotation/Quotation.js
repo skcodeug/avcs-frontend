@@ -2,6 +2,9 @@ import React from "react";
 import { Container, Button } from "react-bootstrap";
 import AppBar from "../AppBar";
 import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
+import SalesNav from "../SalesNav";
+import FinanceNav from "../FinanceNav";
 import Table from "../Table";
 import Canvas from "./Canvas";
 import DeleteBtn from "./Delete";
@@ -17,6 +20,7 @@ class Quotations extends React.Component {
       quotations: [],
       clients: [],
       prospects: [],
+      roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
   }
 
@@ -145,7 +149,10 @@ class Quotations extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {this.props.role === "Admin" && <AdminNav />}
+          {this.state.roleProp === "Admin" && <AdminNav />}
+          {this.state.roleProp === "HR" && <HrNav />}
+          {this.state.roleProp === "Sales" && <SalesNav />}
+          {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
             <Canvas entry="Add a quotation" />
 

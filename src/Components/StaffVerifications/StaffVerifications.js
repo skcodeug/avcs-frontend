@@ -3,6 +3,9 @@ import { Container, Button } from "react-bootstrap";
 import AppBar from "../AppBar";
 import axios from "axios";
 import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
+import SalesNav from "../SalesNav";
+import FinanceNav from "../FinanceNav";
 import Table from "../Table";
 import Canvas from "./Canvas";
 import DeleteBtn from "./Delete";
@@ -15,6 +18,7 @@ class StaffVerifications extends React.Component {
     super();
     this.state = {
       items: [],
+      roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
   }
 
@@ -81,7 +85,10 @@ class StaffVerifications extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {this.props.role === "Admin" && <AdminNav />}
+          {this.state.roleProp === "Admin" && <AdminNav />}
+          {this.state.roleProp === "HR" && <HrNav />}
+          {this.state.roleProp === "Sales" && <SalesNav />}
+          {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
             <Canvas entry="Add a staff verification" />
 
