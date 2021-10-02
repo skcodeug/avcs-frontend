@@ -41,8 +41,6 @@ class Login extends React.Component {
             })
             .then((res) => {
               let roles = res.data.roles;
-              console.log(roles);
-              console.log(roles[0]);
 
               switch (true) {
                 case roles[0] === "Admin":

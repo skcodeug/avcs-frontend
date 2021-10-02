@@ -10,11 +10,24 @@ function AppBar() {
   const history = useHistory();
 
   const handleChange = (event) => {
-    let path = window.location.pathname;
     localStorage.setItem("role", event.target.value);
-    history.push({
-      pathname: path,
-    });
+    switch (event.target.value) {
+      case "Admin":
+        history.push({ pathname: "/clients" });
+        break;
+      case "HR":
+        history.push({ pathname: "/users" });
+        break;
+      case "Finance":
+        history.push({ pathname: "/invoices" });
+        break;
+      case "Sales":
+        history.push({ pathname: "/clients" });
+        break;
+
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -61,12 +74,18 @@ function AppBar() {
             }}
           >
             <select name="role" onChange={handleChange}>
+              <option value={localStorage.getItem("role").replace(/"/g, "")}>
+                {localStorage.getItem("role").replace(/"/g, "")}
+              </option>
               {roles &&
-                roles.map((roleItem, index) => (
-                  <option key={index} value={roleItem}>
-                    {roleItem}
-                  </option>
-                ))}
+                roles.map((roleItem, index) =>
+                  roleItem !==
+                  localStorage.getItem("role").replace(/"/g, "") ? (
+                    <option key={index} value={roleItem}>
+                      {roleItem}
+                    </option>
+                  ) : null
+                )}
             </select>
           </span>
         )}

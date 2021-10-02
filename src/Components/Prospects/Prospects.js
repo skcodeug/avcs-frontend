@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
 import AppBar from "../AppBar";
@@ -8,7 +8,7 @@ import Table from "../Table";
 import Canvas from "./Canvas";
 import DeleteBtn from "./Delete";
 import { withRouter } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Prospects extends React.Component {
   constructor() {

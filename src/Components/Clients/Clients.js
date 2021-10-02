@@ -84,14 +84,11 @@ class Clients extends React.Component {
             minHeight: "100vh",
           }}
         >
-          {console.log(this.roleProp)}
-          {localStorage.getItem("role").replace(/"/g, "") === "Admin" && (
-            <AdminNav />
-          )}
-          {localStorage.getItem("role").replace(/"/g, "") === "HR" && <HrNav />}
-          {localStorage.getItem("role").replace(/"/g, "") === "Sales" && (
-            <SalesNav />
-          )}
+          {console.log("-----------------")}
+          {console.log(this.state.roleProp)}
+          {this.state.roleProp === "Admin" && <AdminNav />}
+          {this.state.roleProp === "HR" && <HrNav />}
+          {this.state.roleProp === "Sales" && <SalesNav />}
 
           <Container>
             <Canvas entry="Add a client" />
