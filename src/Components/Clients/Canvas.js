@@ -71,7 +71,7 @@ class Canvas extends React.Component {
       delete temp.errors;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/clients", temp, {
           headers: {
             Authorization:
               "Bearer " +
@@ -89,6 +89,7 @@ class Canvas extends React.Component {
             errors: {},
           }));
           event.target.className = "needs-validation";
+          window.location.reload();
         })
         .catch((error) => console.log(error));
     } else {

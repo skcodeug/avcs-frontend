@@ -1,104 +1,105 @@
-import React from "react"
-import { Form, Button, Container, Col, Row } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import { withRouter } from "react-router-dom"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import HrNav from "../HrNav"
+import React from "react";
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import { withRouter } from "react-router-dom";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
 
 class Update extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       departments: [],
-      errors: {}
-    }
+      errors: {},
+    };
 
-    this.changeHandler = this.changeHandler.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
-    this.fetchData = this.fetchData.bind(this)
+    this.changeHandler = this.changeHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   fetchData = () => {
-    let id = this.props.location.state.id
+    let id = this.props.location.state.id;
     axios
       .get("https://avcs-platform.herokuapp.com/users/" + id, {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ...res.data
-        }))
+          ...res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   fetchDropDownData = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/departments", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data
-          }
-        })
+            departments: res.data,
+          };
+        });
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      let id = this.props.location.state.id
+      let temp = { ...this.state };
+      delete temp.errors;
+      let id = this.props.location.state.id;
 
       axios
         .put(`https://avcs-platform.herokuapp.com/users/${id}`, temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Updated succesfully")
-          event.target.className = "needs-validation"
-          this.props.history.push("/users")
+          alert("Updated succesfully");
+          event.target.className = "needs-validation";
+          window.location.reload();
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   componentDidMount = () => {
-    this.fetchData()
-    this.fetchDropDownData()
-  }
+    this.fetchData();
+    this.fetchDropDownData();
+  };
 
   render() {
     return (
@@ -108,7 +109,7 @@ class Update extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
@@ -125,7 +126,7 @@ class Update extends React.Component {
                 backgroundColor: "white",
                 borderRadius: "1em",
                 boxShadow: "0 20px 75px rgb(110, 110, 110,0.2)",
-                padding: "4% 3%"
+                padding: "4% 3%",
               }}
             >
               <h1
@@ -133,7 +134,7 @@ class Update extends React.Component {
                   marginBottom: "2vh",
                   fontSize: "1.5rem",
                   fontWeight: "bold",
-                  color: "rgb(100,100,100)"
+                  color: "rgb(100,100,100)",
                 }}
               >
                 Update
@@ -286,7 +287,7 @@ class Update extends React.Component {
                   id="cancel-button"
                   type="cancel"
                   onClick={() => {
-                    this.props.history.push("/users")
+                    this.props.history.push("/users");
                   }}
                 >
                   Cancel
@@ -296,8 +297,8 @@ class Update extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default withRouter(Update)
+export default withRouter(Update);

@@ -1,6 +1,6 @@
-import React from "react"
-import { Button } from "react-bootstrap"
-import axios from "axios"
+import React from "react";
+import { Button } from "react-bootstrap";
+import axios from "axios";
 
 class Delete extends React.Component {
   deleteRow = () => {
@@ -9,17 +9,21 @@ class Delete extends React.Component {
         .delete(`https://avcs-platform.herokuapp.com/users/${this.props.id}`, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
-        .then(() => alert("Deleted succesfully"))
-        .catch((error) => console.log(error))
+        .then(() => {
+          alert("Deleted succesfully");
+          window.location.reload();
+        })
+        .catch((error) => console.log(error));
     }
-  }
+  };
 
   render() {
-    return <Button onClick={this.deleteRow}>Delete</Button>
+    return <Button onClick={this.deleteRow}>Delete</Button>;
   }
 }
 
-export default Delete
+export default Delete;

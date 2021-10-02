@@ -63,6 +63,7 @@ class Canvas extends React.Component {
             errors: {},
           }));
           event.target.className = "needs-validation";
+          window.location.reload();
         })
         .catch((error) => console.log(error));
     } else {

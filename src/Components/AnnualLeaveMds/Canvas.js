@@ -1,11 +1,11 @@
-import React from "react"
-import { Form, Button, Row, Col } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
+import React from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
 
 class Canvas extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       prefix: "",
       firstName: "",
@@ -15,31 +15,31 @@ class Canvas extends React.Component {
       roles: "",
       password: "",
       departments: [],
-      errors: {}
-    }
+      errors: {},
+    };
   }
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   fetchDropDownData = () => {
     axios
       .get("https://avcs-platform.herokuapp.com/departments", {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => {
           return {
             ...prevState,
-            departments: res.data
-          }
-        })
+            departments: res.data,
+          };
+        });
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   reset = () => {
     this.setState((prevState) => ({
@@ -51,34 +51,35 @@ class Canvas extends React.Component {
       departmentId: "",
       roles: "",
       password: "",
-      errors: {}
-    }))
-    document.getElementById("btn-close").click()
-  }
+      errors: {},
+    }));
+    document.getElementById("btn-close").click();
+  };
 
   componentDidMount() {
-    this.fetchDropDownData()
+    this.fetchDropDownData();
   }
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      delete temp.departments
+      let temp = { ...this.state };
+      delete temp.errors;
+      delete temp.departments;
 
       axios
-        .post("https://avcs-platform.herokuapp.com/users", temp, {
+        .post("https://avcs-platform.herokuapp.com/annualLeaveMds", temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Created successfully!")
+          alert("Created successfully!");
           this.setState(() => ({
             prefix: "",
             firstName: "",
@@ -87,21 +88,22 @@ class Canvas extends React.Component {
             departmentId: "",
             roles: "",
             password: "",
-            errors: {}
-          }))
-          event.target.className = "needs-validation"
+            errors: {},
+          }));
+          event.target.className = "needs-validation";
+          window.location.reload();
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -141,14 +143,14 @@ class Canvas extends React.Component {
               style={{
                 paddingLeft: "2%",
                 paddingRight: "2%",
-                paddingBottom: "15%"
+                paddingBottom: "15%",
               }}
             >
               <h1
                 style={{
                   marginBottom: "5%",
                   fontSize: "2rem",
-                  fontWeight: "bolder"
+                  fontWeight: "bolder",
                 }}
               >
                 Create
@@ -336,8 +338,8 @@ class Canvas extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Canvas
+export default Canvas;

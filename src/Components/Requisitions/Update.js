@@ -1,83 +1,84 @@
-import React from "react"
-import { Form, Button, Container, Col, Row } from "react-bootstrap"
-import axios from "axios"
-import findFormErrors from "./FindFormErrors"
-import { withRouter } from "react-router-dom"
-import AppBar from "../AppBar"
-import AdminNav from "../AdminNav"
-import HrNav from "../HrNav"
+import React from "react";
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import findFormErrors from "./FindFormErrors";
+import { withRouter } from "react-router-dom";
+import AppBar from "../AppBar";
+import AdminNav from "../AdminNav";
+import HrNav from "../HrNav";
 
 class Update extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      errors: {}
-    }
+      errors: {},
+    };
 
-    this.changeHandler = this.changeHandler.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
-    this.fetchData = this.fetchData.bind(this)
+    this.changeHandler = this.changeHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   changeHandler = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   fetchData = () => {
-    let id = this.props.location.state.id
+    let id = this.props.location.state.id;
     axios
       .get("https://avcs-platform.herokuapp.com/requisitions/" + id, {
         headers: {
           Authorization:
-            "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-        }
+            "Bearer " + localStorage.getItem("access-token").replace(/"/g, ""),
+        },
       })
       .then((res) => {
         this.setState((prevState) => ({
           ...prevState,
-          ...res.data
-        }))
+          ...res.data,
+        }));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   submitHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (Object.keys(findFormErrors(this.state)).length === 0) {
-      event.target.className += " was-validated"
+      event.target.className += " was-validated";
 
-      let temp = { ...this.state }
-      delete temp.errors
-      let id = this.props.location.state.id
+      let temp = { ...this.state };
+      delete temp.errors;
+      let id = this.props.location.state.id;
 
       axios
         .put(`https://avcs-platform.herokuapp.com/requisitions/${id}`, temp, {
           headers: {
             Authorization:
-              "Bearer " + localStorage.getItem("access-token").replace(/"/g, "")
-          }
+              "Bearer " +
+              localStorage.getItem("access-token").replace(/"/g, ""),
+          },
         })
         .then(() => {
-          alert("Updated succesfully")
-          event.target.className = "needs-validation"
-          this.props.history.push("/requisitions")
+          alert("Updated succesfully");
+          event.target.className = "needs-validation";
+          window.location.reload();
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     } else {
-      let errors = findFormErrors(this.state)
+      let errors = findFormErrors(this.state);
       this.setState((prevState) => {
         return {
           ...prevState,
-          errors
-        }
-      })
+          errors,
+        };
+      });
     }
-  }
+  };
 
   componentDidMount = () => {
-    this.fetchData()
-  }
+    this.fetchData();
+  };
 
   render() {
     return (
@@ -87,7 +88,7 @@ class Update extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh"
+            minHeight: "100vh",
           }}
         >
           {this.props.role === "Admin" ? <AdminNav /> : <HrNav />}
@@ -102,14 +103,14 @@ class Update extends React.Component {
                 borderRadius: "0.5%",
                 boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
                 padding: "1% 0% 1% 4%",
-                width: "85%"
+                width: "85%",
               }}
             >
               <h2
                 style={{
                   marginBottom: "0",
                   fontSize: "2rem",
-                  fontWeight: "bolder"
+                  fontWeight: "bolder",
                 }}
               >
                 Update
@@ -127,7 +128,7 @@ class Update extends React.Component {
                 backgroundColor: "white",
                 borderRadius: "0.5%",
                 boxShadow: "0 1px 2px rgb(0 0 0 / 0.2)",
-                padding: "2% 4%"
+                padding: "2% 4%",
               }}
             >
               <Row>
@@ -208,7 +209,7 @@ class Update extends React.Component {
                   id="cancel-button"
                   type="cancel"
                   onClick={() => {
-                    this.props.history.push("/requisitions")
+                    this.props.history.push("/requisitions");
                   }}
                 >
                   Cancel
@@ -218,8 +219,8 @@ class Update extends React.Component {
           </Container>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default withRouter(Update)
+export default withRouter(Update);

@@ -1,8 +1,8 @@
-import React from "react"
-import { Button } from "react-bootstrap"
-import axios from "axios"
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import { Button } from "react-bootstrap";
+import axios from "axios";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Delete extends React.Component {
   deleteRow = () => {
@@ -14,14 +14,17 @@ class Delete extends React.Component {
             headers: {
               Authorization:
                 "Bearer " +
-                localStorage.getItem("access-token").replace(/"/g, "")
-            }
+                localStorage.getItem("access-token").replace(/"/g, ""),
+            },
           }
         )
-        .then(() => alert("Deleted succesfully"))
-        .catch((error) => console.log(error))
+        .then(() => {
+          alert("Deleted succesfully");
+          window.location.reload();
+        })
+        .catch((error) => console.log(error));
     }
-  }
+  };
 
   render() {
     return (
@@ -31,8 +34,8 @@ class Delete extends React.Component {
       >
         <FontAwesomeIcon icon={faTrashAlt} style={{ color: "blue" }} />
       </Button>
-    )
+    );
   }
 }
 
-export default Delete
+export default Delete;

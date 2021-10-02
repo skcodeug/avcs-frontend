@@ -71,7 +71,7 @@ class Update extends React.Component {
             errors: {},
           }));
           event.target.className = "needs-validation";
-          this.props.history.push("/users");
+          window.location.reload();
         })
         .catch((error) => console.log(error));
     } else {
