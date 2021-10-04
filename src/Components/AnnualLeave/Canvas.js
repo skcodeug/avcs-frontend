@@ -2,8 +2,8 @@ import React from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import findFormErrors from "./FindFormErrors";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Canvas extends React.Component {
   constructor() {
