@@ -38,17 +38,37 @@ class Table extends React.Component {
           {(toolkitprops) => (
             <div
               style={{
-                marginTop: "0%",
+                marginTop: "10%",
                 backgroundColor: "white",
-                borderRadius: "1em",
-                boxShadow: "0 10px 30px rgb(110, 110, 110,0.2)",
+                borderRadius: "0.3em",
+                // boxShadow: "0 10px 30px rgb(110, 110, 110,0.2)",
                 padding: "4% 3%",
                 width: "100%",
               }}
             >
+              <div
+                style={{
+                  position: "relative",
+                  left: "64%",
+                }}
+              >
+                <div style={{ display: "flex" }}>
+                  <SearchBar
+                    srText=""
+                    style={{
+                      width: "300px",
+                      marginRight: "5%",
+                    }}
+                    placeholder="Search.."
+                    {...toolkitprops.searchProps}
+                  />
+                  <span style={{ marginLeft: "2%" }}>{this.props.btn}</span>
+                </div>
+              </div>
               <h1
                 style={{
-                  marginBottom: "2vh",
+                  marginTop: "-3%",
+                  marginBottom: "5vh",
                   fontSize: "1.2rem",
                   fontWeight: "bold",
                   color: "rgba(0,0,0, 0.75)",
@@ -56,12 +76,7 @@ class Table extends React.Component {
               >
                 {this.props.name}
               </h1>
-              <SearchBar
-                srText=""
-                style={{ width: "50vw", marginBottom: "1%" }}
-                placeholder="Search.."
-                {...toolkitprops.searchProps}
-              />
+
               <BootstrapTable
                 hover
                 {...toolkitprops.baseProps}

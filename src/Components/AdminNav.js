@@ -420,7 +420,7 @@ function AdminNav(props) {
               : "rgb(247, 249, 252)"
           }`,
           borderRight: `${
-            window.location.pathname === "/interviewevaluations"
+            window.location.pathname === "/interviewevaluation"
               ? "5px solid blue"
               : "none"
           }`,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Navbar, Nav } from "react-bootstrap";
-import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AppBar() {
@@ -46,7 +46,7 @@ function AppBar() {
         right: "0",
         left: "19%",
         backgroundColor: "white",
-        boxShadow: "0 3px 15px rgb(110, 110, 110,0.2)",
+        // boxShadow: "0 0px 0px rgb(110, 110, 110,0.2)",
         height: "12vh",
       }}
     >

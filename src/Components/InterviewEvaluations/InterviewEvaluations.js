@@ -19,6 +19,8 @@ class InterviewEvaluations extends React.Component {
     roleProp: localStorage.getItem("role").replace(/"/g, ""),
   };
 
+  canvas = (<Canvas entry="Add an interview evaluation" />);
+
   columns = [
     { dataField: "fullName", text: "Fullname" },
     { dataField: "position", text: "Position" },
@@ -93,13 +95,14 @@ class InterviewEvaluations extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
           {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Add an interview evaluation" />
+            {/* <Canvas entry="Add an interview evaluation" /> */}
 
             {this.state.items && (
               <Table
                 name="Interview Evaluations"
                 columns={this.columns}
                 products={this.state.items}
+                btn={this.canvas}
               />
             )}
           </Container>
