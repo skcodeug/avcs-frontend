@@ -20,6 +20,7 @@ class Operations extends React.Component {
       ops: [],
       roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
+    this.canvas = <Canvas entry="Add an operation" />;
   }
 
   columns = [
@@ -91,13 +92,12 @@ class Operations extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
           {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Add an operation" />
-
             {this.state.ops && (
               <Table
                 name="Operations"
                 columns={this.columns}
                 products={this.state.ops}
+                btn={this.canvas}
               />
             )}
           </Container>

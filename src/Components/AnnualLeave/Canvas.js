@@ -111,22 +111,16 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: "10% 0 -3% 95%" }}>
-        <Button
+      <div style={{ margin: "0% 0% 0% 0%" }}>
+        <button
           class="btn btn-primary"
-          size="md"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
-          style={{
-            position: "absolute",
-            top: "32.1%",
-            right: "10%",
-          }}
         >
-          <FontAwesomeIcon icon={faPlus} /> Add
-        </Button>
+          Add
+        </button>
 
         <div
           class="offcanvas offcanvas-end"

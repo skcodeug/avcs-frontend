@@ -20,6 +20,7 @@ class AnnualLeave extends React.Component {
     this.state = {
       entries: [],
     };
+    this.canvas = <Canvas entry="Create an annual leave entry" />;
   }
 
   changeHandler = (event) => {
@@ -138,13 +139,12 @@ class AnnualLeave extends React.Component {
           {this.props.role === "Sales" && <SalesNav />}
           {this.props.role === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Create an annual leave entry" />
-
             {this.state.entries && (
               <Table
                 name="Annual Leave"
                 columns={this.columns}
                 products={this.state.entries}
+                btn={this.canvas}
               />
             )}
           </Container>

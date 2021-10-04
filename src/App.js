@@ -95,27 +95,29 @@ function App() {
         <HrRoute path="/clients/update" component={ClientsUpdate} />
         <HrRoute path="/consultants" component={Consultants} exact />
         <HrRoute path="/consultants/update" component={ConsultantsUpdate} />
+
         <HrSalesRoute path="/clients" component={Clients} exact />
-        <HrRoute
+        <HrSalesRoute
           path="/interviewevaluation"
           component={InterviewEvaluation}
           exact
         />
-        <HrRoute
+        <HrSalesRoute
           path="/interviewevaluation/update"
           component={InterviewEvaluationUpdate}
           exact
         />
-        <HrRoute
+        <HrSalesRoute
           path="/staffverifications"
           component={StaffVerifications}
           exact
         />
-        <HrRoute
+        <HrSalesRoute
           path="/staffverifications/update"
           component={StaffVerificationsUpdate}
           exact
         />
+
         <SalesRoute path="/prospects" component={Prospects} exact />
         <SalesRoute
           path="/prospects/update"
@@ -135,6 +137,7 @@ function App() {
           exact
         />
         <SalesRoute path="/operations" component={Operations} />
+
         <FinanceRoute path="/invoices" component={Invoices} exact />
         <FinanceRoute
           path="/invoices/update"
@@ -154,6 +157,7 @@ function App() {
           exact
         />
         <FinanceRoute path="/approvals" component={Approvals} exact />
+
         <ProtectedRoute path="/maritalstatus" component={MaritalStatus} exact />
         <ProtectedRoute
           path="/annualleavedepartments"

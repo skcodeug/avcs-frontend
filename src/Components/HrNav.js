@@ -148,7 +148,7 @@ function HrNav() {
           color: `${
             window.location.pathname === "/interviewevaluation"
               ? "blue"
-              : "black"
+              : "rgb(100,100,100"
           }`,
           fontWeight: `${
             window.location.pathname === "/interviewevaluation" ? "bold" : ""
@@ -177,7 +177,7 @@ function HrNav() {
           color: `${
             window.location.pathname === "/staffverifications"
               ? "blue"
-              : "black"
+              : "rgb(100,100,100"
           }`,
           fontWeight: `${
             window.location.pathname === "/staffverifications" ? "bold" : ""

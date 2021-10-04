@@ -21,6 +21,7 @@ class Prospects extends React.Component {
       clients: [],
       roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
+    this.canvas = <Canvas entry="Add a prospect" />;
   }
 
   columns = [
@@ -160,13 +161,12 @@ class Prospects extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
           {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Add a prospect" />
-
             {this.state.prospects && (
               <Table
                 name="Prospects"
                 columns={this.columns}
                 products={this.itemsArray()}
+                btn={this.canvas}
               />
             )}
           </Container>

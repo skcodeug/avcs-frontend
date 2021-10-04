@@ -19,6 +19,8 @@ class Clients extends React.Component {
       clients: [],
       roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
+
+    this.canvas = <Canvas entry="Add a client" />;
   }
 
   columns = [
@@ -89,13 +91,12 @@ class Clients extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
 
           <Container>
-            <Canvas entry="Add a client" />
-
             {this.state.clients && (
               <Table
                 name="Clients"
                 columns={this.columns}
                 products={this.state.clients}
+                btn={this.canvas}
               />
             )}
           </Container>

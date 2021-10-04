@@ -198,14 +198,13 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <div style={{ margin: "10% 0 -3% 95%" }}>
+      <div style={{ margin: "0% 0% 0% 0%" }}>
         <button
           class="btn btn-primary"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
-          style={{ marginLeft: "15%", marginTop: "-10%" }}
         >
           Add
         </button>

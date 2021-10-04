@@ -20,6 +20,7 @@ class Requisitions extends React.Component {
       requisitions: [],
       roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
+    this.canvas = <Canvas entry="Create a requisition" />;
   }
 
   columns = [
@@ -90,13 +91,12 @@ class Requisitions extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
           {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Create a requisition" />
-
             {this.state.requisitions && (
               <Table
                 name="Requisitions"
                 columns={this.columns}
                 products={this.state.requisitions}
+                btn={this.canvas}
               />
             )}
           </Container>

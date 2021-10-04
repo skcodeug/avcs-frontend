@@ -99,7 +99,6 @@ class Canvas extends React.Component {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
-          style={{ justifyContent: "right" }}
         >
           Add
         </button>

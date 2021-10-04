@@ -16,6 +16,7 @@ class Approvals extends React.Component {
     this.state = {
       approvals: [],
     };
+    this.canvas = <Canvas entry="Create an approval" />;
   }
 
   changeHandler = (event) => {
@@ -87,13 +88,12 @@ class Approvals extends React.Component {
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas entry="Create an approval" />
-
             {this.state.approvals && (
               <Table
                 name="Approvals"
                 columns={this.columns}
                 products={this.state.approvals}
+                btn={this.canvas}
               />
             )}
           </Container>

@@ -16,6 +16,7 @@ class Receipts extends React.Component {
     this.state = {
       receipts: [],
     };
+    this.canvas = <Canvas entry="Create a receipt" />;
   }
 
   columns = [
@@ -83,13 +84,12 @@ class Receipts extends React.Component {
         >
           {this.props.role === "Admin" && <AdminNav />}
           <Container>
-            <Canvas entry="Create a receipt" />
-
             {this.state.receipts && (
               <Table
                 name="Receipts"
                 columns={this.columns}
                 products={this.state.receipts}
+                btn={this.canvas}
               />
             )}
           </Container>

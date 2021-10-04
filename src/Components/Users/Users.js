@@ -17,6 +17,7 @@ class Users extends React.Component {
     this.state = {
       users: [],
     };
+    this.canvas = <Canvas entry="Add a user" />;
   }
 
   columns = [
@@ -90,13 +91,12 @@ class Users extends React.Component {
           )}
 
           <Container>
-            <Canvas entry="Add a user" />
-
             {this.state.users && (
               <Table
                 name="Users"
                 columns={this.columns}
                 products={this.state.users}
+                btn={this.canvas}
               />
             )}
           </Container>

@@ -22,6 +22,7 @@ class Quotations extends React.Component {
       prospects: [],
       roleProp: localStorage.getItem("role").replace(/"/g, ""),
     };
+    this.canvas = <Canvas entry="Add a quotation" />;
   }
 
   columns = [
@@ -154,13 +155,12 @@ class Quotations extends React.Component {
           {this.state.roleProp === "Sales" && <SalesNav />}
           {this.state.roleProp === "Finance" && <FinanceNav />}
           <Container>
-            <Canvas entry="Add a quotation" />
-
             {this.state.quotations && (
               <Table
                 name="Quotations"
                 columns={this.columns}
                 products={this.state.quotations}
+                btn={this.canvas}
               />
             )}
           </Container>
