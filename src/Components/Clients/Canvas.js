@@ -119,7 +119,7 @@ class Canvas extends React.Component {
         <div
           class="offcanvas offcanvas-end"
           data-bs-scroll="true"
-          data-bs-backdrop="false"
+          //
           tabindex="-1"
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
