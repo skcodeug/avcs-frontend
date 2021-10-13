@@ -117,7 +117,6 @@ class Canvas extends React.Component {
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
-          data-bs-backdrop="false"
           aria-controls="offcanvasRight"
         >
           Add
@@ -125,6 +124,7 @@ class Canvas extends React.Component {
 
         <div
           class="offcanvas offcanvas-end"
+          data-bs-backdrop="false"
           tabindex="-1"
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
