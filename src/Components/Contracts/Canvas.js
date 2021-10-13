@@ -213,6 +213,7 @@ class Canvas extends React.Component {
           tabindex="-1"
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
+          data-bs-backdrop="false"
           style={{ width: "35%" }}
         >
           <div class="offcanvas-header">

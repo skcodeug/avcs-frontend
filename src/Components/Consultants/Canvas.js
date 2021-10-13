@@ -112,6 +112,7 @@ class Canvas extends React.Component {
         </button>
         <div
           class="offcanvas offcanvas-end"
+          data-bs-backdrop="false"
           tabindex="-1"
           id="offcanvasRight"
           aria-labelledby="offcanvasRightLabel"
