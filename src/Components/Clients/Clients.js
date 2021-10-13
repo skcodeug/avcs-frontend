@@ -83,7 +83,8 @@ class Clients extends React.Component {
           style={{
             display: "flex",
             backgroundColor: "rgb(247, 249, 252)",
-            minHeight: "100vh",
+            maxHeight: "100vh",
+            overflowX: "hidden",
           }}
         >
           {this.state.roleProp === "Admin" && <AdminNav />}

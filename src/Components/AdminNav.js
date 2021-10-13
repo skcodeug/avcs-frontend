@@ -8,7 +8,7 @@ function AdminNav(props) {
     <Nav
       defaultActiveKey="/home"
       style={{
-        height: "100%",
+        height: "100vh",
         width: "19%",
         // marginTop: "5.8%",
         paddingBottom: "8%",
@@ -377,7 +377,7 @@ function AdminNav(props) {
           color: `${
             window.location.pathname === "/staffverifications"
               ? "blue"
-              : "black"
+              : "rgb(100,100,100)"
           }`,
           fontWeight: `${
             window.location.pathname === "/staffverifications" ? "bold" : ""
@@ -406,7 +406,7 @@ function AdminNav(props) {
           color: `${
             window.location.pathname === "/interviewevaluation"
               ? "blue"
-              : "black"
+              : "rgb(100,100,100)"
           }`,
           fontWeight: `${
             window.location.pathname === "/interviewevaluation" ? "bold" : ""

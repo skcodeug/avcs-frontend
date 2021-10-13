@@ -93,7 +93,8 @@ class Table extends React.Component {
       <div
         style={{
           marginLeft: "15%",
-          width: "85%",
+          width: "90%",
+          height: "84vh",
         }}
       >
         <PaginationProvider pagination={paginationFactory(options)}>
